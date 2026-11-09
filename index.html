@@ -1218,29 +1218,61 @@ const BOARD = {
   step6:{col:"📝 활동지 W · 우리 모둠 설계 세 칸", title:()=>grp()+" · 설계 세 칸", body:()=>{ const f=k=>(get("s6."+k)||"").trim(); if(!f("std")&&!f("q")) return ""; return ["▪ 그림책: 『여우지만 호랑이입니다』",`▪ 고른 성취기준: ${f("std")?"["+f("std")+"]":""}`,`▪ 무엇을 / 어떻게: ${f("what")} / ${f("how")}`,`▪ 핵심 질문: ${f("q")}`,`▪ 활동: ${f("act")}`,`▪ 학습의 증거(평가): ${f("ev")}`,`▪ 우리 반에서 막힐 것 같은 지점 하나: ${f("stuck")}`].join("\n"); }, need:"성취기준과 핵심 질문부터 정해 주세요."},
   step7:{col:"💬 마무리 의견 공유 · 꺼내 쓸 한 가지", title:who, body:()=>{ const o=(get("s7.one")||"").trim(); if(!o) return ""; const w=(get("s7.why")||"").trim(); return `다음 주 우리 반 국어 시간에 ${o}부터 해 보겠습니다.`+(w?` ${w} 때문입니다.`:""); }, need:"꺼내 쓸 한 가지를 써 주세요."}
 };
-function bridgeUrl(step){ const b=BOARD[step]; return BRIDGE+"#"+encodeURIComponent(JSON.stringify({c:b.col,t:b.title(),b:b.body()})); }
+function boardData(step){ const b=BOARD[step]; return {c:b.col,t:b.title(),b:b.body()}; }
+function bridgeUrl(step){ return BRIDGE+"#"+encodeURIComponent(JSON.stringify(boardData(step))); }
+const postSig=d=>d.c+"|"+d.t+"|"+d.b;
+function isPosted(step){ const d=boardData(step); return !!(S.posted&&S.posted[step]===postSig(d)); }
+async function goBoard(step,btn){
+  const d=boardData(step);
+  if(!d.b){ toast(BOARD[step].need); return; }
+  if(!BRIDGE){ copyText(d.t+"\n"+d.b,"제목과 내용을 함께 복사했어요. 패들렛 칸 아래 + 를 누르고 붙여 넣어 주세요"); window.open(PADLET,"_blank","noopener"); return; }
+  if(isPosted(step)){ toast("이미 올린 글이에요. 활동지를 고치면 다시 올릴 수 있어요"); return; }
+  if(btn.dataset.busy) return;
+  btn.dataset.busy="1"; btn.disabled=true; btn.textContent="올리는 중…";
+  const box=btn.closest(".board");
+  try{
+    const r=await fetch(BRIDGE,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)});
+    const j=await r.json();
+    if(!j||!j.ok) throw new Error((j&&j.error)||"올리지 못했어요");
+    S.posted=S.posted||{}; S.posted[step]=postSig(d); persist();
+    toast("패들렛 「"+(j.section||d.c)+"」 칸에 올렸어요 ✓");
+    if(box) box.querySelector("[data-alt]").hidden=true;
+  }catch(err){
+    toast("바로 올리기가 안 됐어요. 아래 ‘새 탭에서 올리기’를 눌러 주세요");
+    if(box){ const a=box.querySelector("[data-alt]"); a.href=bridgeUrl(step); a.hidden=false; }
+  }finally{ delete btn.dataset.busy; btn.disabled=false; drawBoards(); }
+}
 $$("[data-board]").forEach(box=>{
   const step=box.dataset.board, b=BOARD[step];
   box.className="board";
   box.innerHTML=`<div class="board-head"><b>우리 반 보드에 올리기</b><span class="board-col">패들렛 「${esc(b.col)}」 칸</span></div>
     <dl><dt>제목</dt><dd data-bt></dd><dt>내용</dt><dd data-bb></dd></dl>
-    <div class="row">${BRIDGE?`<a class="btn sm primary" data-post target="_blank" rel="noopener">보드에 바로 올리기 ↗</a>`:""}
-      <button type="button" class="btn sm" data-copy="t">제목 복사</button><button type="button" class="btn sm" data-copy="b">내용 복사</button>
-      <a class="btn sm pencil" href="${PADLET}" target="_blank" rel="noopener">패들렛 열기 ↗</a></div>
-    <p class="board-how">${BRIDGE?"'보드에 바로 올리기'를 누르면 새 탭이 잠깐 열리며 해당 칸에 올라가요.":"패들렛에서 이 칸 아래 + 를 누르고, 복사한 제목과 내용을 붙여 넣어요."}</p>`;
-  box.addEventListener("click",e=>{
-    const c=e.target.closest("[data-copy]"), p=e.target.closest("[data-post]");
-    const body=b.body();
-    if((c||p)&&!body){ e.preventDefault(); toast(b.need); return; }
-    if(c) copyText(c.dataset.copy==="t"?b.title():body, c.dataset.copy==="t"?"제목을 복사했어요":"내용을 복사했어요. 패들렛에 붙여 넣어 주세요");
-    if(p){ p.href=bridgeUrl(step); toast("새 탭에서 올리고 있어요"); }
-  });
+    <div class="row"><button type="button" class="btn sm ${BRIDGE?"primary":"pencil"}" data-go>${BRIDGE?"패들렛에 바로 올리기":"복사하고 패들렛 열기 ↗"}</button>
+      ${BRIDGE?`<a class="btn sm" data-alt target="_blank" rel="noopener" hidden>새 탭에서 올리기 ↗</a><a class="btn sm" href="${PADLET}" target="_blank" rel="noopener">패들렛 보기 ↗</a>`:""}</div>
+    <p class="board-how">${BRIDGE?"마지막 칸에서 <b>엔터</b>를 치거나 ‘패들렛에 바로 올리기’를 누르면 이 칸에 바로 올라가요. 줄을 바꾸려면 Shift+엔터.":"마지막 칸에서 <b>엔터</b>를 치거나 버튼을 누르면 제목과 내용이 한꺼번에 복사되고 패들렛이 열려요. 이 칸 아래 + 를 누르고 붙여 넣기(Ctrl+V)만 하면 돼요."}</p>`;
+  box.addEventListener("click",e=>{ const g=e.target.closest("[data-go]"); if(g) goBoard(step,g); });
+});
+/* 엔터: 다음 칸으로, 마지막 칸이면 보드에 올리기 */
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"||e.isComposing||e.keyCode===229||e.altKey) return;
+  const el=e.target; if(!(el instanceof HTMLElement)) return;
+  const isIn=el.matches('input[type="text"],input:not([type])'), isTa=el.matches("textarea");
+  if(!isIn&&!isTa) return;
+  if(isTa&&e.shiftKey) return;
+  let box=el.parentElement;
+  while(box&&box!==document.body&&box.querySelectorAll("[data-board]").length===0) box=box.parentElement;
+  if(!box||box===document.body||box.querySelectorAll("[data-board]").length!==1) return;
+  e.preventDefault();
+  const fields=$$('input[type="text"],input:not([type]),textarea',box).filter(f=>!f.closest("[data-board]")&&f.offsetParent!==null);
+  const i=fields.indexOf(el);
+  if(i>-1&&i<fields.length-1){ fields[i+1].focus(); return; }
+  const g=box.querySelector("[data-board] [data-go]"); if(g) g.click();
 });
 function drawBoards(){
   $$("[data-board]").forEach(box=>{ const b=BOARD[box.dataset.board]; const body=b.body();
     box.querySelector("[data-bt]").textContent=b.title();
     const bb=box.querySelector("[data-bb]"); bb.textContent=body||"활동지를 쓰면 여기에 미리 보여요."; bb.classList.toggle("empty",!body);
-    const p=box.querySelector("[data-post]"); if(p) p.href=body?bridgeUrl(box.dataset.board):"#";
+    const g=box.querySelector("[data-go]"); if(g&&BRIDGE&&!g.dataset.busy){ const done=!!body&&isPosted(box.dataset.board); g.textContent=done?"올렸어요 ✓":"패들렛에 바로 올리기"; g.classList.toggle("primary",!done); }
   });
 }
 
