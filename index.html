@@ -393,6 +393,33 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 .toast{position:fixed;z-index:70;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));
   background:var(--side-bg);color:var(--side-ink);padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);font-size:15px;max-width:calc(100% - 32px)}
 
+/* 토의 말 카드 */
+.talk-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.talk-head .row{gap:8px}
+.talk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tk{position:relative;border-radius:14px;background:var(--surface);border:1.5px solid var(--line);transition:border-color .2s,box-shadow .2s}
+.tk::before{content:"";position:absolute;left:14px;right:14px;top:0;height:4px;border-radius:0 0 4px 4px;background:var(--tk)}
+.tk.picked{border-color:var(--pencil);box-shadow:0 0 0 3px var(--pencil-soft)}
+.tk.used{border-color:var(--ok)}
+.tk-flip{display:grid;width:100%;min-height:212px;padding:16px 14px 52px;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer;border-radius:14px}
+.tk-flip:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.tk-front,.tk-back{grid-area:1/1;display:flex;flex-direction:column;gap:6px;transition:opacity .25s,transform .25s}
+.tk-back{opacity:0;transform:translateY(8px);visibility:hidden}
+.tk.flip .tk-front{opacity:0;transform:translateY(-8px);visibility:hidden}
+.tk.flip .tk-back{opacity:1;transform:none;visibility:visible}
+.tk-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tk-top svg{width:58px;height:58px;flex:none}
+.tk-who{font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.tk-title{font-family:var(--f-display);font-size:18px;font-weight:700}
+.tk-say{font-family:var(--f-hand);font-size:21px;line-height:1.35;color:var(--ink);word-break:keep-all}
+.tk-say u{text-decoration:none;border-bottom:2px dashed var(--tk);padding:0 6px}
+.tk-book{font-size:12.5px;color:var(--ink-soft)}
+.tk-ex{font-family:var(--f-hand);font-size:20px;line-height:1.4;word-break:keep-all}
+.tk-hint{font-size:12.5px;color:var(--ink-soft);margin-top:auto}
+.tk-done{position:absolute;left:12px;bottom:12px}
+.tk-done[aria-pressed="true"]{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
+.talk-foot{font-size:14px;color:var(--ink-soft)}
+.talk-foot b{color:var(--ink);font-size:16px}
 @media (max-width: 960px){
   .side{transform:translateX(-102%);transition:transform .25s;width:min(86vw,var(--side-w))}
   .side.open{transform:none}
@@ -417,9 +444,11 @@ input[type=range]{width:100%;accent-color:var(--sea)}
   .step-head{grid-template-columns:1fr}.step-head .art{display:none}
   .qr-pair{grid-template-columns:1fr}
   .deck{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .talk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .card{padding:16px}
   .wg{--cols:12}
 }
+@media (max-width: 520px){ .talk-grid{grid-template-columns:1fr} .tk-flip{min-height:0} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
 .yt-wrap{display:flex;flex-direction:column;gap:8px}.yt{aspect-ratio:16/9;max-width:100%;border-radius:16px;overflow:hidden;background:var(--side-bg);box-shadow:var(--shadow)}.yt iframe{width:100%;height:100%;border:0;display:block}.yt-wrap .cap{font-size:13.5px;color:var(--ink-soft)}
 </style>
@@ -862,6 +891,14 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <li><span>내 생각을 말하고, 그림에서 근거 하나를 손가락으로 짚어요.</span></li>
         <li><span>듣는 사람은 "어떤 장면을 보고 그렇게 생각했어?"를 한 번 더 물어요.</span></li>
       </ol>
+    </div>
+    <div class="card plain">
+      <div class="talk-head">
+        <div><p class="eyebrow">토의 말 카드</p><h2 class="h2">말머리 하나면 토의가 이어져요 <small>카드를 누르면 오늘 그림책 예시가 보여요</small></h2></div>
+        <div class="row"><button type="button" class="btn sm pencil" id="talkPick">한 장 뽑기</button><button type="button" class="btn sm" id="talkPrint">교실용 카드 인쇄</button></div>
+      </div>
+      <div class="talk-grid" id="talkGrid"></div>
+      <p class="talk-foot">토의하며 쓴 카드는 [썼어요]를 눌러요. <b id="talkCount">0</b> / 6장 · 여섯 장을 다 쓰면 토의가 한 바퀴 돈 거예요. <button type="button" class="btn sm" id="talkReset">처음부터</button></p>
     </div>
     <div class="sheet">
       <div class="sheet-title"><h3>내 활동지 · 마음이 바뀐 장면</h3><span class="saved" data-saved="s5"></span></div>
@@ -1391,6 +1428,63 @@ $("#spin").addEventListener("click",()=>{
   requestAnimationFrame(step);
 });
 $$("[data-open-pick]").forEach(b=>b.addEventListener("click",()=>{ openModal("pickModal"); drawWheel(); closeSide(); }));
+
+/* ── 토의 말 카드 ── */
+const TALK=[
+  {k:"think",c:"--sea",who:"모두",title:"내 생각 말하기",say:"나는 <u>　　</u>라고 생각해. 왜냐하면 <u>　　</u> 때문이야.",plain:"나는 ______라고 생각해. 왜냐하면 ______ 때문이야.",ex:"나는 여우가 그냥 여우여도 괜찮았다고 생각해. 왜냐하면 다람쥐가 여우의 멋진 점을 하나하나 말해 줬기 때문이야."},
+  {k:"point",c:"--ok",who:"모두",title:"근거 짚기",say:"이 장면을 봐. <u>　　</u>잖아.",plain:"이 장면을 봐. ______잖아.",ex:"이 장면을 봐. 비에 줄무늬가 지워지니까 여우가 시무룩해졌잖아."},
+  {k:"ask",c:"--pencil",who:"질문이",title:"되묻기",say:"어떤 장면을 보고 그렇게 생각했어?",plain:"어떤 장면을 보고 그렇게 생각했어?",ex:"여우가 마지막에 기뻤다고 했는데, 어떤 장면을 보고 그렇게 생각했어?"},
+  {k:"add",c:"--sea",who:"모두",title:"덧붙이기",say:"네 말에 덧붙이면, <u>　　</u>.",plain:"네 말에 덧붙이면, ______.",ex:"네 말에 덧붙이면, 거북이랑 토끼도 무언가가 되어서 셋이 신나게 놀았어."},
+  {k:"differ",c:"--no",who:"모두",title:"다르게 생각하기",say:"나는 생각이 조금 달라. <u>　　</u>.",plain:"나는 생각이 조금 달라. ______.",ex:"나는 생각이 조금 달라. 줄무늬를 그린 건 거짓말이라기보다 친구들과 하는 놀이 같았어."},
+  {k:"sum",c:"--ok",who:"발표이",title:"정리하기",say:"우리 모둠은 <u>　　</u>라고 정리했어. 까닭은 <u>　　</u>.",plain:"우리 모둠은 ______라고 정리했어. 까닭은 ______.",ex:"우리 모둠은 '나답게 지내는 게 가장 즐겁다'라고 정리했어. 까닭은 여우가 여우라서 기뻐했기 때문이야."}
+];
+const TK_ART={
+  think:`<path d="M10 14 q0-8 8-8 h28 q8 0 8 8 v18 q0 8-8 8 h-20 l-10 9 l2-9 h0 q-8 0-8-8 z" style="fill:var(--sea-soft);stroke:var(--sea);stroke-width:2.6;stroke-linejoin:round"/><path d="M32 13 q-7 0-7 7 q0 4 4 7 v3 h6 v-3 q4-3 4-7 q0-7-7-7z" style="fill:var(--pencil);stroke:var(--ink);stroke-width:2"/><path d="M29 33 h6" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/>`,
+  point:`<rect x="6" y="8" width="40" height="32" rx="4" style="fill:var(--ok-soft);stroke:var(--ok);stroke-width:2.6"/><path d="M11 34 l9-11 l6 7 l5-5 l10 9" style="fill:none;stroke:var(--ok);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round"/><circle cx="35" cy="17" r="3.4" style="fill:var(--pencil)"/><path d="M40 56 v-16 q0-4 4-4 q4 0 4 4 v8 l7 2 q4 1 3 6 l-1 2" style="fill:var(--wood);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round"/>`,
+  ask:`<circle cx="26" cy="26" r="16" style="fill:var(--pencil-soft);stroke:var(--ink);stroke-width:2.6"/><path d="M38 38 l14 14" style="stroke:var(--ink);stroke-width:5;stroke-linecap:round"/><path d="M21 21 q1-6 6-6 q6 0 6 5 q0 4-5 5 v4" style="fill:none;stroke:var(--sea);stroke-width:3;stroke-linecap:round"/><circle cx="28" cy="35" r="2" style="fill:var(--sea)"/>`,
+  add:`<path d="M6 12 q0-6 6-6 h24 q6 0 6 6 v12 q0 6-6 6 h-18 l-8 7 l1-7 q-5-1-5-6z" style="fill:var(--surface-2);stroke:var(--ink-soft);stroke-width:2.4;stroke-linejoin:round"/><path d="M22 30 q0-6 6-6 h24 q6 0 6 6 v12 q0 6-6 6 h-5 l1 7 l-8-7 h-12 q-6 0-6-6z" style="fill:var(--sea-soft);stroke:var(--sea);stroke-width:2.6;stroke-linejoin:round"/><path d="M40 30 v12 M34 36 h12" style="stroke:var(--sea);stroke-width:3;stroke-linecap:round"/>`,
+  differ:`<path d="M4 14 q0-6 6-6 h18 q6 0 6 6 v10 q0 6-6 6 h-12 l-7 6 l1-6 q-6-1-6-6z" style="fill:var(--sea-soft);stroke:var(--sea);stroke-width:2.4;stroke-linejoin:round"/><path d="M30 34 q0-6 6-6 h18 q6 0 6 6 v10 q0 6-6 6 h-1 l1 6 l-7-6 h-11 q-6 0-6-6z" style="fill:var(--no-soft);stroke:var(--no);stroke-width:2.4;stroke-linejoin:round"/><path d="M14 19 h10 M40 39 h10" style="stroke:var(--ink);stroke-width:2.4;stroke-linecap:round"/><path d="M45 34 v10" style="stroke:var(--ink);stroke-width:2.4;stroke-linecap:round"/>`,
+  sum:`<rect x="12" y="8" width="36" height="46" rx="5" style="fill:var(--surface);stroke:var(--ink);stroke-width:2.6"/><rect x="22" y="4" width="16" height="9" rx="3" style="fill:var(--metal);stroke:var(--ink);stroke-width:2"/><path d="M19 24 h22 M19 32 h16" style="stroke:var(--ink-soft);stroke-width:2.4;stroke-linecap:round"/><path d="M20 43 l6 5 l12-12" style="fill:none;stroke:var(--ok);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round"/>`
+};
+const tkSvg=k=>`<svg viewBox="0 0 64 64" aria-hidden="true">${TK_ART[k]}</svg>`;
+const talkGrid=$("#talkGrid");
+talkGrid.innerHTML=TALK.map(t=>`<div class="tk" data-tk="${t.k}" style="--tk:var(${t.c})">
+  <button type="button" class="tk-flip" aria-pressed="false" aria-label="${t.title} 카드, 누르면 그림책 예시">
+    <span class="tk-front"><span class="tk-top">${tkSvg(t.k)}<span class="tk-who">${t.who}</span></span><span class="tk-title">${t.title}</span><span class="tk-say">${t.say}</span></span>
+    <span class="tk-back"><span class="tk-book">『여우지만 호랑이입니다』에서</span><span class="tk-ex">${esc(t.ex)}</span><span class="tk-hint">다시 누르면 말머리로 돌아가요</span></span>
+  </button>
+  <button type="button" class="btn sm tk-done" aria-pressed="false">썼어요</button>
+</div>`).join("");
+function drawTalk(){
+  let n=0;
+  $$(".tk",talkGrid).forEach(c=>{ const on=!!get("talk."+c.dataset.tk); if(on) n++; c.classList.toggle("used",on); const d=c.querySelector(".tk-done"); d.setAttribute("aria-pressed",String(on)); d.textContent=on?"썼어요 ✓":"썼어요"; });
+  $("#talkCount").textContent=n;
+  if(n===TALK.length&&!drawTalk.cheered){ drawTalk.cheered=true; toast("여섯 장을 다 썼어요. 토의가 한 바퀴 돌았어요!"); }
+  if(n<TALK.length) drawTalk.cheered=false;
+}
+talkGrid.addEventListener("click",e=>{
+  const f=e.target.closest(".tk-flip"), d=e.target.closest(".tk-done");
+  if(f){ const c=f.closest(".tk"); const on=!c.classList.contains("flip"); c.classList.toggle("flip",on); f.setAttribute("aria-pressed",String(on)); }
+  if(d){ const k=d.closest(".tk").dataset.tk; S.talk=S.talk||{}; S.talk[k]=!S.talk[k]; persist(); drawTalk(); }
+});
+$("#talkPick").addEventListener("click",()=>{
+  const cs=$$(".tk",talkGrid), left=cs.filter(c=>!get("talk."+c.dataset.tk)), pool=left.length?left:cs;
+  cs.forEach(c=>c.classList.remove("picked"));
+  const c=pool[Math.floor(Math.random()*pool.length)]; c.classList.add("picked");
+  c.scrollIntoView({block:"nearest",behavior:"smooth"});
+  toast("「"+c.querySelector(".tk-title").textContent+"」 카드로 먼저 말해 봐요");
+});
+$("#talkReset").addEventListener("click",()=>{ S.talk={}; persist(); $$(".tk",talkGrid).forEach(c=>{ c.classList.remove("picked","flip"); c.querySelector(".tk-flip").setAttribute("aria-pressed","false"); }); drawTalk(); toast("말 카드를 처음부터 시작해요"); });
+$("#talkPrint").addEventListener("click",()=>{
+  const LIGHT={"--sea":"#1d5bb8","--sea-soft":"#e2ecfb","--ok":"#2e7d5e","--ok-soft":"#e0f1e9","--no":"#b5443a","--no-soft":"#f8e3e0","--pencil":"#f4c430","--pencil-soft":"#fdf3cf","--ink":"#1b2740","--ink-soft":"#56617a","--surface":"#ffffff","--surface-2":"#edf2f9","--wood":"#f1d3a2","--metal":"#b9c3d3"};
+  const fix=h=>h.replace(/var\((--[a-z0-9-]+)\)/g,(m,v)=>LIGHT[v]||"#999");
+  const cards=TALK.map(t=>`<div class="c" style="border-top:10px solid ${LIGHT[t.c]}"><div class="t"><svg viewBox="0 0 64 64">${fix(TK_ART[t.k])}</svg><span class="w">${t.who}</span></div><h2>${t.title}</h2><p>${esc(t.plain)}</p></div>`).join("");
+  const w=window.open("","_blank");
+  if(!w){ toast("인쇄 창이 막혔어요. 팝업을 허용해 주세요"); return; }
+  w.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>토의 말 카드</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Batang:wght@700&display=swap"><style>@page{size:A4;margin:12mm}body{margin:0;font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#1b2740;word-break:keep-all}h1{font-family:"Gowun Batang",serif;font-size:20px;margin:0 0 8mm}.g{display:grid;grid-template-columns:1fr 1fr;gap:6mm}.c{border:1.5px dashed #9aa6bb;border-radius:4mm;padding:6mm;height:72mm;box-sizing:border-box;display:flex;flex-direction:column;gap:3mm;break-inside:avoid}.t{display:flex;justify-content:space-between;align-items:center}.t svg{width:26mm;height:26mm}.w{font-size:13pt;border:1px solid #c9d2e0;border-radius:99px;padding:1mm 4mm}h2{font-family:"Gowun Batang",serif;font-size:18pt;margin:0}p{font-family:"Gaegu",cursive;font-size:22pt;line-height:1.3;margin:0}small{display:block;margin-top:6mm;font-size:10pt;color:#56617a}</style></head><body><h1>토의 말 카드 · 모둠 책상 가운데 두고, 말할 때 카드를 앞으로 내밀어요</h1><div class="g">${cards}</div><small>점선을 따라 잘라 쓰세요. 질문이는 '되묻기', 발표이는 '정리하기' 카드를 맡아요.</small><script>document.fonts.ready.then(()=>setTimeout(()=>print(),300));<\/script></body></html>`);
+  w.document.close();
+});
+drawTalk();
 
 /* ── 자투리 +1 맞춤법 탐정 ── */
 const TAP_TEXT="나는 느림보지만 끈기 있는 사람입니다. 왜냐면 늦어도 끝까지 하기 때문입니다. 지난주 줄넘기 시험 때 자꾸 걸렸지만 쉬는 시간마다 연습해서 결국 통과햇습니다.";
