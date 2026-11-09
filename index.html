@@ -154,7 +154,19 @@ button,input,select,textarea{font:inherit;color:inherit}
 .flow-break{grid-column:1/-1;display:flex;align-items:center;gap:12px;color:var(--ink-soft);font-size:14px}
 .flow-break::before,.flow-break::after{content:"";flex:1;border-top:1px dashed var(--line)}
 
-.qr-card{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.qr-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.qr-item{margin:0;display:flex;gap:14px;align-items:center;background:var(--surface-2);border:0;border-radius:14px;padding:14px;text-align:left;cursor:pointer;color:var(--ink)}
+.qr-item:hover{box-shadow:0 0 0 2px var(--sea)}
+.qr-item .qr{flex:none}
+.qr-cap{display:flex;flex-direction:column;gap:2px;min-width:0}
+.qr-cap b{font-size:17px}
+.qr-cap span{font-size:14px;color:var(--ink-soft)}
+.qr-cap .url{font-size:12.5px;word-break:break-all}
+.qr-cap .zoom{margin-top:4px;font-size:13px;font-weight:600;color:var(--sea)}
+.qr-big{display:grid;place-items:center;gap:12px}
+.qr-big .qr{width:min(340px,80vw);height:min(340px,80vw);padding:14px}
+.qr-big .qr img,.qr-big .qr canvas{width:100%!important;height:100%!important}
+.qr-big p{font-size:15px;color:var(--ink-soft);text-align:center;word-break:break-all}
 .qr{width:148px;height:148px;background:var(--qr-bg);border-radius:12px;padding:8px;display:grid;place-items:center}
 .qr img,.qr canvas{width:132px!important;height:132px!important}
 .qr .qr-fallback{color:var(--qr-ink);font-size:12px;text-align:center}
@@ -377,7 +389,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
   .roles,.sliders{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ladder-wrap{grid-template-columns:1fr}.ladder{max-width:220px}
   .step-head{grid-template-columns:1fr}.step-head .art{display:none}
-  .qr-card{grid-template-columns:1fr}
+  .qr-pair{grid-template-columns:1fr}
   .deck{grid-template-columns:repeat(2,minmax(0,1fr))}
   .card{padding:16px}
   .wg{--cols:12}
@@ -511,13 +523,19 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       </div>
     </div>
 
-    <div class="card qr-card">
-      <div class="qr" id="qr" role="img" aria-label="우리 반 패들렛 QR 코드"></div>
-      <div class="plain">
-        <h2 class="h2">우리 반 보드</h2>
-        <p>오늘 쓴 생각은 모두 패들렛에 모여요. 휴대폰으로 QR을 찍으면 바로 들어갈 수 있어요.</p>
-        <div class="kit"><span>준비물</span><span>휴대폰 또는 노트북</span><span>필기구</span><span>그림책 『나는 여우지만 호랑이입니다』</span></div>
+    <div class="card plain">
+      <h2 class="h2">휴대폰으로 들어와요 <small>QR을 찍으면 바로 열려요 · 누르면 크게 보여요</small></h2>
+      <div class="qr-pair">
+        <button type="button" class="qr-item" data-qr-big="guide" aria-label="안내 가이드 QR 크게 보기">
+          <span class="qr" id="qrGuide" role="img" aria-label="안내 가이드 QR 코드"></span>
+          <span class="qr-cap"><b>안내 가이드</b><span>오늘 연수 진행 · 내 활동지</span><span class="url" data-guide-url></span><span class="zoom">크게 보기 ⤢</span></span>
+        </button>
+        <button type="button" class="qr-item" data-qr-big="board" aria-label="우리 반 보드 QR 크게 보기">
+          <span class="qr" id="qr" role="img" aria-label="우리 반 패들렛 QR 코드"></span>
+          <span class="qr-cap"><b>우리 반 보드</b><span>패들렛 · 모두의 생각 모아 보기</span><span class="url">padlet.com</span><span class="zoom">크게 보기 ⤢</span></span>
+        </button>
       </div>
+      <div class="kit"><span>준비물</span><span>휴대폰 또는 노트북</span><span>필기구</span><span>그림책 『나는 여우지만 호랑이입니다』</span></div>
     </div>
   </section>
 
@@ -933,6 +951,14 @@ input[type=range]{width:100%;accent-color:var(--sea)}
   </div>
 </div>
 
+<!-- QR 크게 -->
+<div class="modal" id="qrModal" hidden role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+  <div class="modal-box">
+    <div class="modal-head"><h2 id="qrTitle">QR</h2><button class="x-btn" data-close aria-label="닫기">✕</button></div>
+    <div class="qr-big"><span class="qr" id="qrBig"></span><p id="qrBigUrl"></p></div>
+  </div>
+</div>
+
 <!-- 복사 대체 -->
 <div class="modal" id="copyModal" hidden role="dialog" aria-modal="true" aria-labelledby="copyTitle">
   <div class="modal-box">
@@ -950,6 +976,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 "use strict";
 /* ── 설정 ── */
 const PADLET = "https://padlet.com/mjmjvip0506/padlet-s025af5orsrla0hyy5h5";
+const GUIDE = "https://mjvip0506-web.github.io/korean-guide/";
 const BRIDGE = ""; /* 구글 Apps Script 웹 앱 주소를 넣으면 '보드에 올리기'가 패들렛에 바로 올라가요 */
 const KEY = "korean-guide-v1";
 const STDS = [
@@ -1027,8 +1054,11 @@ $$("[data-theme-toggle]").forEach(b=>b.addEventListener("click",()=>{
 
 /* ── 패들렛 링크·QR ── */
 $$("[data-padlet]").forEach(a=>a.href=PADLET);
-try{ if(window.QRCode){ new QRCode($("#qr"),{text:PADLET,width:132,height:132,colorDark:"#14213d",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M}); }
-  else $("#qr").innerHTML='<span class="qr-fallback">QR을 불러오지 못했어요.<br>왼쪽 아래 버튼으로 들어가요.</span>'; }catch(e){}
+function makeQR(el,text,size){ el.innerHTML=""; try{ if(window.QRCode){ new QRCode(el,{text:text,width:size,height:size,colorDark:"#14213d",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M}); return; } }catch(e){} el.innerHTML='<span class="qr-fallback">QR을 불러오지 못했어요.<br>주소를 직접 입력해 주세요.</span>'; }
+makeQR($("#qrGuide"),GUIDE,132); makeQR($("#qr"),PADLET,132);
+$$("[data-guide-url]").forEach(e=>e.textContent=GUIDE.replace(/^https:\/\//,"").replace(/\/$/,""));
+$$("[data-qr-big]").forEach(b=>b.addEventListener("click",()=>{ const g=b.dataset.qrBig==="guide"; const url=g?GUIDE:PADLET;
+  $("#qrTitle").textContent=g?"안내 가이드":"우리 반 보드"; $("#qrBigUrl").textContent=url; makeQR($("#qrBig"),url,600); openModal("qrModal"); }));
 
 /* ── 원고지 ── */
 $$("[data-wongoji]").forEach(el=>{
