@@ -193,6 +193,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sheet-title h3{font-family:var(--f-body);font-size:16px;display:flex;gap:8px;align-items:center}
 .sheet-title h3::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--sea)}
 .saved{font-size:12.5px;color:var(--ok)}
+.sheet-tools{display:flex;align-items:center;gap:8px}
+.reset-btn{font-size:13px;padding:5px 11px}
+.reset-btn.armed{background:var(--no-soft);color:var(--no);border-color:var(--no)}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label,.field .lab{font-size:14px;font-weight:600}
 .field small{color:var(--ink-soft);font-size:13px}
@@ -1779,6 +1782,29 @@ $("#talkPrint").addEventListener("click",()=>{
   w.document.close();
 });
 drawTalk();
+
+/* ── 활동지 하나씩 초기화 ── */
+const RESET_MAP={s0:{step:"opening",keys:["s0"]},s1:{step:"step1",keys:["s1"]},s2:{step:"step2",keys:["s2"]},s3:{step:"step3",keys:["s3"]},s4:{step:"step4",keys:["s4"]},s5:{step:"step5",keys:["s5","ed","talk"]},s6:{step:"step6",keys:["s6"]},s7:{step:"step7",keys:["s7"]}};
+$$(".sheet-title [data-saved]").forEach(sp=>{
+  const sec=sp.dataset.saved; if(!RESET_MAP[sec]) return;
+  const b=document.createElement("button"); b.type="button"; b.className="btn sm reset-btn"; b.dataset.reset=sec; b.textContent="초기화";
+  const wrap=document.createElement("span"); wrap.className="sheet-tools"; sp.replaceWith(wrap); wrap.append(sp,b);
+});
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-reset]"); if(!b) return;
+  if(!b.dataset.armed){ b.dataset.armed="1"; b.textContent="한 번 더 누르면 지워져요"; b.classList.add("armed"); clearTimeout(b._t); b._t=setTimeout(()=>{ delete b.dataset.armed; b.textContent="초기화"; b.classList.remove("armed"); },3500); return; }
+  clearTimeout(b._t); delete b.dataset.armed; b.textContent="초기화"; b.classList.remove("armed");
+  const m=RESET_MAP[b.dataset.reset];
+  m.keys.forEach(k=>{ delete S[k]; });
+  if(S.posted) delete S.posted[m.step];
+  persist();
+  const sec=b.closest("section.view")||document;
+  $$("input[data-k],textarea[data-k]",sec).forEach(el=>{ if(m.keys.some(k=>el.dataset.k.startsWith(k+"."))){ if(el.type==="checkbox") el.checked=false; else el.value=""; } });
+  if(m.step==="step6"){ wStds._browse=false; const o=$("#wOrig"); if(o) delete o.dataset.code; }
+  if(m.step==="step5"){ const a=$("#edAns"); if(a) a.hidden=true; const n=$("#edNote"); if(n) n.textContent="짐작을 고르거나 쓴 뒤에 눌러요."; $$(".tk",talkGrid).forEach(c=>{ c.classList.remove("picked","flip"); c.querySelector(".tk-flip").setAttribute("aria-pressed","false"); }); drawTalk(); }
+  $$(".sugg",sec).forEach(x=>{ x._sig=""; });
+  refresh(); toast("이 활동지를 처음 상태로 되돌렸어요");
+});
 
 /* ── 자투리 +1 맞춤법 탐정 ── */
 const TAP_TEXT="나는 느림보지만 끈기 있는 사람입니다. 왜냐면 늦어도 끝까지 하기 때문입니다. 지난주 줄넘기 시험 때 자꾸 걸렸지만 쉬는 시간마다 연습해서 결국 통과햇습니다.";
