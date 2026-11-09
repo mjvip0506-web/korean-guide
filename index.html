@@ -1219,7 +1219,9 @@ const BOARD = {
   step7:{col:"💬 마무리 의견 공유 · 꺼내 쓸 한 가지", title:who, body:()=>{ const o=(get("s7.one")||"").trim(); if(!o) return ""; const w=(get("s7.why")||"").trim(); return `다음 주 우리 반 국어 시간에 ${o}부터 해 보겠습니다.`+(w?` ${w} 때문입니다.`:""); }, need:"꺼내 쓸 한 가지를 써 주세요."}
 };
 function boardData(step){ const b=BOARD[step]; return {c:b.col,t:b.title(),b:b.body()}; }
-function bridgeUrl(step){ return BRIDGE+"#"+encodeURIComponent(JSON.stringify(boardData(step))); }
+/* 패들렛이 문단(<p>) 사이를 붙여 버려서, 줄마다 띄어쓰기를 하나 더해 보내요 */
+const forBoard=d=>({c:d.c,t:d.t,b:d.b.replace(/\n/g," \n")});
+function bridgeUrl(step){ return BRIDGE+"#"+encodeURIComponent(JSON.stringify(forBoard(boardData(step)))); }
 const postSig=d=>d.c+"|"+d.t+"|"+d.b;
 function isPosted(step){ const d=boardData(step); return !!(S.posted&&S.posted[step]===postSig(d)); }
 async function goBoard(step,btn){
@@ -1231,7 +1233,7 @@ async function goBoard(step,btn){
   btn.dataset.busy="1"; btn.disabled=true; btn.textContent="올리는 중…";
   const box=btn.closest(".board");
   try{
-    const r=await fetch(BRIDGE,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)});
+    const r=await fetch(BRIDGE,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(forBoard(d))});
     const j=await r.json();
     if(!j||!j.ok) throw new Error((j&&j.error)||"올리지 못했어요");
     S.posted=S.posted||{}; S.posted[step]=postSig(d); persist();
