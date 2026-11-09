@@ -336,6 +336,30 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 .me{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
 .me svg{width:92px;height:92px}
 .me ul{margin:4px 0 0;padding-left:18px;font-size:15px}
+.book{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;align-items:start}
+.book>svg{width:100%;height:auto}
+.story{font-size:15.5px;max-width:62ch}
+.beats{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px;counter-reset:b}
+.beats li{font-size:13.5px;background:var(--surface-2);border-radius:999px;padding:3px 12px}
+.beats li::before{counter-increment:b;content:counter(b) " ";font-weight:700;color:var(--sea)}
+.note{font-size:13.5px;color:var(--ink-soft)}
+.tapwords{display:flex;flex-wrap:wrap;gap:8px;font-family:var(--f-hand);font-size:24px;line-height:1.3}
+.tapwords button{border:1px dashed var(--line);background:var(--surface);border-radius:8px;padding:2px 8px;cursor:pointer}
+.tapwords button.ok{background:var(--ok-soft);border:1px solid var(--ok)}
+.tapwords button.ok small{display:block;font-family:var(--f-body);font-size:12.5px;color:var(--ok);font-weight:700}
+.tapwords button.no{background:var(--surface-2);color:var(--ink-soft)}
+.og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.og-col{display:flex;flex-direction:column;gap:8px}
+.og-col h3{font-family:var(--f-body);font-size:14px;color:var(--ink-soft)}
+.og-pool button{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px;cursor:pointer;font-size:15px}
+.og-pool button.shake{border-color:var(--no);background:var(--no-soft)}
+.og-done{margin:0;list-style:none;display:flex;flex-direction:column;gap:8px;min-height:60px;border:1.5px dashed var(--line);border-radius:12px;padding:8px}
+.og-done li{background:var(--ok-soft);border-radius:10px;padding:8px 12px;font-size:15px;display:flex;gap:8px;align-items:baseline}
+.og-done li b{font-size:12px;color:var(--ok);white-space:nowrap}
+.area-row{display:grid;grid-template-columns:minmax(0,1fr) 160px auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.area-row code{font-family:var(--f-body);font-weight:700;color:var(--sea)}
+.area-row .mk{font-weight:700;min-width:1.5em}
+.area-row .mk.y{color:var(--ok)} .area-row .mk.n{color:var(--no)}
 .pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:6px;border-top:1px solid var(--line)}
 .pager a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);max-width:48%}
 .pager a.next{margin-left:auto;text-align:right}
@@ -382,7 +406,9 @@ input[type=range]{width:100%;accent-color:var(--sea)}
   .util{display:none}
 }
 @media (max-width: 720px){
-  .video,.me{grid-template-columns:1fr}
+  .video,.me,.og{grid-template-columns:1fr}
+  .book{grid-template-columns:72px minmax(0,1fr)}
+  .area-row{grid-template-columns:1fr}
   .hero{grid-template-columns:1fr;padding:22px}
   .hero-art{order:-1}.hero-art svg{max-width:180px}
   .ab,.w-grid,.compare,.three{grid-template-columns:1fr}
@@ -435,6 +461,13 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <button type="button" data-open-timer><span class="num">⏱</span><span>공유 타이머<span class="sub">30초 · 1분 · 3분 · 큰 화면</span></span></button>
       <button type="button" data-open-pick><span class="num">◎</span><span>모둠 뽑기 룰렛<span class="sub">발표 순서 · 모둠 뽑기</span></span></button>
       <button type="button" data-theme-toggle><span class="num">◐</span><span>화면 밝기 바꾸기</span></button>
+    </div>
+    <div class="nav nav-group">
+      <div class="nav-label">자투리 활동 <span>일찍 끝났다면</span></div>
+      <a href="#plus1" data-nav="plus1"><span class="num">+1</span><span>맞춤법 탐정<span class="sub">학생 B 글에서 고칠 곳 찾기</span></span></a>
+      <a href="#plus2" data-nav="plus2"><span class="num">+2</span><span>문단 순서 맞추기<span class="sub">중심 → 까닭 → 장면</span></span></a>
+      <a href="#plus3" data-nav="plus3"><span class="num">+3</span><span>그림책 장면 순서<span class="sub">이야기 흐름 다시 잇기</span></span></a>
+      <a href="#plus4" data-nav="plus4"><span class="num">+4</span><span>성취기준 영역 맞히기<span class="sub">번호만 보고 영역 알기</span></span></a>
     </div>
     <div class="nav nav-group">
       <div class="nav-label">바로 가는 곳</div>
@@ -535,7 +568,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
           <span class="qr-cap"><b>우리 반 보드</b><span>패들렛 · 모두의 생각 모아 보기</span><span class="url">padlet.com</span><span class="zoom">크게 보기 ⤢</span></span>
         </button>
       </div>
-      <div class="kit"><span>준비물</span><span>휴대폰 또는 노트북</span><span>필기구</span><span>그림책 『나는 여우지만 호랑이입니다』</span></div>
+      <div class="kit"><span>준비물</span><span>휴대폰 또는 노트북</span><span>필기구</span><span>그림책 『여우지만 호랑이입니다』</span></div>
     </div>
   </section>
 
@@ -577,7 +610,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="row"><button type="button" class="btn primary" id="revealBtn">정답 보기</button><span style="font-size:14px;color:var(--ink-soft)" id="guessNote">번호를 눌러 내 생각을 고른 뒤 정답을 봐요.</span></div>
       <div class="reveal" id="reveal" hidden>
         <b>거짓은 3번이에요.</b>
-        <span>1번과 2번은 진짜예요. 오늘 4단계에서는 여러분도 이 틀, "나는 ○○지만 ○○입니다"로 자기를 소개하게 돼요. 사실 이 틀은 오늘 함께 볼 그림책 『나는 여우지만 호랑이입니다』에서 빌려 왔어요.</span>
+        <span>1번과 2번은 진짜예요. 오늘 4단계에서는 여러분도 이 틀, "나는 ○○지만 ○○입니다"로 자기를 소개하게 돼요. 사실 이 틀은 오늘 함께 볼 그림책 『여우지만 호랑이입니다』에서 빌려 왔어요.</span>
       </div>
       <div class="me">
         <svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="44" style="fill:var(--sea-soft)"/><circle cx="46" cy="38" r="17" style="fill:var(--surface);stroke:var(--sea);stroke-width:3"/><path d="M18 80 Q46 54 74 80" style="fill:var(--surface);stroke:var(--sea);stroke-width:3"/><circle cx="40" cy="37" r="2.4" style="fill:var(--ink)"/><circle cx="52" cy="37" r="2.4" style="fill:var(--ink)"/><path d="M40 45 Q46 50 52 45" style="fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round"/><rect x="62" y="12" width="9" height="30" rx="2" transform="rotate(25 66 27)" style="fill:var(--pencil)"/></svg>
@@ -652,7 +685,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     </div>
     <div class="example">
       <p class="eyebrow">강사 예시 · 3학년</p>
-      <h3>『나는 여우지만 호랑이입니다』</h3>
+      <h3>『여우지만 호랑이입니다』</h3>
       <p><b>[4국05-02]</b> <mark class="how">자신의 경험을 바탕으로 작품 속 세계와 현실 세계를 비교하여</mark> <mark class="what">작품을 감상한다</mark>.</p>
       <p class="legend"><span><mark class="what">밑줄</mark> 무엇을</span><span><mark class="how">형광</mark> 어떻게</span></p>
       <dl class="wlist">
@@ -683,13 +716,23 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <p class="lead">질문은 선생님의 확인 문제가 아니라, 아이가 읽기를 스스로 이끄는 도구예요. [4국02-03] 질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.</p>
       </div>
     </div>
+    <div class="card book">
+      <svg viewBox="0 0 120 150" aria-hidden="true"><rect x="10" y="8" width="96" height="134" rx="6" style="fill:var(--sea)"/><rect x="10" y="8" width="12" height="134" rx="4" style="fill:var(--side-bg)"/><path d="M40 112 l14 -22 l10 14 l8 -10 l16 18 z" style="fill:var(--pencil)"/><path d="M44 38 h48 M44 50 h36" style="stroke:var(--on-sea);stroke-width:6;stroke-linecap:round"/><path d="M58 92 q6 -6 12 0 M66 98 q6 -6 12 0" style="stroke:var(--side-bg);stroke-width:3;fill:none;stroke-linecap:round"/></svg>
+      <div class="plain">
+        <p class="eyebrow">오늘의 그림책</p>
+        <h2 class="h2">『여우지만 호랑이입니다』 <small>코리 R. 테이버 글·그림</small></h2>
+        <p class="story">호랑이 책을 보던 여우는 몸집이 크고 날쌘 호랑이가 부럽습니다. 붓으로 몸에 줄무늬를 그려 '호랑이'가 되자, 거북이는 경주용 자동차가 되고 토끼는 상자를 쓴 로봇이 되어 셋이 신나게 어울려 놉니다. 그런데 갑자기 비가 쏟아져 줄무늬가 씻겨 나가고, 다시 여우가 된 여우는 시무룩해집니다. 그때 다람쥐가 여우를 반가워하며 여우의 멋진 점을 하나하나 말해 주고, 여우는 자기가 여우라서 기뻐합니다.</p>
+        <ol class="beats"><li>호랑이를 부러워해요</li><li>줄무늬를 그려 '호랑이'가 돼요</li><li>친구들도 무언가가 되어 함께 놀아요</li><li>비에 줄무늬가 지워져요</li><li>여우라서 기뻐요</li></ol>
+        <p class="note">그림책 장면은 강사 화면으로 함께 봐요. 책 전체는 저작권 때문에 이 페이지에 올리지 않아요.</p>
+      </div>
+    </div>
     <div class="plain">
       <h2 class="h2">질문 4단계 <small>강사 예시 질문과 함께</small></h2>
       <div class="tbl-wrap"><table>
-        <thead><tr><th>단계</th><th>무엇을 묻나</th><th>『나는 여우지만 호랑이입니다』에서</th></tr></thead>
+        <thead><tr><th>단계</th><th>무엇을 묻나</th><th>『여우지만 호랑이입니다』에서</th></tr></thead>
         <tbody>
-          <tr><td class="stage">① 내용</td><td>글과 그림에 드러난 사실</td><td class="q">여우는 호랑이 무리에서 무엇을 했나?</td></tr>
-          <tr><td class="stage">② 상상</td><td>드러나지 않은 마음과 까닭</td><td class="q">여우는 어떤 마음으로 숨겼을까?</td></tr>
+          <tr><td class="stage">① 내용</td><td>글과 그림에 드러난 사실</td><td class="q">여우는 호랑이가 되려고 무엇을 했나?</td></tr>
+          <tr><td class="stage">② 상상</td><td>드러나지 않은 마음과 까닭</td><td class="q">줄무늬를 그리는 동안 여우는 어떤 마음이었을까?</td></tr>
           <tr><td class="stage">③ 적용</td><td>나의 경험과 견주기</td><td class="q">나라면 사실대로 말했을까?</td></tr>
           <tr><td class="stage">④ 종합</td><td>작품 전체가 말하는 것</td><td class="q">이 책은 나답게 사는 것에 대해 무엇을 말할까?</td></tr>
         </tbody>
@@ -752,7 +795,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="plain">
         <h2 class="h2">문단 사다리</h2>
         <ol class="steps">
-          <li><span><b>한 줄</b> · 책 제목 구조를 빌려요. "나는 ○○지만 ○○입니다."</span></li>
+          <li><span><b>한 줄</b> · 책 제목 『여우지만 호랑이입니다』의 구조를 빌려요. "나는 ○○지만 ○○입니다."</span></li>
           <li><span><b>까닭</b> · 그렇게 쓴 까닭 한 줄. "앞 문장이 중심 문장, 뒤 문장이 뒷받침 문장이야." 하고 이름을 붙여 줘요.</span></li>
           <li><span><b>장면</b> · 언제, 어디서, 무엇을 했는지 더하면 한 문단이 돼요.</span></li>
         </ol>
@@ -823,7 +866,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     <div class="sheet">
       <div class="sheet-title"><h3>내 활동지 · 마음이 바뀐 장면</h3><span class="saved" data-saved="s5"></span></div>
       <div class="field"><label for="s5-pick">마음이 가장 크게 바뀐 장면</label><select id="s5-pick" data-k="s5.pick"></select><small>그래프에서 자동으로 골라 두었어요. 모둠 생각이 다르면 바꿔 주세요.</small></div>
-      <div class="field"><label for="s5-why">그렇게 본 까닭</label><input type="text" id="s5-why" data-k="s5.why" placeholder="예: 들킬까 봐 숨기던 여우가 처음으로 자기 이야기를 했기"></div>
+      <div class="field"><label for="s5-why">그렇게 본 까닭</label><input type="text" id="s5-why" data-k="s5.why" placeholder="예: 비에 줄무늬가 지워져 시무룩하던 여우가 다람쥐의 말을 듣고 다시 웃었기"></div>
       <div data-board="step5"></div>
     </div>
     <nav class="pager" data-pager="step5"></nav>
@@ -843,7 +886,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <p class="eyebrow">강사 예시 · 활동지 W</p>
         <h3>[4국05-02] 경험과 견주어 감상하기</h3>
         <dl class="wlist">
-          <dt>그림책</dt><dd>『나는 여우지만 호랑이입니다』</dd>
+          <dt>그림책</dt><dd>『여우지만 호랑이입니다』</dd>
           <dt>무엇을</dt><dd>작품을 감상한다</dd>
           <dt>어떻게</dt><dd>자신의 경험을 바탕으로, 작품 속 세계와 현실 세계를 비교하여</dd>
           <dt>핵심 질문</dt><dd>나라면 사실대로 말했을까?</dd>
@@ -896,6 +939,43 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     </div>
     <div class="row"><a class="btn" href="#sheets">내 활동지 모음 보기</a><a class="btn pencil" data-padlet target="_blank" rel="noopener">우리 반 보드 둘러보기 ↗</a></div>
     <nav class="pager" data-pager="step7"></nav>
+  </section>
+
+  <!-- ───────── 자투리 활동 ───────── -->
+  <section class="view" data-route="plus1" hidden>
+    <div class="card step-head"><div>
+      <p class="step-tag"><b>자투리 +1</b>일찍 끝났다면</p>
+      <h1>맞춤법 탐정</h1>
+      <p class="lead">1차시 ①의 학생 B 글에 고칠 곳이 두 군데 숨어 있어요. 고칠 낱말을 눌러 찾아보세요.</p>
+    </div></div>
+    <div class="card plain"><div class="tapwords" id="tapwords"></div><p class="row" style="justify-content:space-between"><b id="tapCount">찾은 곳 0 / 2</b><button type="button" class="btn sm" id="tapReset">처음부터</button></p></div>
+    <div class="tip"><b>TIP</b><span>고쳐쓰기는 내용(중심 문장 · 뒷받침 문장 · 장면)을 먼저 보고, 맞춤법은 그다음에 봐요. 학생 B의 글이 맞춤법은 틀려도 문단으로는 더 단단했던 것처럼요.</span></div>
+  </section>
+  <section class="view" data-route="plus2" hidden>
+    <div class="card step-head"><div>
+      <p class="step-tag"><b>자투리 +2</b>일찍 끝났다면</p>
+      <h1>문단 순서 맞추기</h1>
+      <p class="lead">강사 예시 문단의 문장이 섞여 있어요. 첫 문장부터 차례대로 눌러 한 문단을 다시 세워 보세요.</p>
+    </div></div>
+    <div class="card og" id="og2"></div>
+  </section>
+  <section class="view" data-route="plus3" hidden>
+    <div class="card step-head"><div>
+      <p class="step-tag"><b>자투리 +3</b>일찍 끝났다면</p>
+      <h1>그림책 장면 순서</h1>
+      <p class="lead">『여우지만 호랑이입니다』의 장면이 섞여 있어요. 일어난 순서대로 눌러 이야기를 다시 이어 보세요.</p>
+    </div></div>
+    <div class="card og" id="og3"></div>
+  </section>
+  <section class="view" data-route="plus4" hidden>
+    <div class="card step-head"><div>
+      <p class="step-tag"><b>자투리 +4</b>일찍 끝났다면</p>
+      <h1>성취기준 영역 맞히기</h1>
+      <p class="lead">성취기준 번호만 보고 영역을 골라 보세요. 힌트는 번호 가운데 두 자리예요.</p>
+    </div></div>
+    <div class="plain" id="areas"></div>
+    <div class="row"><button type="button" class="btn primary" id="areaCheck">확인하기</button><span id="areaResult" style="font-weight:600"></span></div>
+    <div class="tip"><b>TIP</b><span>2022 개정 국어과는 듣기·말하기(01), 읽기(02), 쓰기(03), 문법(04), 문학(05), 매체(06) 여섯 영역이에요. [4국03-01]은 '4학년군 · 국어 · 쓰기 영역 · 첫 번째 성취기준'이라는 뜻이에요.</span></div>
   </section>
 
   <!-- ───────── 내 활동지 모음 ───────── -->
@@ -987,7 +1067,7 @@ const STDS = [
   ["4국03-01","중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다."]
 ];
 const ORDER = [["home","처음 화면"],["opening","여는 이야기"],["step1","학생 A? B?"],["step2","성취기준, 무엇을·어떻게"],["step3","질문 하나 고르기"],["step4","한 줄에서 문단으로"],["step5","마음 그래프와 작은 토의"],["step6","그림책 한 권, 설계 세 칸"],["step7","다음 주에 꺼내 쓸 한 가지"]];
-const ROUTES = ORDER.map(o=>o[0]).concat(["sheets"]);
+const ROUTES = ORDER.map(o=>o[0]).concat(["sheets","plus1","plus2","plus3","plus4"]);
 const $ = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc = s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1091,8 +1171,8 @@ function bindInputs(){
 }
 
 /* ── 마음 그래프 ── */
-const DEF_SCENES=["처음 만난 호랑이 무리","무리 속에서 숨기기","들킬 뻔한 순간","사실을 말한 뒤"];
-function scenes(){ const sc=get("s5.sc")||[]; return [0,1,2,3].map(i=>({name:(sc[i]&&sc[i].name)||DEF_SCENES[i], v:(sc[i]&&sc[i].v!=null)?+sc[i].v:[6,4,2,8][i]})); }
+const DEF_SCENES=["호랑이를 부러워할 때","줄무늬를 그린 뒤","비에 줄무늬가 지워질 때","여우가 최고라는 말을 들을 때"];
+function scenes(){ const sc=get("s5.sc")||[]; return [0,1,2,3].map(i=>({name:(sc[i]&&sc[i].name)||DEF_SCENES[i], v:(sc[i]&&sc[i].v!=null)?+sc[i].v:[4,8,2,10][i]})); }
 function setScene(i,key,val){ const sc=scenes(); sc[i][key]=val; set("s5.sc",sc); }
 const sliders=$("#sliders");
 sliders.innerHTML=[0,1,2,3].map(i=>`<div class="field"><label for="sc-n${i}">장면 ${i+1}</label><input type="text" id="sc-n${i}" data-sc="${i}" data-key="name"><input type="range" id="sc-v${i}" min="0" max="10" step="1" data-sc="${i}" data-key="v" aria-label="장면 ${i+1} 마음 높이"></div>`).join("");
@@ -1135,7 +1215,7 @@ const BOARD = {
   step3:{col:"💬 1차시 ③ 의견 공유 · 우리가 고른 질문", title:who, body:()=>{ const q=(get("s3.q")||"").trim(); if(!q) return ""; const st=get("s3.stage"); return `우리가 고른 질문은 '${q}'이고, 4단계 중 ${st||"____"} 질문입니다.`; }, need:"짝과 고른 질문을 써 주세요."},
   step4:{col:"💬 1차시 ④ 의견 공유 · 나의 한 줄", title:who, body:()=>{ const p=para(); return [p.l1,p.l2,p.l3].filter(Boolean).join(" "); }, need:"1단계 한 줄부터 써 주세요."},
   step5:{col:"💬 2차시 ① 의견 공유 · 마음이 바뀐 장면", title:()=>grp()+" · 마음 그래프", body:()=>{ const sc=scenes(); const pk=get("s5.pick"); const i=(pk!==undefined&&pk!=="")?+pk:hotIndex(sc); const why=(get("s5.why")||"").trim(); if(!why) return ""; return `우리 모둠은 '${sc[i].name}' 장면에서 마음이 가장 크게 바뀌었다고 봤습니다. ${why} 때문입니다.\n(마음 높이: ${sc.map(s=>s.name+" "+s.v).join(" → ")})`; }, need:"그렇게 본 까닭을 써 주세요."},
-  step6:{col:"📝 활동지 W · 우리 모둠 설계 세 칸", title:()=>grp()+" · 설계 세 칸", body:()=>{ const f=k=>(get("s6."+k)||"").trim(); if(!f("std")&&!f("q")) return ""; return ["▪ 그림책: 『나는 여우지만 호랑이입니다』",`▪ 고른 성취기준: ${f("std")?"["+f("std")+"]":""}`,`▪ 무엇을 / 어떻게: ${f("what")} / ${f("how")}`,`▪ 핵심 질문: ${f("q")}`,`▪ 활동: ${f("act")}`,`▪ 학습의 증거(평가): ${f("ev")}`,`▪ 우리 반에서 막힐 것 같은 지점 하나: ${f("stuck")}`].join("\n"); }, need:"성취기준과 핵심 질문부터 정해 주세요."},
+  step6:{col:"📝 활동지 W · 우리 모둠 설계 세 칸", title:()=>grp()+" · 설계 세 칸", body:()=>{ const f=k=>(get("s6."+k)||"").trim(); if(!f("std")&&!f("q")) return ""; return ["▪ 그림책: 『여우지만 호랑이입니다』",`▪ 고른 성취기준: ${f("std")?"["+f("std")+"]":""}`,`▪ 무엇을 / 어떻게: ${f("what")} / ${f("how")}`,`▪ 핵심 질문: ${f("q")}`,`▪ 활동: ${f("act")}`,`▪ 학습의 증거(평가): ${f("ev")}`,`▪ 우리 반에서 막힐 것 같은 지점 하나: ${f("stuck")}`].join("\n"); }, need:"성취기준과 핵심 질문부터 정해 주세요."},
   step7:{col:"💬 마무리 의견 공유 · 꺼내 쓸 한 가지", title:who, body:()=>{ const o=(get("s7.one")||"").trim(); if(!o) return ""; const w=(get("s7.why")||"").trim(); return `다음 주 우리 반 국어 시간에 ${o}부터 해 보겠습니다.`+(w?` ${w} 때문입니다.`:""); }, need:"꺼내 쓸 한 가지를 써 주세요."}
 };
 function bridgeUrl(step){ const b=BOARD[step]; return BRIDGE+"#"+encodeURIComponent(JSON.stringify({c:b.col,t:b.title(),b:b.body()})); }
@@ -1201,7 +1281,7 @@ function route(){
 window.addEventListener("hashchange",route);
 
 /* ── 질문 짝 맞추기 ── */
-const PAIRS=[["① 내용","글과 그림에 드러난 사실","여우는 호랑이 무리에서 무엇을 했나?"],["② 상상","드러나지 않은 마음과 까닭","여우는 어떤 마음으로 숨겼을까?"],["③ 적용","나의 경험과 견주기","나라면 사실대로 말했을까?"],["④ 종합","작품 전체가 말하는 것","이 책은 나답게 사는 것에 대해 무엇을 말할까?"]];
+const PAIRS=[["① 내용","글과 그림에 드러난 사실","여우는 호랑이가 되려고 무엇을 했나?"],["② 상상","드러나지 않은 마음과 까닭","줄무늬를 그리는 동안 여우는 어떤 마음이었을까?"],["③ 적용","나의 경험과 견주기","나라면 사실대로 말했을까?"],["④ 종합","작품 전체가 말하는 것","이 책은 나답게 사는 것에 대해 무엇을 말할까?"]];
 let G={cards:[],open:[],moves:0,pairs:0,start:0,timer:null,lock:false};
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function newGame(){
@@ -1278,6 +1358,35 @@ $("#spin").addEventListener("click",()=>{
 });
 $$("[data-open-pick]").forEach(b=>b.addEventListener("click",()=>{ openModal("pickModal"); drawWheel(); closeSide(); }));
 
+/* ── 자투리 +1 맞춤법 탐정 ── */
+const TAP_TEXT="나는 느림보지만 끈기 있는 사람입니다. 왜냐면 늦어도 끝까지 하기 때문입니다. 지난주 줄넘기 시험 때 자꾸 걸렸지만 쉬는 시간마다 연습해서 결국 통과햇습니다.";
+const TAP_FIX={"왜냐면":"→ 왜냐하면 (글에서는 이렇게 써요)","통과햇습니다.":"→ 통과했습니다."};
+function drawTap(){ $("#tapwords").innerHTML=TAP_TEXT.split(" ").map(w=>`<button type="button" data-w="${esc(w)}">${esc(w)}</button>`).join(""); $("#tapCount").textContent="찾은 곳 0 / 2"; }
+$("#tapwords").addEventListener("click",e=>{ const b=e.target.closest("button[data-w]"); if(!b||b.classList.contains("ok")) return; const w=b.dataset.w;
+  if(TAP_FIX[w]){ b.classList.add("ok"); b.innerHTML=esc(w)+"<small>"+esc(TAP_FIX[w])+"</small>"; const n=$$("#tapwords .ok").length; $("#tapCount").textContent=`찾은 곳 ${n} / 2`+(n===2?" · 다 찾았어요!":""); }
+  else { b.classList.add("no"); setTimeout(()=>b.classList.remove("no"),700); } });
+$("#tapReset").addEventListener("click",drawTap);
+
+/* ── 자투리 +2·+3 순서 맞추기 ── */
+function orderGame(rootSel, items, doneLabel){
+  const root=$(rootSel);
+  function start(){ let next=0; const pool=shuffle(items.map((it,i)=>Object.assign({},it,{i:i})));
+    root.innerHTML=`<div class="og-col"><h3>섞인 카드 · 순서대로 눌러요</h3><div class="og-col og-pool"></div></div><div class="og-col"><h3>${esc(doneLabel)}</h3><ol class="og-done"></ol><p class="og-msg" style="font-weight:600"></p><button type="button" class="btn sm og-reset" style="align-self:flex-start">다시 섞기</button></div>`;
+    const P=root.querySelector(".og-pool"), Dn=root.querySelector(".og-done"), M=root.querySelector(".og-msg");
+    P.innerHTML=pool.map(it=>`<button type="button" data-i="${it.i}">${esc(it.t)}</button>`).join("");
+    P.addEventListener("click",e=>{ const b=e.target.closest("button[data-i]"); if(!b) return;
+      if(+b.dataset.i===next){ const it=items[next]; b.remove(); Dn.insertAdjacentHTML("beforeend",`<li>${it.r?`<b>${esc(it.r)}</b>`:""}<span>${esc(it.t)}</span></li>`); next++; if(next===items.length) M.textContent="완성! 이 순서가 되는 까닭을 짝에게 말해 보세요."; }
+      else { b.classList.add("shake"); setTimeout(()=>b.classList.remove("shake"),600); } });
+    root.querySelector(".og-reset").addEventListener("click",start); }
+  start();
+}
+
+/* ── 자투리 +4 영역 맞히기 ── */
+const AREAS=["듣기·말하기","읽기","쓰기","문법","문학","매체"];
+const AREA_STDS=STDS.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+function drawAreas(){ $("#areas").innerHTML=AREA_STDS.map(([c,t],i)=>`<div class="area-row"><span><code>[${c}]</code> ${esc(t)}</span><select id="area-${i}" aria-label="[${c}] 영역"><option value="">영역 고르기</option>${AREAS.map(a=>`<option>${a}</option>`).join("")}</select><span class="mk" id="mk-${i}"></span></div>`).join(""); }
+$("#areaCheck").addEventListener("click",()=>{ let ok=0; AREA_STDS.forEach(([c],i)=>{ const want=AREAS[parseInt(c.slice(2,4),10)-1]; const got=$("#area-"+i).value; const m=$("#mk-"+i); if(got===want){ok++; m.textContent="○"; m.className="mk y";} else { m.textContent=(got?"✕ ":"→ ")+want; m.className="mk n"; } }); $("#areaResult").textContent=`${AREA_STDS.length}개 중 ${ok}개 맞혔어요.`; });
+
 /* ── 강사 소개 맞히기 ── */
 const LIE="3";
 function drawGuess(){ const g=get("s0.guess"), shown=!!get("s0.shown");
@@ -1288,7 +1397,10 @@ $("#guess").addEventListener("click",e=>{ const b=e.target.closest("button[data-
 $("#revealBtn").addEventListener("click",()=>set("s0.shown",!get("s0.shown")));
 
 /* ── 시작 ── */
-newGame(); wReset(); refresh(); route(); tDraw();
+newGame(); wReset(); drawTap(); drawAreas();
+orderGame("#og2",[{t:"나는 부끄럼쟁이지만 다정한 사람입니다.",r:"중심"},{t:"처음 만난 사람 앞에서는 말을 잘 못 하지만, 친구가 힘들어 보이면 먼저 다가가기 때문입니다.",r:"까닭"},{t:"지난주 체육 시간에 넘어진 친구에게 가장 먼저 달려가 괜찮냐고 물어보았습니다.",r:"장면"},{t:"그때 친구가 고맙다고 웃어 주어서 나도 기분이 좋았습니다.",r:"장면"}],"다시 세운 문단");
+orderGame("#og3",[{t:"여우가 호랑이 책을 보며 호랑이를 부러워해요.",r:"1"},{t:"여우가 붓으로 몸에 줄무늬를 그려요.",r:"2"},{t:"거북이는 경주용 자동차, 토끼는 로봇이 돼요.",r:"3"},{t:"셋이 신나게 어울려 놀아요.",r:"4"},{t:"갑자기 비가 쏟아져 줄무늬가 씻겨 나가요.",r:"5"},{t:"다람쥐의 말을 듣고 여우는 자기가 여우라서 기뻐해요.",r:"6"}],"이어진 이야기");
+refresh(); route(); tDraw();
 })();
 </script>
 
