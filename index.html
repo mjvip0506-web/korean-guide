@@ -507,6 +507,23 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 }
 @media (max-width: 520px){ .talk-grid{grid-template-columns:1fr} .tk-flip{min-height:0} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+/* v13 · 역량·내용 체계, 나눔, 이름 고르기 */
+.comp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.comp{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.comp b{font-size:15.5px}
+.comp span{font-size:13.5px;color:var(--ink-soft)}
+.comp em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--sea)}
+.areas{display:flex;flex-wrap:wrap;gap:6px}
+.areas span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:14px}
+.areas span i{font-style:normal;color:var(--sea);font-weight:700;margin-right:4px}
+.el-box{background:var(--surface-2,var(--surface));border:1px dashed var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.el-box .wlist{font-size:14.5px}
+.share{border:1px solid var(--ok);background:var(--ok-soft);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.share b{color:var(--ok);font-size:14px}
+.who-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.who-grid button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:13px 6px;font-size:17px;font-weight:600;cursor:pointer;font-family:inherit}
+.who-grid button[aria-pressed="true"]{background:var(--sea-soft);border-color:var(--sea)}
+@media (max-width:820px){ .comp-grid{grid-template-columns:repeat(2,minmax(0,1fr))} input[type="text"],textarea,select{font-size:16px!important} }
 .yt-wrap{display:flex;flex-direction:column;gap:8px}.yt{aspect-ratio:16/9;max-width:100%;border-radius:16px;overflow:hidden;background:var(--side-bg);box-shadow:var(--shadow)}.yt iframe{width:100%;height:100%;border:0;display:block}.yt-wrap .cap{font-size:13.5px;color:var(--ink-soft)}
 </style>
 </head>
@@ -515,7 +532,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 <div class="topbar">
   <button class="menu-btn" id="menuBtn" aria-label="목차 열기" aria-controls="side" aria-expanded="false">☰</button>
   <b>읽고 묻고 쓰는 국어 수업</b>
-  <button class="chip-btn" data-open-who><span class="who-dot" data-who-num>?</span><span data-who-name>모둠·이름</span></button>
+  <button class="chip-btn" data-open-who><span class="who-dot" data-who-num>?</span><span data-who-name>이름 고르기</span></button>
 </div>
 
 <aside class="side" id="side" aria-label="목차">
@@ -545,7 +562,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="nav-label">함께 쓰는 도구</div>
       <a href="#sheets" data-nav="sheets"><span class="num">✎</span><span>내 활동지 모음<span class="sub">자동 저장 · 한꺼번에 복사</span></span></a>
       <button type="button" data-open-timer><span class="num">⏱</span><span>공유 타이머<span class="sub">30초 · 1분 · 3분 · 큰 화면</span></span></button>
-      <button type="button" data-open-pick><span class="num">◎</span><span>모둠 뽑기 룰렛<span class="sub">발표 순서 · 모둠 뽑기</span></span></button>
+      <button type="button" data-open-pick><span class="num">◎</span><span>이름 뽑기 룰렛<span class="sub">나눔 순서 정하기</span></span></button>
       <button type="button" data-theme-toggle><span class="num">◐</span><span>화면 밝기 바꾸기</span></button>
     </div>
     <div class="nav nav-group">
@@ -557,7 +574,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     </div>
     <div class="nav nav-group">
       <div class="nav-label">바로 가는 곳</div>
-      <a data-padlet target="_blank" rel="noopener"><span class="num">▦</span><span>우리 반 보드<span class="sub">패들렛 · 모둠별 생각 모아 보기</span></span><span class="ext">↗</span></a>
+      <a data-padlet target="_blank" rel="noopener"><span class="num">▦</span><span>우리 반 보드<span class="sub">패들렛 · 모두의 생각 모아 보기</span></span><span class="ext">↗</span></a>
       <a href="https://ncic.re.kr" target="_blank" rel="noopener"><span class="num">▤</span><span>2022 개정 교육과정<span class="sub">국가교육과정정보센터</span></span><span class="ext">↗</span></a>
     </div>
   </div>
@@ -568,7 +585,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 <main class="main" id="main">
 <div class="wrap">
   <div class="util">
-    <button class="chip-btn" data-open-who><span class="who-dot" data-who-num>?</span><span data-who-name>모둠·이름 정하기</span></button>
+    <button class="chip-btn" data-open-who><span class="who-dot" data-who-num>?</span><span data-who-name>이름 고르기</span></button>
     <button class="chip-btn" data-theme-toggle>◐ 화면</button>
   </div>
 
@@ -578,9 +595,9 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div>
         <p class="eyebrow">2026 저경력 교사 연수 · 중학년(3~4학년) 국어과 지도의 실제 · 2차시 80분</p>
         <h1>읽고, 묻고, 쓰는<br><em>우리 반 국어 수업</em></h1>
-        <p class="lead">그림책 한 권으로 국어 수업을 한 바퀴 돌려 봅니다. 성취기준을 읽고, 질문을 고르고, 한 줄을 문단으로 키운 다음, 모둠이 함께 설계해요.</p>
+        <p class="lead">그림책 한 권으로 국어 수업을 한 바퀴 돌려 봅니다. 성취기준을 읽고, 질문을 고르고, 한 줄을 문단으로 키운 다음, 내 반 수업을 설계해요.</p>
         <div class="row" style="margin-top:18px">
-          <button class="btn pencil" data-open-who><span data-who-label>모둠·이름 정하기</span></button>
+          <button class="btn pencil" data-open-who><span data-who-label>이름 고르기</span></button>
           <a class="btn primary" href="#opening">여는 이야기부터 시작 →</a>
           <a class="btn ghost" data-padlet target="_blank" rel="noopener">우리 반 보드 ↗</a>
         </div>
@@ -618,7 +635,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div>
         <h3>이렇게 올려요</h3>
         <ol>
-          <li>오른쪽 위에서 <b>모둠·이름</b>을 먼저 정해요. 보드에 올릴 제목이 저절로 만들어져요.</li>
+          <li>오른쪽 위에서 <b>내 이름</b>을 먼저 골라요. 보드에 올릴 제목이 저절로 만들어져요.</li>
           <li>단계마다 <b>내 활동지</b>에 한 줄만 써요. 쓰는 대로 이 기기에 저장돼요.</li>
           <li><b>보드에 올리기</b>를 누르면 우리 반 패들렛의 해당 칸에 올라가요.</li>
           <li>동료 글에는 하트와 댓글로 응원해 주세요.</li>
@@ -632,12 +649,12 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="flow">
         <a href="#opening"><span class="when">여는 이야기</span><b>오늘의 영상과 강사 소개</b><span>아이의 진짜 이야기를 꺼내는 수업</span><span class="verb">마음 열기</span></a>
         <a href="#step1"><span class="when">1차시 ①</span><b>학생 A? B?</b><span>두 학생의 문단, 누가 더 가까울까</span><span class="verb">열기</span></a>
-        <a href="#step2"><span class="when">1차시 ②</span><b>성취기준, 무엇을·어떻게</b><span>도달했다는 증거 찾기</span><span class="verb">교육과정</span></a>
+        <a href="#step2"><span class="when">1차시 ②</span><b>성취기준, 무엇을·어떻게</b><span>역량 · 내용 체계 · 도달의 증거</span><span class="verb">교육과정</span></a>
         <a href="#step3"><span class="when">1차시 ③</span><b>질문 하나 고르기</b><span>질문 4단계와 짝 질문</span><span class="verb">질문·토의</span></a>
         <a href="#step4"><span class="when">1차시 ④</span><b>한 줄에서 문단으로</b><span>한 줄 → 까닭 → 장면</span><span class="verb">글쓰기</span></a>
-        <div class="flow-break">쉬는 시간 10분 · 네 분씩 모둠으로 앉아요</div>
-        <a class="c2" href="#step5"><span class="when">2차시 ①</span><b>착한 아이, 못된 아이</b><span>영상 · 『에드와르도』 · 마음 그래프 · 작은 토의</span><span class="verb">모둠 체험</span></a>
-        <a class="c2" href="#step6"><span class="when">2차시 ②</span><b>그림책 한 권, 설계 세 칸</b><span>우리 모둠 수업 설계</span><span class="verb">설계</span></a>
+        <div class="flow-break">쉬는 시간 없이 2차시로 이어져요</div>
+        <a class="c2" href="#step5"><span class="when">2차시 ①</span><b>착한 아이, 못된 아이</b><span>영상 · 『에드와르도』 · 마음 그래프 · 작은 토의</span><span class="verb">체험</span></a>
+        <a class="c2" href="#step6"><span class="when">2차시 ②</span><b>그림책 한 권, 설계 세 칸</b><span>내 반 수업 설계와 나눔</span><span class="verb">설계</span></a>
         <a class="c2" href="#step7"><span class="when">마무리</span><b>다음 주에 꺼내 쓸 한 가지</b><span>우리 반에서 바로 해 볼 것</span><span class="verb">가져가기</span></a>
       </div>
     </div>
@@ -745,6 +762,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div data-board="step1"></div>
     </div>
     <div class="tip"><b>TIP</b><span>두 글은 연수용으로 만든 예시예요. 4단계 글쓰기를 마친 뒤 같은 두 글을 한 번 더 고르게 돼요. 처음 고른 이유가 달라지는지 지켜봐 주세요.</span></div>
+    <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>우리 반에도 A 같은 글, B 같은 글이 있나요? 떠오르는 아이의 글을 한 편씩 이야기해요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step1"></nav>
   </section>
 
@@ -754,8 +772,29 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div>
         <p class="step-tag"><b>STEP 2</b>1차시 ② · 교육과정 톺아보기</p>
         <h1>성취기준을 무엇을·어떻게로 나눠 읽기</h1>
-        <p class="lead">교과서 차시보다 먼저 볼 것은 성취기준이에요. '무엇을'과 '어떻게'로 나눠 읽으면 아이가 어디까지 가야 하는지, 도달점이 보여요.</p>
+        <p class="lead">교과서 차시보다 먼저 볼 것은 성취기준이에요. 국어과가 기르려는 역량과 내용 체계를 훑은 다음, 성취기준 하나를 '무엇을'과 '어떻게'로 나눠 읽어요.</p>
       </div>
+    </div>
+    <div class="plain">
+      <h2 class="h2">국어과가 기르려는 힘 <small>2022 개정 국어과 역량 여섯 가지 · 풀이는 연수용으로 쉽게 쓴 말이에요</small></h2>
+      <div class="comp-grid">
+        <div class="comp"><b>비판적·창의적 사고 역량</b><span>글과 자료를 따져 읽고 새로운 생각을 만들어 내는 힘</span><em>오늘 · 표지 예측, 질문 4단계</em></div>
+        <div class="comp"><b>디지털·미디어 역량</b><span>매체 자료를 찾아 가려 쓰고, 책임 있게 만들고 나누는 힘</span><em>오늘 · 캔바 명함, 독서로</em></div>
+        <div class="comp"><b>의사소통 역량</b><span>상황과 상대를 헤아리며 생각과 느낌을 주고받는 힘</span><em>오늘 · 짝 질문, 작은 토의</em></div>
+        <div class="comp"><b>공동체·대인 관계 역량</b><span>서로 존중하며 관계를 맺고 함께 문제를 푸는 힘</span><em>오늘 · 장면이 있는 칭찬</em></div>
+        <div class="comp"><b>문화 향유 역량</b><span>문학과 국어 문화를 즐기고 그 가치를 누리는 힘</span><em>오늘 · 그림책 두 권 감상</em></div>
+        <div class="comp"><b>자기 성찰·계발 역량</b><span>내 말과 글, 배움을 돌아보고 스스로 키워 가는 힘</span><em>오늘 · 읽기 과정 점검, 고쳐쓰기</em></div>
+      </div>
+    </div>
+    <div class="plain">
+      <h2 class="h2">내용 체계는 이렇게 짜여 있어요 <small>영역 여섯 · 범주 셋</small></h2>
+      <div class="areas"><span><i>01</i>듣기·말하기</span><span><i>02</i>읽기</span><span><i>03</i>쓰기</span><span><i>04</i>문법</span><span><i>05</i>문학</span><span><i>06</i>매체 · 2022 개정에서 새로 생긴 영역</span></div>
+      <div class="three">
+        <div><em>범주 1</em><b>지식·이해</b><span>알아야 할 것 · 맥락, 담화와 글의 유형, 갈래</span></div>
+        <div><em>범주 2</em><b>과정·기능</b><span>할 수 있어야 할 것 · 예측하기, 의견 교환하기, 문단 쓰기, 고쳐쓰기</span></div>
+        <div><em>범주 3</em><b>가치·태도</b><span>갖추어야 할 마음가짐 · 흥미, 효능감, 적극적 참여, 성찰</span></div>
+      </div>
+      <p class="note">영역마다 맨 위에 '핵심 아이디어'가 있어요. 그 영역에서 학년이 올라가도 이어지는 큰 생각을 문장으로 적어 둔 것이에요. 성취기준은 이 세 범주의 내용 요소를 엮어 만든 문장이에요. 그래서 성취기준을 읽을 때 '어느 영역, 어느 범주의 내용 요소에서 왔나'를 찾아보면 도달점이 더 또렷해져요.</p>
     </div>
     <div class="plain">
       <h2 class="h2">오늘 함께 볼 3~4학년 성취기준 <small>하나를 눌러 고르세요</small></h2>
@@ -784,12 +823,16 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     <div class="sheet">
       <div class="sheet-title"><h3>내 활동지 · 도달의 증거</h3><span class="saved" data-saved="s2"></span></div>
       <div class="field"><span class="lab">고른 성취기준</span><small data-std-show="s2.std"></small></div>
+      <div class="el-box" id="elBox" hidden></div>
       <div class="field"><label for="s2-what">무엇을</label><input type="text" id="s2-what" data-k="s2.what" placeholder="예: 글의 내용 예측과 나의 읽기 과정"></div>
       <div class="field"><label for="s2-how">어떻게</label><input type="text" id="s2-how" data-k="s2.how" placeholder="예: 질문을 만들어 예측하며 읽고, 읽은 뒤 점검한다"></div>
       <div class="field"><label for="s2-ev">도달했는지 확인하려면, 아이들의 ____이(가) 남아야 한다</label>
         <input type="text" id="s2-ev" data-k="s2.ev" placeholder="예: 표지를 보고 쓴 질문과 읽은 뒤 고친 질문"></div>
+      <div class="field"><span class="lab">이 성취기준과 가장 가까운 국어과 역량 하나 <small>· 정답은 없어요. 까닭을 옆 선생님께 말해 주세요</small></span><div class="chips" data-k="s2.comp" data-choices="비판적·창의적 사고,디지털·미디어,의사소통,공동체·대인 관계,문화 향유,자기 성찰·계발"></div></div>
       <div data-board="step2"></div>
     </div>
+    <div class="tip"><b>지도서</b><span>지도서에서는 두 곳을 펴 보세요. ① 앞쪽 총론: 국어과 역량, 내용 체계 표, 학년군 성취기준. ② 단원 첫머리: 그 단원의 성취기준, 학습 목표, 평가 계획. 오늘 고른 성취기준이 우리 학년 어느 단원에 있는지 찾아 표시해 두면 다음 수업 준비가 빨라져요. 이름과 순서는 지도서마다 조금 달라요.</span></div>
+    <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>내가 고른 성취기준을 우리 학년 어느 단원에서 가르쳤나요? 그때 아이들에게 무엇이 남았는지 이야기해요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step2"></nav>
   </section>
 
@@ -854,6 +897,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div data-board="step3"></div>
     </div>
     <div class="tip"><b>TIP</b><span>열기는 제목 하나로 충분해요. 표지만 보여 주고 "여우인데 호랑이라니, 무슨 말일까?" 짝과 30초 예측. 선생님이 내용을 미리 말하지 않는 것이 중요해요.</span></div>
+    <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>우리 반에서 잘 통했던 질문 하나, 대답이 안 나왔던 질문 하나를 나눠요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step3"></nav>
   </section>
 
@@ -914,6 +958,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="chips big" data-k="s4.revote" data-choices="A,B"></div>
       <p style="font-size:14.5px;color:var(--ink-soft)">문단 사다리로 다시 보면 학생 B의 세 문장은 중심 문장 → 까닭 → 장면이에요. 학생 A는 문장이 정확하지만 문장마다 다른 이야기라 중심 문장이 없어요. 고른 까닭은 패들렛 1차시 ① 칸의 내 글에 댓글로 남겨 주세요.</p>
     </div>
+    <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>첫 줄에서 멈추는 아이에게 써 본 방법을 하나씩 나눠요. 통한 것도, 안 통한 것도 좋아요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step4"></nav>
   </section>
 
@@ -921,9 +966,9 @@ input[type=range]{width:100%;accent-color:var(--sea)}
   <section class="view" data-route="step5" hidden>
     <div class="card step-head">
       <div>
-        <p class="step-tag"><b>STEP 5</b>2차시 ① · 모둠 체험</p>
+        <p class="step-tag"><b>STEP 5</b>2차시 ① · 체험</p>
         <h1>착한 아이, 못된 아이</h1>
-        <p class="lead">어른이 붙여 준 이름표는 아이를 어떻게 바꿀까요? 4분 영상과 두 번째 그림책으로 2차시를 열고, 네 분씩 모둠으로 마음 그래프와 작은 토의를 해요.</p>
+        <p class="lead">어른이 붙여 준 이름표는 아이를 어떻게 바꿀까요? 4분 영상과 두 번째 그림책으로 2차시를 열고, 마음 그래프를 각자 그린 다음 옆 선생님과 견주며 작은 토의를 해요.</p>
       </div>
     </div>
     <div class="video">
@@ -957,23 +1002,14 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <li><span>우리 반 아이에게 내일 붙여 줄 이름표 하나는? "너는 ○○한 아이구나."</span></li>
       </ol>
     </div>
-    <div class="plain">
-      <h2 class="h2">역할부터 정해요 <small>30초</small></h2>
-      <div class="roles">
-        <div class="role-c"><b>이끔이</b><span>순서를 챙기고 모두 말하게 해요</span><input type="text" id="s5-r1" data-k="s5.r1" placeholder="이름" aria-label="이끔이 이름"></div>
-        <div class="role-c"><b>기록이</b><span>모둠 생각을 학습지에 적어요</span><input type="text" id="s5-r2" data-k="s5.r2" placeholder="이름" aria-label="기록이 이름"></div>
-        <div class="role-c"><b>질문이</b><span>"왜 그렇게 생각해?"를 물어요</span><input type="text" id="s5-r3" data-k="s5.r3" placeholder="이름" aria-label="질문이 이름"></div>
-        <div class="role-c"><b>발표이</b><span>모둠 결론을 전해요</span><input type="text" id="s5-r4" data-k="s5.r4" placeholder="이름" aria-label="발표이 이름"></div>
-      </div>
-    </div>
     <div class="card plain">
-      <h2 class="h2">마음 그래프 <small>장면 넷을 한 명씩 맡아 마음의 높이를 정하고, 함께 한 선으로 이어요</small></h2>
+      <h2 class="h2">마음 그래프 <small>장면 넷마다 여우의 마음 높이를 정해 한 선으로 이어요</small></h2>
       <div class="graph" id="graph"></div>
       <div class="sliders" id="sliders"></div>
-      <p style="font-size:14px;color:var(--ink-soft)">노란 선은 마음이 가장 크게 바뀐 곳이에요. 왜 거기서 바뀌었는지 까닭을 들어 이야기 나눠요. <button class="btn sm" data-timer="240">4분 재기</button></p>
+      <p style="font-size:14px;color:var(--ink-soft)">노란 선은 마음이 가장 크게 바뀐 곳이에요. 다 그리면 옆 선생님 그래프와 견줘 보세요. 높이가 다른 장면이 이야깃거리예요. <button class="btn sm" data-timer="180">3분 재기</button></p>
     </div>
     <div class="plain">
-      <h2 class="h2">작은 토의 <small>짝 → 모둠 → 전체로 넓혀요</small></h2>
+      <h2 class="h2">작은 토의 <small>짝 → 전체로 넓혀요</small></h2>
       <ol class="steps">
         <li><span>주제: 1차시에 고른 질문 하나, "여우는 사실대로 말해야 했을까?", 또는 "어른이 붙인 이름표가 아이를 바꿀까?"</span></li>
         <li><span>내 생각을 말하고, 그림에서 근거 하나를 손가락으로 짚어요.</span></li>
@@ -990,10 +1026,11 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     </div>
     <div class="sheet">
       <div class="sheet-title"><h3>내 활동지 · 마음이 바뀐 장면</h3><span class="saved" data-saved="s5"></span></div>
-      <div class="field"><label for="s5-pick">마음이 가장 크게 바뀐 장면</label><select id="s5-pick" data-k="s5.pick"></select><small>그래프에서 자동으로 골라 두었어요. 모둠 생각이 다르면 바꿔 주세요.</small></div>
+      <div class="field"><label for="s5-pick">마음이 가장 크게 바뀐 장면</label><select id="s5-pick" data-k="s5.pick"></select><small>그래프에서 자동으로 골라 두었어요. 생각이 다르면 바꿔 주세요.</small></div>
       <div class="field"><label for="s5-why">그렇게 본 까닭</label><input type="text" id="s5-why" data-k="s5.why" placeholder="예: 비에 줄무늬가 지워져 시무룩하던 여우가 다람쥐의 말을 듣고 다시 웃었기"></div>
       <div data-board="step5"></div>
     </div>
+    <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>교실에서는 이 그래프를 모둠 넷이 장면 하나씩 맡아 함께 그려요. 우리 반이라면 어떤 장면 넷을 고를지, 역할은 어떻게 나눌지 이야기해요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step5"></nav>
   </section>
 
@@ -1003,7 +1040,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div>
         <p class="step-tag"><b>STEP 6</b>2차시 ② · 설계</p>
         <h1>그림책 한 권, 설계 세 칸</h1>
-        <p class="lead">같은 그림책이라도 성취기준이 바뀌면 수업이 바뀌어요. 강사 예시의 [4국05-02] 말고 다른 성취기준 하나를 골라 모둠이 함께 설계해요.</p>
+        <p class="lead">같은 그림책이라도 성취기준이 바뀌면 수업이 바뀌어요. 강사 예시의 [4국05-02] 말고 다른 성취기준 하나를 골라 내 반에 맞게 설계해요. 다 쓰면 옆 선생님과 바꿔 읽어요.</p>
       </div>
     </div>
     <div class="w-grid">
@@ -1021,7 +1058,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         </dl>
       </div>
       <div class="sheet">
-        <div class="sheet-title"><h3>우리 모둠 활동지 W</h3><span class="saved" data-saved="s6"></span></div>
+        <div class="sheet-title"><h3>내 활동지 W</h3><span class="saved" data-saved="s6"></span></div>
         <div class="field"><span class="lab">고른 성취기준 <small>· 누르면 원문과 예시가 나와요</small></span>
           <div class="wstds" id="wStds"></div>
           <div class="w-orig" id="wOrig" hidden></div></div>
@@ -1034,7 +1071,8 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <div data-board="step6"></div>
       </div>
     </div>
-    <div class="tip"><b>TIP</b><span>다른 모둠 설계에는 '우리 반에서도 써 보고 싶은 점'을 패들렛 댓글로 남겨 주세요. 발표 순서는 <button class="btn sm" data-open-pick>모둠 뽑기 룰렛</button>으로 정해요.</span></div>
+    <div class="tip"><b>TIP</b><span>다른 선생님 설계에는 '우리 반에서도 써 보고 싶은 점'을 아래 '함께 보기'의 별점과 한마디로 남겨 주세요. 나눔 순서는 <button class="btn sm" data-open-pick>이름 뽑기 룰렛</button>으로 정해요.</span></div>
+    <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>다 쓴 설계를 옆 선생님과 기기째 바꿔 읽어요. 핵심 질문의 답이 여럿인지, 활동에서 성취기준의 행동이 보이는지 한마디씩 해 주세요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step6"></nav>
   </section>
 
@@ -1060,6 +1098,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="sheet-title"><h3>내 활동지 · 꺼내 쓸 한 가지</h3><span class="saved" data-saved="s7"></span></div>
       <div class="field"><label for="s7-one">다음 주 우리 반 국어 시간에 ____부터 해 보겠습니다</label><input type="text" id="s7-one" data-k="s7.one" placeholder="예: 표지만 보여 주고 짝과 30초 예측하기"></div>
       <div class="field"><label for="s7-why">____ 때문입니다</label><input type="text" id="s7-why" data-k="s7.why" placeholder="예: 우리 반은 읽기 전에 궁금한 것이 없어 보이기"></div>
+      <div class="field"><label for="s7-share">선생님들과 나누고 싶은 우리 반 국어 수업 한 가지 <small>· 잘된 것도, 고민도 좋아요</small></label><input type="text" id="s7-share" data-k="s7.share" placeholder="예: 아침 10분 그림책 읽어 주기를 한 달째 하고 있어요"></div>
       <div data-board="step7"></div>
     </div>
     <div class="video">
@@ -1130,13 +1169,13 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 </div>
 </main>
 
-<!-- 모둠·이름 -->
+<!-- 이름 고르기 -->
 <div class="modal" id="whoModal" hidden role="dialog" aria-modal="true" aria-labelledby="whoTitle">
   <div class="modal-box">
-    <div class="modal-head"><h2 id="whoTitle">모둠·이름 정하기</h2><button class="x-btn" data-close aria-label="닫기">✕</button></div>
-    <p style="color:var(--ink-soft);font-size:15px">보드에 올릴 제목이 '2모둠 · 김○○'처럼 저절로 만들어져요. 이 기기에만 저장돼요.</p>
-    <div class="field"><label for="whoGroup">모둠</label><select id="whoGroup"></select></div>
-    <div class="field"><label for="whoName">이름</label><input type="text" id="whoName" placeholder="예: 김○○"></div>
+    <div class="modal-head"><h2 id="whoTitle">이름 고르기</h2><button class="x-btn" data-close aria-label="닫기">✕</button></div>
+    <p style="color:var(--ink-soft);font-size:15px">내 이름을 누르고 저장해 주세요. 보드에 올릴 제목에 이름이 저절로 붙어요. 이 기기에만 저장돼요.</p>
+    <div class="who-grid" id="whoGrid" role="group" aria-label="이름 고르기"></div>
+    <div class="field"><label for="whoName">명단에 없으면 직접 써요</label><input type="text" id="whoName" placeholder="예: 김○○"></div>
     <button class="btn primary" id="whoSave">저장</button>
   </div>
 </div>
@@ -1157,10 +1196,10 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 <!-- 룰렛 -->
 <div class="modal" id="pickModal" hidden role="dialog" aria-modal="true" aria-labelledby="pickTitle">
   <div class="modal-box">
-    <div class="modal-head"><h2 id="pickTitle">모둠 뽑기 룰렛</h2><button class="x-btn" data-close aria-label="닫기">✕</button></div>
-    <div class="row"><label for="pickN" style="font-weight:600">모둠 수</label><select id="pickN" style="width:auto"></select>
-      <label class="row" style="gap:6px;font-size:14px"><input type="checkbox" id="pickRemove" checked> 뽑힌 모둠은 다음에 빼기</label></div>
-    <div class="wheel-wrap"><span class="pointer" aria-hidden="true"></span><canvas id="wheel" width="640" height="640" aria-label="모둠 룰렛"></canvas></div>
+    <div class="modal-head"><h2 id="pickTitle">이름 뽑기 룰렛</h2><button class="x-btn" data-close aria-label="닫기">✕</button></div>
+    <div class="row"><span style="font-weight:600">나눔할 선생님을 뽑아요</span>
+      <label class="row" style="gap:6px;font-size:14px"><input type="checkbox" id="pickRemove" checked> 뽑힌 분은 다음에 빼기</label></div>
+    <div class="wheel-wrap"><span class="pointer" aria-hidden="true"></span><canvas id="wheel" width="640" height="640" aria-label="이름 룰렛"></canvas></div>
     <p class="pick-result" id="pickResult" aria-live="polite"></p>
     <p style="font-size:14px;color:var(--ink-soft);text-align:center" id="pickOrder"></p>
     <div class="row" style="justify-content:center"><button class="btn primary" id="spin">돌리기</button><button class="btn" id="pickReset">처음부터</button></div>
@@ -1267,7 +1306,8 @@ const SUGG = {
   "s6.act":()=>{ const i=STD_INFO[get("s6.std")]; return i?i.act:[]; },
   "s6.ev":()=>{ const i=STD_INFO[get("s6.std")]; return i?i.ev:[]; },
   "s6.stuck":()=>{ const i=STD_INFO[get("s6.std")]; return i?i.stuck:[]; },
-  "s7.one":()=>["표지만 보여 주고 짝과 30초 예측하기","질문 만들고 짝과 바꿔 하나 고르기","'나는 ○○지만 ○○입니다' 한 줄 쓰기","토의 말 카드로 모둠 토의하기","장면이 있는 칭찬 나누기","성취기준을 무엇을·어떻게로 나눠 읽고 수업 짜기"],
+  "s7.one":()=>["표지만 보여 주고 짝과 30초 예측하기","질문 만들고 짝과 바꿔 하나 고르기","'나는 ○○지만 ○○입니다' 한 줄 쓰기","토의 말 카드로 모둠 토의하기","장면이 있는 칭찬 나누기","성취기준을 무엇을·어떻게로 나눠 읽고 수업 짜기","지도서에서 단원 성취기준부터 찾아 읽기"],
+  "s7.share":()=>["아침마다 그림책을 한 장면씩 읽어 줘요","질문 공책을 써 보고 있어요","짝과 글을 바꿔 읽게 해요","발표를 어려워하는 아이를 어떻게 도울지 고민이에요","글을 길게 쓰기 싫어하는 아이가 많아요"],
   "s7.why":()=>["우리 반은 읽기 전에 궁금한 것이 없어 보이기","글을 쓰라고 하면 첫 줄에서 멈추는 아이가 많기","모둠 활동에서 몇 명만 말하기","칭찬이 '착해'로만 끝나기"]
 };
 const ORDER = [["home","처음 화면"],["opening","여는 이야기"],["step1","학생 A? B?"],["step2","성취기준, 무엇을·어떻게"],["step3","질문 하나 고르기"],["step4","한 줄에서 문단으로"],["step5","착한 아이, 못된 아이"],["step6","그림책 한 권, 설계 세 칸"],["step7","다음 주에 꺼내 쓸 한 가지"]];
@@ -1289,18 +1329,23 @@ function markSaved(sec){ const el=$(`[data-saved="${sec}"]`); if(!el) return; el
 function batchim(w){ w=(w||"").trim(); if(!w) return false; const c=w.charCodeAt(w.length-1); if(c<0xAC00||c>0xD7A3) return false; return (c-0xAC00)%28!==0; }
 const iga = w=>w+(batchim(w)?"이":"가");
 
-/* ── 모둠·이름 ── */
-function grp(){ const g=get("who.group"); return g?g+"모둠":"○모둠"; }
-function who(){ const g=get("who.group"), n=(get("who.name")||"").trim(); return (g?g+"모둠":"○모둠")+" · "+(n||"이름"); }
+/* ── 이름 고르기 ── */
+const PEOPLE=["이정임","김류림","김예진","박한빈","조준호","유다란","박은주","이원지","온유화"];
+const TEACHER="김미정";
+function who(){ return (get("who.name")||"").trim()||"이름"; }
 function renderWho(){
-  const g=get("who.group"), n=(get("who.name")||"").trim();
-  $$("[data-who-num]").forEach(e=>e.textContent=g||"?");
-  $$("[data-who-name]").forEach(e=>e.textContent=(g||n)?who():"모둠·이름 정하기");
-  $$("[data-who-label]").forEach(e=>e.textContent=(g||n)?who()+" (바꾸기)":"모둠·이름 정하기");
+  const n=(get("who.name")||"").trim();
+  $$("[data-who-num]").forEach(e=>e.textContent=n?n.charAt(0):"?");
+  $$("[data-who-name]").forEach(e=>e.textContent=n||"이름 고르기");
+  $$("[data-who-label]").forEach(e=>e.textContent=n?n+" (바꾸기)":"이름 고르기");
 }
-const whoGroup=$("#whoGroup"); whoGroup.innerHTML='<option value="">골라 주세요</option>'+Array.from({length:12},(_,i)=>`<option value="${i+1}">${i+1}모둠</option>`).join("");
-$$("[data-open-who]").forEach(b=>b.addEventListener("click",()=>{ whoGroup.value=get("who.group")||""; $("#whoName").value=get("who.name")||""; openModal("whoModal"); setTimeout(()=>whoGroup.focus(),30); }));
-$("#whoSave").addEventListener("click",()=>{ set("who.group",whoGroup.value); set("who.name",$("#whoName").value.trim()); closeModal("whoModal"); toast("저장했어요. "+who()); });
+const whoGrid=$("#whoGrid");
+whoGrid.innerHTML=PEOPLE.concat([TEACHER]).map(n=>`<button type="button" data-n="${n}" aria-pressed="false">${n}${n===TEACHER?" · 강사":""}</button>`).join("");
+function markWho(v){ $$("button",whoGrid).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.n===v))); }
+whoGrid.addEventListener("click",e=>{ const b=e.target.closest("button[data-n]"); if(!b) return; $("#whoName").value=b.dataset.n; markWho(b.dataset.n); });
+$("#whoName").addEventListener("input",e=>markWho(e.target.value.trim()));
+$$("[data-open-who]").forEach(b=>b.addEventListener("click",()=>{ const n=get("who.name")||""; $("#whoName").value=n; markWho(n); openModal("whoModal"); }));
+$("#whoSave").addEventListener("click",()=>{ const n=$("#whoName").value.trim(); if(!n){ toast("이름을 눌러 골라 주세요"); return; } set("who.name",n); closeModal("whoModal"); toast("저장했어요. "+who()); });
 
 /* ── 모달 ── */
 let lastFocus=null;
@@ -1363,6 +1408,17 @@ const stdBox=$("[data-std-pick]");
 stdBox.innerHTML=STDS.map(([c,t])=>`<button type="button" class="std" data-code="${c}" aria-pressed="false"><code>[${c}]</code><span>${esc(t)}</span></button>`).join("");
 stdBox.addEventListener("click",e=>{ const b=e.target.closest(".std"); if(b) set("s2.std",b.dataset.code); });
 
+
+/* ── 고른 성취기준을 내용 체계에서 찾아보기(간추림) ── */
+const STD_EL={
+  "4국02-03":{area:"읽기",k:"글의 유형 · 친숙한 화제의 글 등",p:"단어의 의미나 내용 예측하기 / 읽기 과정과 전략 점검·조정하기"},
+  "4국05-02":{area:"문학",k:"갈래 · 이야기",p:"자신의 경험을 바탕으로 읽기"},
+  "4국01-04":{area:"듣기·말하기",k:"담화 유형 · 대화",p:"상황과 상대의 입장 이해하기 / 예의를 지키며 듣고 말하기"},
+  "4국01-06":{area:"듣기·말하기",k:"담화 유형 · 토의",p:"주제에 적절한 의견과 이유 제시하기 / 의견 교환하기"},
+  "4국03-01":{area:"쓰기",k:"쓰기 맥락과 글의 유형 (이 성취기준은 과정·기능이 중심이에요)",p:"쓰기의 기초 · 문단 쓰기 / 고쳐쓰기 · 문장, 문단 수준에서 고쳐쓰기"}
+};
+function drawEl(){ const box=$("#elBox"); if(!box) return; const c=get("s2.std"), e=STD_EL[c]; if(!e){ box.hidden=true; return; }
+  box.hidden=false; box.innerHTML=`<b>내용 체계에서 찾아보면 <small style="font-weight:400;color:var(--ink-soft)">· ${esc(e.area)} 영역 3~4학년, 간추림</small></b><dl class="wlist"><dt>지식·이해</dt><dd>${esc(e.k)}</dd><dt>과정·기능</dt><dd>${esc(e.p)}</dd><dt>가치·태도</dt><dd>이 성취기준 문장에는 드러나 있지 않아요. 수업에서 어떤 마음가짐을 함께 기를지는 선생님이 정해요.</dd></dl>`; }
 
 /* ── 고르기(선택형) + 직접 쓰기 ── */
 function suggDef(k){ const d=SUGG[k]; return typeof d==="function"?{list:d}:d; }
@@ -1457,12 +1513,12 @@ function drawPara(){
 const BOARD = {
   opening:{col:"💬 여는 이야기 · 마음에 남은 한 장면", title:who, body:()=>{ const a=(get("s0.scene")||"").trim(); if(!a) return ""; const m=(get("s0.mine")||"").trim(); return `영상에서 마음에 남은 한 장면은 ${a}입니다.`+(m?` 우리 반 ${iga(m)} 떠올랐기 때문입니다.`:""); }, need:"마음에 남은 한 장면을 써 주세요."},
   step1:{col:"💬 1차시 ① 의견 공유 · 투표와 이유", title:()=>(get("s1.vote")?"학생 "+get("s1.vote"):"A 또는 B")+" · "+who(), body:()=>(get("s1.reason")||"").trim(), need:"학생을 고르고 이유 한 줄을 써 주세요."},
-  step2:{col:"💬 1차시 ② 의견 공유 · 도달의 증거", title:who, body:()=>{ const ev=(get("s2.ev")||"").trim(); if(!ev) return ""; const std=get("s2.std")||"4국○○-○○"; let t=`[${std}]에 도달했는지 확인하려면, 아이들의 ${iga(ev)} 남아야 한다.`; const w=(get("s2.what")||"").trim(), h=(get("s2.how")||"").trim(); if(w||h) t+=`\n· 무엇을: ${w}\n· 어떻게: ${h}`; return t; }, need:"남아야 할 증거를 써 주세요."},
+  step2:{col:"💬 1차시 ② 의견 공유 · 도달의 증거", title:who, body:()=>{ const ev=(get("s2.ev")||"").trim(); if(!ev) return ""; const std=get("s2.std")||"4국○○-○○"; let t=`[${std}]에 도달했는지 확인하려면, 아이들의 ${iga(ev)} 남아야 한다.`; const w=(get("s2.what")||"").trim(), h=(get("s2.how")||"").trim(); if(w||h) t+=`\n· 무엇을: ${w}\n· 어떻게: ${h}`; const cp=get("s2.comp"); if(cp) t+=`\n· 가장 가까운 국어과 역량: ${cp} 역량`; return t; }, need:"남아야 할 증거를 써 주세요."},
   step3:{col:"💬 1차시 ③ 의견 공유 · 우리가 고른 질문", title:who, body:()=>{ const q=(get("s3.q")||"").trim(); if(!q) return ""; const st=get("s3.stage"); return `우리가 고른 질문은 '${q}'이고, 4단계 중 ${st||"____"} 질문입니다.`; }, need:"짝과 고른 질문을 써 주세요."},
   step4:{col:"💬 1차시 ④ 의견 공유 · 나의 한 줄", title:who, body:()=>{ const p=para(); return [p.l1,p.l2,p.l3].filter(Boolean).join(" "); }, need:"1단계 한 줄부터 써 주세요."},
-  step5:{col:"💬 2차시 ① 의견 공유 · 마음이 바뀐 장면", title:()=>grp()+" · 마음 그래프", body:()=>{ const sc=scenes(); const pk=get("s5.pick"); const i=(pk!==undefined&&pk!=="")?+pk:hotIndex(sc); const why=(get("s5.why")||"").trim(); if(!why) return ""; return `우리 모둠은 '${sc[i].name}' 장면에서 마음이 가장 크게 바뀌었다고 봤습니다. ${why} 때문입니다.\n(마음 높이: ${sc.map(s=>s.name+" "+s.v).join(" → ")})`; }, need:"그렇게 본 까닭을 써 주세요."},
-  step6:{col:"📝 활동지 W · 우리 모둠 설계 세 칸", title:()=>grp()+" · 설계 세 칸", body:()=>{ const f=k=>(get("s6."+k)||"").trim(); if(!f("std")&&!f("q")) return ""; return ["▪ 그림책: 『여우지만 호랑이입니다』",`▪ 고른 성취기준: ${f("std")?"["+f("std")+"] "+((STD_INFO[f("std")]||{}).t||""):""}`,`▪ 무엇을 / 어떻게: ${f("what")} / ${f("how")}`,`▪ 핵심 질문: ${f("q")}`,`▪ 활동: ${f("act")}`,`▪ 학습의 증거(평가): ${f("ev")}`,`▪ 우리 반에서 막힐 것 같은 지점 하나: ${f("stuck")}`].join("\n"); }, need:"성취기준과 핵심 질문부터 정해 주세요."},
-  step7:{col:"💬 마무리 의견 공유 · 꺼내 쓸 한 가지", title:who, body:()=>{ const o=(get("s7.one")||"").trim(); if(!o) return ""; const w=(get("s7.why")||"").trim(); return `다음 주 우리 반 국어 시간에 ${o}부터 해 보겠습니다.`+(w?` ${w} 때문입니다.`:""); }, need:"꺼내 쓸 한 가지를 써 주세요."}
+  step5:{col:"💬 2차시 ① 의견 공유 · 마음이 바뀐 장면", title:()=>who()+" · 마음 그래프", body:()=>{ const sc=scenes(); const pk=get("s5.pick"); const i=(pk!==undefined&&pk!=="")?+pk:hotIndex(sc); const why=(get("s5.why")||"").trim(); if(!why) return ""; return `저는 '${sc[i].name}' 장면에서 마음이 가장 크게 바뀌었다고 봤습니다. ${why} 때문입니다.\n(마음 높이: ${sc.map(s=>s.name+" "+s.v).join(" → ")})`; }, need:"그렇게 본 까닭을 써 주세요."},
+  step6:{col:"📝 활동지 W · 우리 모둠 설계 세 칸", title:()=>who()+" · 설계 세 칸", body:()=>{ const f=k=>(get("s6."+k)||"").trim(); if(!f("std")&&!f("q")) return ""; return ["▪ 그림책: 『여우지만 호랑이입니다』",`▪ 고른 성취기준: ${f("std")?"["+f("std")+"] "+((STD_INFO[f("std")]||{}).t||""):""}`,`▪ 무엇을 / 어떻게: ${f("what")} / ${f("how")}`,`▪ 핵심 질문: ${f("q")}`,`▪ 활동: ${f("act")}`,`▪ 학습의 증거(평가): ${f("ev")}`,`▪ 우리 반에서 막힐 것 같은 지점 하나: ${f("stuck")}`].join("\n"); }, need:"성취기준과 핵심 질문부터 정해 주세요."},
+  step7:{col:"💬 마무리 의견 공유 · 꺼내 쓸 한 가지", title:who, body:()=>{ const o=(get("s7.one")||"").trim(); if(!o) return ""; const w=(get("s7.why")||"").trim(); const sh=(get("s7.share")||"").trim(); return `다음 주 우리 반 국어 시간에 ${o}부터 해 보겠습니다.`+(w?` ${w} 때문입니다.`:"")+(sh?`\n· 선생님들과 나누고 싶은 한 가지: ${sh}`:""); }, need:"꺼내 쓸 한 가지를 써 주세요."}
 };
 function boardData(step){ const b=BOARD[step]; return {c:b.col,t:b.title(),b:b.body()}; }
 /* 패들렛이 문단(<p>) 사이를 붙여 버려서, 줄마다 띄어쓰기를 하나 더해 보내요 */
@@ -1549,7 +1605,7 @@ function refresh(){
   $$(".std",stdBox).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.code===get("s2.std"))));
   $$("[data-std-show]").forEach(el=>{ const c=get(el.dataset.stdShow); const s=STDS.find(x=>x[0]===c); el.textContent=s?`[${s[0]}] ${s[1]}`:"위 목록에서 하나를 눌러 고르세요."; });
   const fv=get("s1.vote"); const fe=$("[data-first-vote]"); if(fe) fe.textContent=fv?`처음 고른 학생: ${fv}`:"";
-  drawPara(); drawGraph(); drawBoards(); drawSheets(); drawGuess(); drawSugg(); drawW();
+  drawPara(); drawGraph(); drawBoards(); drawSheets(); drawGuess(); drawSugg(); drawW(); drawEl();
   $$("[data-nav]").forEach(a=>{ const r=a.dataset.nav; const b=BOARD[r]; let d=a.querySelector(".done"); const ok=b&&!!b.body();
     if(ok&&!d){ d=document.createElement("span"); d.className="done"; d.textContent="✓"; d.setAttribute("aria-label","작성함"); a.appendChild(d); } else if(!ok&&d) d.remove(); });
 }
@@ -1614,10 +1670,9 @@ let actx=null;
 function beep(){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); [0,.35,.7].forEach(t=>{ const o=actx.createOscillator(), g=actx.createGain(); o.frequency.value=880; o.connect(g); g.connect(actx.destination); g.gain.setValueAtTime(.0001,actx.currentTime+t); g.gain.exponentialRampToValueAtTime(.25,actx.currentTime+t+.02); g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+t+.28); o.start(actx.currentTime+t); o.stop(actx.currentTime+t+.3); }); }catch(e){} }
 
 /* ── 룰렛 ── */
-const W={n:6,left:[1,2,3,4,5,6],angle:0,spinning:false,picked:[]};
-$("#pickN").innerHTML=Array.from({length:11},(_,i)=>`<option value="${i+2}">${i+2}모둠</option>`).join(""); $("#pickN").value="6";
-function wReset(){ W.n=+$("#pickN").value; W.left=Array.from({length:W.n},(_,i)=>i+1); W.picked=[]; W.angle=0; $("#pickResult").textContent=""; $("#pickOrder").textContent=""; drawWheel(); }
-$("#pickN").addEventListener("change",wReset); $("#pickReset").addEventListener("click",wReset);
+const W={left:PEOPLE.slice(),angle:0,spinning:false,picked:[]};
+function wReset(){ W.left=PEOPLE.slice(); W.picked=[]; W.angle=0; $("#pickResult").textContent=""; $("#pickOrder").textContent=""; drawWheel(); }
+$("#pickReset").addEventListener("click",wReset);
 function tok(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 function drawWheel(){
   const cv=$("#wheel"); if(!cv) return; const ctx=cv.getContext("2d"); const R=300, cx=320, cy=320; const n=W.left.length;
@@ -1627,7 +1682,7 @@ function drawWheel(){
   const seg=Math.PI*2/n;
   for(let i=0;i<n;i++){ const a0=W.angle+i*seg-Math.PI/2;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,a0,a0+seg); ctx.closePath(); ctx.fillStyle=fills[i%3]; ctx.fill(); ctx.strokeStyle=tok("--line"); ctx.lineWidth=2; ctx.stroke();
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0+seg/2); ctx.fillStyle=tok("--ink"); ctx.font="700 "+(n>8?30:38)+"px "+tok("--f-body"); ctx.textAlign="right"; ctx.textBaseline="middle"; ctx.fillText(W.left[i]+"모둠",R-24,0); ctx.restore(); }
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0+seg/2); ctx.fillStyle=tok("--ink"); ctx.font="700 "+(n>8?30:38)+"px "+tok("--f-body"); ctx.textAlign="right"; ctx.textBaseline="middle"; ctx.fillText(W.left[i],R-24,0); ctx.restore(); }
   ctx.beginPath(); ctx.arc(cx,cy,42,0,Math.PI*2); ctx.fillStyle=tok("--side-bg"); ctx.fill();
 }
 function pickedIndex(){ const n=W.left.length, seg=Math.PI*2/n; let a=((-W.angle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2); return Math.floor(a/seg)%n; }
@@ -1636,20 +1691,19 @@ $("#spin").addEventListener("click",()=>{
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const target=W.angle+(reduce?0:Math.PI*2*5)+Math.random()*Math.PI*2; const from=W.angle; const dur=reduce?1:3200; const t0=performance.now(); W.spinning=true;
   function step(t){ const k=Math.min(1,(t-t0)/dur); const e=1-Math.pow(1-k,3); W.angle=from+(target-from)*e; drawWheel();
-    if(k<1) requestAnimationFrame(step); else { W.spinning=false; const i=pickedIndex(); const g=W.left[i]; $("#pickResult").textContent=g+"모둠!"; W.picked.push(g);
-      $("#pickOrder").textContent="뽑힌 순서: "+W.picked.map(x=>x+"모둠").join(" → ");
+    if(k<1) requestAnimationFrame(step); else { W.spinning=false; const i=pickedIndex(); const g=W.left[i]; $("#pickResult").textContent=g+" 선생님!"; W.picked.push(g);
+      $("#pickOrder").textContent="뽑힌 순서: "+W.picked.join(" → ");
       if($("#pickRemove").checked){ setTimeout(()=>{ W.left.splice(i,1); drawWheel(); },900); } } }
   requestAnimationFrame(step);
 });
 $$("[data-open-pick]").forEach(b=>b.addEventListener("click",()=>{ openModal("pickModal"); drawWheel(); closeSide(); }));
 
-/* ── 함께 보기: 내 답 · 우리 모둠 · 전체 + 댓글·평가 ── */
+/* ── 함께 보기: 내 답 · 전체 + 댓글·평가 ── */
 const ANS={};
 const CM_CHIPS=["장면이 생생해요","까닭이 분명해요","우리 반에서도 써 보고 싶어요","질문이 좋아요","하나 더 궁금해요"];
 const nrm=x=>String(x||"").replace(/[^0-9A-Za-z\uAC00-\uD7A3]/g,"");
 function ago(iso){ const t=Date.parse(iso); if(!t) return ""; const d=Math.max(0,(Date.now()-t)/1000); if(d<60) return "방금"; if(d<3600) return Math.floor(d/60)+"분 전"; if(d<86400) return Math.floor(d/3600)+"시간 전"; return new Date(t).toLocaleDateString("ko-KR"); }
 function isMine(step,p){ const ids=(S.mine&&S.mine[step])||[]; return ids.includes(String(p.id))||(!!nrm(p.t)&&nrm(p.t)===nrm(BOARD[step].title())); }
-function isGrp(p){ const g=get("who.group"); return !!g&&new RegExp("(^|[^0-9])"+g+"모둠").test(p.t||""); }
 const ansBox=step=>$(`[data-board="${step}"] [data-ans]`);
 async function loadAns(step,force){
   if(!BRIDGE||!ansBox(step)) return;
@@ -1687,15 +1741,16 @@ function drawAns(step){
   const typing=$$(".cm-form input",box).some(i=>i.value.trim()||document.activeElement===i);
   if(typing&&!st.forceDraw){ const n=box.querySelector("[data-ans-new]"); if(n) n.hidden=false; return; }
   st.forceDraw=false;
-  const posts=st.posts||[], lists={me:posts.filter(p=>isMine(step,p)),grp:posts.filter(isGrp),all:posts};
+  const posts=st.posts||[], lists={me:posts.filter(p=>isMine(step,p)),all:posts};
+  if(!lists[st.tab]) st.tab="all";
   const tab=st.tab, list=lists[tab];
   let inner;
   if(st.err==="old") inner=`<p class="ans-empty">'함께 보기'는 Apps Script를 새 코드로 다시 배포하면 켜져요.</p>`;
   else if(st.err==="net") inner=`<p class="ans-empty">여기서는 답을 불러올 수 없어요. 깃허브 주소의 가이드나 [패들렛 보기]에서 확인해 주세요.</p>`;
   else if(!st.posts) inner=`<p class="ans-empty">답을 불러오는 중이에요…</p>`;
-  else if(!list.length) inner=`<p class="ans-empty">${tab==="grp"&&!get("who.group")?"오른쪽 위 '모둠·이름 정하기'에서 모둠을 고르면 우리 모둠 답이 모여요.":tab==="me"?"아직 올린 답이 없어요. 위 활동지를 쓰고 엔터를 쳐 보세요.":tab==="grp"?"우리 모둠 답이 아직 없어요.":"아직 올라온 답이 없어요. 첫 답을 올려 주세요!"}</p>`;
+  else if(!list.length) inner=`<p class="ans-empty">${tab==="me"?"아직 올린 답이 없어요. 위 활동지를 쓰고 엔터를 쳐 보세요.":"아직 올라온 답이 없어요. 첫 답을 올려 주세요!"}</p>`;
   else inner=list.map(p=>postHtml(p,step,st.open[p.id])).join("");
-  const tabs=[["me","내 답"],["grp",get("who.group")?grp():"우리 모둠"],["all","전체"]];
+  const tabs=[["me","내 답"],["all","전체"]]; if(!lists[st.tab]) st.tab="all";
   box.innerHTML=`<div class="ans-head"><b>함께 보기</b><div class="ans-tabs" role="tablist">${tabs.map(([k,l])=>`<button type="button" role="tab" data-tab="${k}" aria-selected="${k===tab}">${esc(l)} <i>${lists[k].length}</i></button>`).join("")}</div><span class="ans-time">${st.at?"30초마다 새로 불러와요":""}</span><button type="button" class="btn sm" data-ans-refresh>새로 고침</button><button type="button" class="btn sm pencil" data-ans-new hidden>새 답이 있어요 ↻</button></div><div class="ans-list">${inner}</div>`;
 }
 document.addEventListener("click",async e=>{
