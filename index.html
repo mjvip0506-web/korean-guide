@@ -559,6 +559,16 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 .kit-links a small{font-weight:400;color:var(--ink-soft);margin-left:4px}
 .unit-tbl td input{width:100%;min-width:120px}
 .unit-tbl td code{white-space:nowrap}
+/* v15 · 막힘 사례, 처방, 도달의 증거 */
+.case{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--pencil);border-radius:10px;padding:12px 16px;font-family:var(--f-hand);font-size:21px;line-height:1.5;display:flex;flex-direction:column;gap:2px}
+.case p{margin:0}
+.case i{font-style:normal;font-family:var(--f-body);font-size:13.5px;color:var(--ink-soft)}
+.techs.one{grid-template-columns:1fr}
+.techs.one .tech{border:2px solid var(--sea)}
+details.more{margin-top:10px}
+details.more summary{cursor:pointer;font-size:14.5px;font-weight:600;color:var(--sea);padding:6px 0}
+details.more .techs{margin-top:8px}
+.ev-field label{color:var(--ok);font-weight:700}
 @media (max-width:820px){ .techs{grid-template-columns:1fr} }
 .yt-wrap{display:flex;flex-direction:column;gap:8px}.yt{aspect-ratio:16/9;max-width:100%;border-radius:16px;overflow:hidden;background:var(--side-bg);box-shadow:var(--shadow)}.yt iframe{width:100%;height:100%;border:0;display:block}.yt-wrap .cap{font-size:13.5px;color:var(--ink-soft)}
 </style>
@@ -585,13 +595,13 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <a href="#opening" data-nav="opening"><span class="num">0</span><span>여는 이야기<span class="sub">여는 영상 · 강사 소개</span></span></a>
       <a href="#step1" data-nav="step1"><span class="num">1</span><span>학생 A? B?<span class="sub">열기 · 투표와 이유</span></span></a>
       <a href="#step2" data-nav="step2"><span class="num">2</span><span>교육과정 톺아보기<span class="sub">역량 · 내용 체계 · 성취기준</span></span></a>
-      <a href="#step3" data-nav="step3"><span class="num">3</span><span>마당 1 · 질문과 책 읽기<span class="sub">예측 · 질문 4단계 · 질문 주사위</span></span></a>
-      <a href="#lit" data-nav="lit"><span class="num">4</span><span>마당 2 · 문해력<span class="sub">낱말 탐정 · 중심 문장 · 간추리기</span></span></a>
+      <a href="#step3" data-nav="step3"><span class="num">3</span><span>마당 1 · 질문과 책 읽기<span class="sub">막힘 진단 · 질문 4단계 · 도달의 증거</span></span></a>
+      <a href="#lit" data-nav="lit"><span class="num">4</span><span>마당 2 · 문해력<span class="sub">막힘 진단 · 중심 문장 찾기 · 도달의 증거</span></span></a>
     </div>
     <div class="nav nav-group">
       <div class="nav-label">2차시 · 말하고, 쓰고, 옮기기 <span>40분</span></div>
-      <a href="#step5" data-nav="step5"><span class="num">5</span><span>마당 3 · 토의토론<span class="sub">여는 영상 · 신호등 토론 · 마음 그래프</span></span></a>
-      <a href="#step4" data-nav="step4"><span class="num">6</span><span>마당 4 · 글쓰기<span class="sub">한 줄 틀 · 문단 사다리 · 고쳐쓰기</span></span></a>
+      <a href="#step5" data-nav="step5"><span class="num">5</span><span>마당 3 · 토의토론<span class="sub">여는 영상 · 막힘 진단 · 신호등 토론</span></span></a>
+      <a href="#step4" data-nav="step4"><span class="num">6</span><span>마당 4 · 글쓰기<span class="sub">막힘 진단 · 문단 사다리 · 고쳐쓰기</span></span></a>
       <a href="#step6" data-nav="step6"><span class="num">7</span><span>내 반에 옮기기<span class="sub">성취기준 · 기법 · 단원</span></span></a>
       <a href="#step7" data-nav="step7"><span class="num">8</span><span>마무리 · 나눔<span class="sub">꺼내 쓸 한 가지</span></span></a>
     </div>
@@ -636,7 +646,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div>
         <p class="eyebrow">2026 저경력 교사 연수 · 중학년(3~4학년) 국어과 지도의 실제 · 2차시 80분</p>
         <h1>읽고, 묻고, 쓰는<br><em>우리 반 국어 수업</em></h1>
-        <p class="lead">질문과 책 읽기, 문해력, 토의토론, 글쓰기. 네 마당의 기법을 아이가 되어 해 보고, 우리 교과서 단원에 꽂아 봅니다. 해 본 놀이와 기법 카드는 연수 뒤에도 우리 반에서 그대로 써요.</p>
+        <p class="lead">질문과 책 읽기, 문해력, 토의토론, 글쓰기. 네 마당마다 아이의 막힘을 진단하고, 기법 하나를 깊게 해 보고, 도달의 증거를 정합니다. 해 본 놀이와 기법 카드는 연수 뒤에도 우리 반에서 그대로 써요.</p>
         <div class="row" style="margin-top:18px">
           <button class="btn pencil" data-open-who><span data-who-label>이름 고르기</span></button>
           <a class="btn primary" href="#opening">여는 이야기부터 시작 →</a>
@@ -686,16 +696,16 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     </div>
 
     <div class="plain">
-      <h2 class="h2">오늘의 흐름 <small>여는 영상 → 톺아보기 → 기법 네 마당 → 내 반에 옮기기</small></h2>
+      <h2 class="h2">오늘의 흐름 <small>여는 영상 → 톺아보기 → 네 마당(막힘 진단 → 기법 → 도달의 증거) → 내 반에 옮기기</small></h2>
       <div class="flow">
         <a href="#opening"><span class="when">STEP 0</span><b>여는 영상과 강사 소개</b><span>아이의 진짜 이야기를 꺼내는 수업</span><span class="verb">마음 열기</span></a>
         <a href="#step1"><span class="when">STEP 1</span><b>학생 A? B?</b><span>두 학생의 문단, 누가 더 가까울까</span><span class="verb">열기</span></a>
         <a href="#step2"><span class="when">STEP 2</span><b>교육과정 톺아보기</b><span>역량 · 내용 체계 · 성취기준 읽는 법</span><span class="verb">교육과정</span></a>
-        <a href="#step3"><span class="when">STEP 3 · 마당 1</span><b>질문과 책 읽기</b><span>예측 · 질문 4단계 · 질문 주사위</span><span class="verb">질문 놀이</span></a>
-        <a href="#lit"><span class="when">STEP 4 · 마당 2</span><b>문해력</b><span>낱말 탐정 · 중심 문장 찾기 · 간추리기</span><span class="verb">읽기 놀이</span></a>
+        <a href="#step3"><span class="when">STEP 3 · 마당 1</span><b>질문과 책 읽기</b><span>막힘 진단 → 질문 4단계 → 도달의 증거</span><span class="verb">질문</span></a>
+        <a href="#lit"><span class="when">STEP 4 · 마당 2</span><b>문해력</b><span>막힘 진단 → 중심 문장 찾기 → 도달의 증거</span><span class="verb">읽기</span></a>
         <div class="flow-break">쉬는 시간 없이 2차시로 이어져요</div>
-        <a class="c2" href="#step5"><span class="when">STEP 5 · 마당 3</span><b>토의토론</b><span>여는 영상 · 신호등 토론 · 마음 그래프 · 말 카드</span><span class="verb">토의 실습</span></a>
-        <a class="c2" href="#step4"><span class="when">STEP 6 · 마당 4</span><b>글쓰기</b><span>한 줄 틀 → 문단 사다리 → 고쳐쓰기</span><span class="verb">글쓰기 실습</span></a>
+        <a class="c2" href="#step5"><span class="when">STEP 5 · 마당 3</span><b>토의토론</b><span>여는 영상 · 막힘 진단 → 신호등 토론 → 도달의 증거</span><span class="verb">토의</span></a>
+        <a class="c2" href="#step4"><span class="when">STEP 6 · 마당 4</span><b>글쓰기</b><span>막힘 진단 → 문단 사다리 → 도달의 증거</span><span class="verb">글쓰기</span></a>
         <a class="c2" href="#step6"><span class="when">STEP 7</span><b>내 반에 옮기기</b><span>성취기준 하나 · 기법 하나 · 단원 하나</span><span class="verb">설계</span></a>
         <a class="c2" href="#step7"><span class="when">STEP 8</span><b>마무리 · 나눔</b><span>다음 주에 꺼내 쓸 한 가지</span><span class="verb">가져가기</span></a>
         <a class="c2" href="#kit"><span class="when">자료 나눔</span><b>기법 카드와 수업 자료</b><span>연수 뒤에도 우리 반에서 그대로 써요</span><span class="verb">자료</span></a>
@@ -888,9 +898,18 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <p class="lead">질문은 선생님의 확인 문제가 아니라, 아이가 읽기를 스스로 이끄는 도구예요. [4국02-03] 질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.</p>
       </div>
     </div>
+    <div class="card plain">
+      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <h2 class="h2">질문을 만들랬더니</h2>
+      <div class="case"><p><i>질문 공책 · 『여우지만 호랑이입니다』를 읽고</i></p><p>1. 주인공은 누구인가요?</p><p>2. 여우는 무엇을 그렸나요?</p><p>3. 비가 왔나요?</p></div>
+      <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="s3.dx" data-choices="질문을 만들 줄 모른다,답이 책에 바로 있는 질문에 머문다,글의 내용을 이해하지 못했다"></div></div>
+      <div class="row"><button type="button" class="btn sm" data-reveal="#dx-step3">강사의 진단 보기</button></div>
+      <div class="reveal" id="dx-step3" hidden><b>답이 책에 바로 있는 질문에 머물러요.</b><span>질문은 만들 줄 알고 내용도 알아요. 다만 [4국02-03]의 &#x27;질문을 활용하여 예측하며 읽고&#x27;까지 가려면 답이 책 밖에 있는 질문이 필요해요. 처방은 질문 4단계예요. 같은 장면에서 &#x27;어떤 마음이었을까?&#x27;, &#x27;나라면?&#x27;으로 한 칸씩 올려요.</span></div>
+    </div>
     <div class="plain">
-      <h2 class="h2">이 마당의 기법 네 가지 <small>카드마다 닿는 성취기준과 3학년 단원 예시가 있어요 · 번호에 손을 대면 원문이 보여요</small></h2>
-      <div class="techs"><div class="tech"><h3>표지·제목 30초 예측</h3><span class="when">읽기 전에 궁금한 것이 없어 보일 때</span><ol><li>표지와 제목만 보여 줘요</li><li>짝과 30초 동안 무슨 이야기일지 예측해요</li><li>읽으면서 내 예측과 견줘요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><span class="u">3학년 예시 · 3-2 5단원</span></div><span class="say">“여우인데 호랑이라니, 무슨 말일까?”</span></div><div class="tech"><h3>질문 4단계</h3><span class="when">확인 질문만 하다가 수업이 끝날 때</span><ol><li>내용 질문: 글과 그림에 답이 있어요</li><li>상상 질문: 마음과 까닭을 짐작해요</li><li>적용·종합 질문: 내 경험과 책 전체로 넓혀요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><code title="자신의 경험을 바탕으로 작품 속 세계와 현실 세계를 비교하여 작품을 감상한다.">[4국05-02]</code><span class="u">3학년 예시 · 3-2 5단원 / 3-2 1단원</span></div><span class="say">“나라면 어떻게 했을까?”</span></div><div class="tech"><h3>짝 질문 바꿔 읽고 하나 고르기</h3><span class="when">질문은 만들었는데 이야기가 이어지지 않을 때</span><ol><li>각자 질문 하나를 써요</li><li>짝과 바꿔 읽어요</li><li>더 이야기하고 싶은 질문 하나를 고르고 &#x27;왜?&#x27;를 한 번 더 물어요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><code title="상황과 상대의 입장을 이해하고 예의를 지키며 대화한다.">[4국01-04]</code><span class="u">3학년 예시 · 3-2 5단원 / 3-2 4단원</span></div><span class="say">“둘 중 어느 질문으로 더 오래 이야기할 수 있을까?”</span></div><div class="tech"><h3>질문 주사위</h3><span class="when">질문 만들기를 놀이로 시작하고 싶을 때</span><ol><li>주사위를 굴려 질문 말머리를 뽑아요</li><li>그 말머리로 시작하는 질문을 만들어요</li><li>짝이 답하고 차례를 바꿔요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><span class="u">3학년 예시 · 3-2 5단원</span></div><span class="say">“&#x27;왜&#x27;가 나왔네. &#x27;왜&#x27;로 시작하는 질문을 만들어 볼까?”</span></div></div>
+      <h2 class="h2">② 처방 · 오늘 깊게 해 볼 기법 하나 <small>성취기준 번호에 손을 대면 원문이 보여요</small></h2>
+      <div class="techs one"><div class="tech"><h3>질문 4단계</h3><span class="when">확인 질문만 하다가 수업이 끝날 때</span><ol><li>내용 질문: 글과 그림에 답이 있어요</li><li>상상 질문: 마음과 까닭을 짐작해요</li><li>적용·종합 질문: 내 경험과 책 전체로 넓혀요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><code title="자신의 경험을 바탕으로 작품 속 세계와 현실 세계를 비교하여 작품을 감상한다.">[4국05-02]</code><span class="u">3학년 예시 · 3-2 5단원 / 3-2 1단원</span></div><span class="say">“나라면 어떻게 했을까?”</span></div></div>
+      <details class="more"><summary>이 마당의 다른 기법 3장 · '자료 나눔'에도 있어요</summary><div class="techs"><div class="tech"><h3>표지·제목 30초 예측</h3><span class="when">읽기 전에 궁금한 것이 없어 보일 때</span><ol><li>표지와 제목만 보여 줘요</li><li>짝과 30초 동안 무슨 이야기일지 예측해요</li><li>읽으면서 내 예측과 견줘요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><span class="u">3학년 예시 · 3-2 5단원</span></div><span class="say">“여우인데 호랑이라니, 무슨 말일까?”</span></div><div class="tech"><h3>짝 질문 바꿔 읽고 하나 고르기</h3><span class="when">질문은 만들었는데 이야기가 이어지지 않을 때</span><ol><li>각자 질문 하나를 써요</li><li>짝과 바꿔 읽어요</li><li>더 이야기하고 싶은 질문 하나를 고르고 &#x27;왜?&#x27;를 한 번 더 물어요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><code title="상황과 상대의 입장을 이해하고 예의를 지키며 대화한다.">[4국01-04]</code><span class="u">3학년 예시 · 3-2 5단원 / 3-2 4단원</span></div><span class="say">“둘 중 어느 질문으로 더 오래 이야기할 수 있을까?”</span></div><div class="tech"><h3>질문 주사위</h3><span class="when">질문 만들기를 놀이로 시작하고 싶을 때</span><ol><li>주사위를 굴려 질문 말머리를 뽑아요</li><li>그 말머리로 시작하는 질문을 만들어요</li><li>짝이 답하고 차례를 바꿔요</li></ol><div class="meta"><code title="질문을 활용하여 글을 예측하며 읽고 자신의 읽기 과정을 점검한다.">[4국02-03]</code><span class="u">3학년 예시 · 3-2 5단원</span></div><span class="say">“&#x27;왜&#x27;가 나왔네. &#x27;왜&#x27;로 시작하는 질문을 만들어 볼까?”</span></div></div></details>
     </div>
     <div class="card book">
       <svg viewBox="0 0 120 150" aria-hidden="true"><rect x="10" y="8" width="96" height="134" rx="6" style="fill:var(--sea)"/><rect x="10" y="8" width="12" height="134" rx="4" style="fill:var(--side-bg)"/><path d="M40 112 l14 -22 l10 14 l8 -10 l16 18 z" style="fill:var(--pencil)"/><path d="M44 38 h48 M44 50 h36" style="stroke:var(--on-sea);stroke-width:6;stroke-linecap:round"/><path d="M58 92 q6 -6 12 0 M66 98 q6 -6 12 0" style="stroke:var(--side-bg);stroke-width:3;fill:none;stroke-linecap:round"/></svg>
@@ -947,6 +966,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="sheet-title"><h3>내 활동지 · 우리가 고른 질문</h3><span class="saved" data-saved="s3"></span></div>
       <div class="field"><label for="s3-q">짝과 고른 질문</label><input type="text" id="s3-q" data-k="s3.q" placeholder="예: 나라면 친구들에게 사실대로 말했을까?"></div>
       <div class="field"><span class="lab">4단계 중 어디일까요?</span><div class="chips" data-k="s3.stage" data-choices="내용,상상,적용,종합"></div></div>
+      <div class="field ev-field"><label for="s3-ev">③ 도달의 증거 <small>· 이 기법을 쓴 뒤 아이에게 무엇이 남으면 도달일까요?</small></label><input type="text" id="s3-ev" data-k="s3.ev" placeholder="예: 내용 질문 하나와 상상 질문 하나가 적힌 질문 쪽지"></div>
       <div data-board="step3"></div>
     </div>
     <div class="tip"><b>TIP</b><span>열기는 제목 하나로 충분해요. 표지만 보여 주고 "여우인데 호랑이라니, 무슨 말일까?" 짝과 30초 예측. 선생님이 내용을 미리 말하지 않는 것이 중요해요.</span></div>
@@ -963,17 +983,22 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <p class="lead">문해력은 낱말 하나를 짐작하는 데서 시작해 문단의 중심 생각을 잡는 데까지 이어져요. [4국02-02] 문단과 글에서 중심 생각을 파악하고 내용을 간추린다.</p>
       </div>
     </div>
-    <div class="plain">
-      <h2 class="h2">이 마당의 기법 세 가지 <small>카드마다 닿는 성취기준과 3학년 단원 예시가 있어요 · 번호에 손을 대면 원문이 보여요</small></h2>
-      <div class="techs"><div class="tech"><h3>낱말 뜻 짐작하기</h3><span class="when">모르는 낱말이 나오면 읽기를 멈출 때</span><ol><li>모르는 낱말에 동그라미를 쳐요</li><li>앞뒤 문장에서 실마리를 찾아 뜻을 짐작해요</li><li>국어사전에서 확인하고 내 짐작과 견줘요</li></ol><div class="meta"><code title="글의 의미를 파악하며 유창하게 글을 읽는다.">[4국02-01]</code><code title="단어를 분류하고 국어사전을 활용하여 능동적인 국어 활동을 한다.">[4국04-02]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“사전을 찾기 전에 앞뒤 문장으로 먼저 짐작해 볼까?”</span></div><div class="tech"><h3>중심 문장 찾기</h3><span class="when">다 읽고도 무슨 내용인지 말하지 못할 때</span><ol><li>문단을 소리 내어 읽어요</li><li>문단이 말하려는 한 가지가 담긴 문장에 밑줄을 그어요</li><li>나머지 문장이 그 문장을 어떻게 돕는지 말해요</li></ol><div class="meta"><code title="문단과 글에서 중심 생각을 파악하고 내용을 간추린다.">[4국02-02]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“이 문장을 빼면 문단이 무슨 말인지 알 수 있을까?”</span></div><div class="tech"><h3>한 문장으로 간추리기</h3><span class="when">읽은 내용을 길게 늘어놓기만 할 때</span><ol><li>중심 문장을 찾아요</li><li>&#x27;무엇이 어떠하다&#x27;로 줄여요</li><li>짝의 한 문장과 견줘요</li></ol><div class="meta"><code title="문단과 글에서 중심 생각을 파악하고 내용을 간추린다.">[4국02-02]</code><code title="중요한 내용과 주제를 파악하며 듣고 그 내용을 요약한다.">[4국01-01]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“친구에게 한 문장으로만 알려 준다면?”</span></div></div>
-    </div>
     <div class="example">
       <p class="eyebrow">연습할 글 · 연수용으로 새로 쓴 설명하는 글</p>
       <p class="para">여우의 꼬리는 쓸모가 많습니다. 추운 겨울밤에는 꼬리로 몸을 감싸 이불처럼 덮고 잡니다. 빠르게 달리다가 방향을 바꿀 때에는 꼬리가 균형을 잡아 줍니다. 꼬리를 세우거나 흔들어서 다른 여우에게 마음을 전하기도 합니다.</p>
     </div>
     <div class="card plain">
-      <h2 class="h2">낱말 탐정 <small>앞뒤 문장으로 뜻을 짐작해요 · 맞는 뜻을 눌러요</small></h2>
-      <div class="qz" id="wordQuiz"></div>
+      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <h2 class="h2">한 문장으로 간추리랬더니</h2>
+      <div class="case"><p><i>위의 여우 꼬리 글을 한 문장으로</i></p><p>아이 ㄱ: 여우의 꼬리는 쓸모가 많습니다. 추운 겨울밤에는 꼬리로 몸을 감싸 이불처럼 덮고 잡니다. 빠르게 달리다가 … <i>(끝까지 그대로 옮겨 씀)</i></p><p>아이 ㄴ: 여우는 꼬리를 이불처럼 덮고 잔다.</p></div>
+      <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="lit.dx" data-choices="글을 소리 내어 읽지 못한다,중심 문장과 뒷받침 문장을 가르지 못한다,쓰기를 귀찮아한다"></div></div>
+      <div class="row"><button type="button" class="btn sm" data-reveal="#dx-lit">강사의 진단 보기</button></div>
+      <div class="reveal" id="dx-lit" hidden><b>두 아이 모두 중심 문장과 뒷받침 문장을 가르지 못해요.</b><span>ㄱ은 다 중요해 보여서 전부 옮겼고, ㄴ은 가장 재미있는 문장 하나를 골랐어요. [4국02-02]의 &#x27;중심 생각을 파악하고&#x27;가 먼저예요. 처방은 중심 문장 찾기예요. 문장마다 &#x27;이 문장을 빼면 문단이 무슨 말인지 알 수 있을까?&#x27;를 물어요.</span></div>
+    </div>
+    <div class="plain">
+      <h2 class="h2">② 처방 · 오늘 깊게 해 볼 기법 하나 <small>성취기준 번호에 손을 대면 원문이 보여요</small></h2>
+      <div class="techs one"><div class="tech"><h3>중심 문장 찾기</h3><span class="when">다 읽고도 무슨 내용인지 말하지 못할 때</span><ol><li>문단을 소리 내어 읽어요</li><li>문단이 말하려는 한 가지가 담긴 문장에 밑줄을 그어요</li><li>나머지 문장이 그 문장을 어떻게 돕는지 말해요</li></ol><div class="meta"><code title="문단과 글에서 중심 생각을 파악하고 내용을 간추린다.">[4국02-02]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“이 문장을 빼면 문단이 무슨 말인지 알 수 있을까?”</span></div></div>
+      <details class="more"><summary>이 마당의 다른 기법 2장 · '자료 나눔'에도 있어요</summary><div class="techs"><div class="tech"><h3>낱말 뜻 짐작하기</h3><span class="when">모르는 낱말이 나오면 읽기를 멈출 때</span><ol><li>모르는 낱말에 동그라미를 쳐요</li><li>앞뒤 문장에서 실마리를 찾아 뜻을 짐작해요</li><li>국어사전에서 확인하고 내 짐작과 견줘요</li></ol><div class="meta"><code title="글의 의미를 파악하며 유창하게 글을 읽는다.">[4국02-01]</code><code title="단어를 분류하고 국어사전을 활용하여 능동적인 국어 활동을 한다.">[4국04-02]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“사전을 찾기 전에 앞뒤 문장으로 먼저 짐작해 볼까?”</span></div><div class="tech"><h3>한 문장으로 간추리기</h3><span class="when">읽은 내용을 길게 늘어놓기만 할 때</span><ol><li>중심 문장을 찾아요</li><li>&#x27;무엇이 어떠하다&#x27;로 줄여요</li><li>짝의 한 문장과 견줘요</li></ol><div class="meta"><code title="문단과 글에서 중심 생각을 파악하고 내용을 간추린다.">[4국02-02]</code><code title="중요한 내용과 주제를 파악하며 듣고 그 내용을 요약한다.">[4국01-01]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“친구에게 한 문장으로만 알려 준다면?”</span></div></div></details>
     </div>
     <div class="card plain">
       <h2 class="h2">중심 문장 찾기 <small>문단이 말하려는 한 가지가 담긴 문장을 눌러요</small></h2>
@@ -982,8 +1007,13 @@ input[type=range]{width:100%;accent-color:var(--sea)}
     <div class="sheet">
       <div class="sheet-title"><h3>내 활동지 · 한 문장으로 간추리기</h3><span class="saved" data-saved="lit"></span></div>
       <div class="field"><label for="lit-sum">여우 꼬리 글을 한 문장으로 <small>· '무엇이 어떠하다'로 줄여요</small></label><input type="text" id="lit-sum" data-k="lit.sum" placeholder="예: 여우의 꼬리는 ○○"></div>
-      <div class="field"><label for="lit-word">이 글에서 우리 반 아이들이 어려워할 낱말 하나 <small>· 그 낱말을 어떻게 짐작하게 할까요?</small></label><input type="text" id="lit-word" data-k="lit.word" placeholder="예: 균형 → '방향을 바꿀 때 넘어지지 않게'에서 짐작하게 하기"></div>
+      <div class="field ev-field"><label for="lit-ev">③ 도달의 증거 <small>· 이 기법을 쓴 뒤 아이에게 무엇이 남으면 도달일까요?</small></label><input type="text" id="lit-ev" data-k="lit.ev" placeholder="예: 중심 문장에 밑줄을 긋고 한 문장으로 줄여 쓴 공책"></div>
       <p style="font-size:14px;color:var(--ink-soft);margin:0">이 칸은 패들렛에 올리지 않아요. 쓴 글은 '내 활동지 모음'에 남아요.</p>
+    </div>
+    <div class="card plain">
+      <h2 class="h2">더 해 보기 · 낱말 탐정 <small>앞뒤 문장으로 뜻을 짐작해요 · 맞는 뜻을 눌러요</small></h2>
+      <div class="qz" id="wordQuiz"></div>
+      <div class="field"><label for="lit-word">이 글에서 우리 반 아이들이 어려워할 낱말 하나 <small>· 어떻게 짐작하게 할까요?</small></label><input type="text" id="lit-word" data-k="lit.word" placeholder="예: 균형 → '방향을 바꿀 때 넘어지지 않게'에서 짐작하게 하기"></div>
     </div>
     <div class="tip"><b>TIP</b><span>뜻을 짐작하는 실마리는 세 가지예요. 앞뒤 문장, 낱말을 쪼갠 조각, 한자의 뜻. '균형(均衡: 고를 균, 저울대 형)'은 '고르다'와 '저울'에서 '한쪽으로 기울지 않음'을 짐작할 수 있어요. 교과서 지문에서도 낱말 두세 개만 골라 같은 방법으로 해 보세요.</span></div>
     <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>우리 반 아이들이 교과서를 읽다가 자주 막히는 낱말이 있나요? 그럴 때 어떻게 하는지 나눠요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
@@ -997,9 +1027,18 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <p class="lead">[4국03-01] 중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다. 첫 줄에서 멈추는 아이에게는 첫 줄을 쓸 틀을 줘요.</p>
       </div>
     </div>
+    <div class="card plain">
+      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <h2 class="h2">나를 소개하는 글을 쓰랬더니</h2>
+      <div class="case"><p><i>10분 뒤, 아이 ㄱ의 공책</i></p><p>나는 <i>(쓰다 지운 자국)</i></p><p><i>옆자리 아이 ㄴ의 공책</i></p><p>나는 축구를 좋아합니다. 그리고 떡볶이를 좋아합니다. 우리 집에는 강아지가 있습니다. 끝.</p></div>
+      <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="s4.dx" data-choices="쓸 내용이 없다,중심 문장을 세우지 못한다,맞춤법이 걱정된다"></div></div>
+      <div class="row"><button type="button" class="btn sm" data-reveal="#dx-step4">강사의 진단 보기</button></div>
+      <div class="reveal" id="dx-step4" hidden><b>두 아이 모두 중심 문장을 세우지 못해요.</b><span>ㄱ은 쓸 내용이 없어서가 아니에요. 말로 물으면 술술 나와요. 첫 문장을 어떤 모양으로 시작할지 몰라 멈췄어요. ㄴ은 쓰기는 쓰지만 문장을 늘어놓아 문단이 되지 않아요. 둘 다 [4국03-01]의 &#x27;중심 문장&#x27;에서 막혔어요. 처방은 문단 사다리예요. 한 줄 틀로 중심 문장을 먼저 세우고, 까닭과 장면을 한 칸씩 올려요.</span></div>
+    </div>
     <div class="plain">
-      <h2 class="h2">이 마당의 기법 네 가지 <small>카드마다 닿는 성취기준과 3학년 단원 예시가 있어요 · 번호에 손을 대면 원문이 보여요</small></h2>
-      <div class="techs"><div class="tech"><h3>한 줄 틀 &#x27;나는 ○○지만 ○○입니다&#x27;</h3><span class="when">첫 줄에서 연필이 멈출 때</span><ol><li>빈칸 두 개에 나의 두 면을 넣어요</li><li>앞에는 아쉬운 면, 뒤에는 좋은 면을 둬요</li><li>이 한 줄이 중심 문장이 돼요</li></ol><div class="meta"><code title="중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다.">[4국03-01]</code><span class="u">3학년 예시 · 3-1 3단원 · 3-2 6단원</span></div><span class="say">“외모 말고 성격이나 마음으로 써 볼까?”</span></div><div class="tech"><h3>문단 사다리 (한 줄 → 까닭 → 장면)</h3><span class="when">한 줄만 쓰고 &#x27;다 썼어요&#x27; 할 때</span><ol><li>한 줄을 써요</li><li>&#x27;왜냐하면 ~ 때문입니다&#x27;로 까닭을 더해요</li><li>언제, 어디서, 무엇을 했는지 장면을 더해요</li></ol><div class="meta"><code title="중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다.">[4국03-01]</code><span class="u">3학년 예시 · 3-1 3단원 · 3-2 6단원</span></div><span class="say">“네가 쓴 첫 줄이 중심 문장이고, 뒤의 두 줄이 뒷받침 문장이야.”</span></div><div class="tech"><h3>고쳐쓰기 세 물음</h3><span class="when">고쳐쓰기를 맞춤법 고치기로만 알 때</span><ol><li>중심 문장이 하나로 분명한가</li><li>뒷받침 문장이 모두 관련 있는가</li><li>장면이 있는가</li></ol><div class="meta"><code title="중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다.">[4국03-01]</code><code title="자신의 쓰기 과정을 점검하며 쓰기에 자신감을 갖는다.">[4국03-05]</code><span class="u">3학년 예시 · 3-1 3단원 · 3-2 6단원</span></div><span class="say">“맞춤법은 그다음에 봐도 돼.”</span></div><div class="tech"><h3>장면이 있는 칭찬</h3><span class="when">칭찬이 &#x27;착해&#x27;, &#x27;잘했어&#x27;로만 끝날 때</span><ol><li>&#x27;네가 ___ 했을 때&#x27;로 장면을 말해요</li><li>&#x27;나는 ___ 했어&#x27;로 내 마음을 말해요</li><li>말로 먼저 하고 글로 옮겨요</li></ol><div class="meta"><code title="목적과 주제를 고려하여 독자에게 마음을 전하는 글을 쓴다.">[4국03-04]</code><span class="u">3학년 예시 · 3-1 5단원</span></div><span class="say">“네가 ___ 했을 때, 나는 ___ 했어. 고마워!”</span></div></div>
+      <h2 class="h2">② 처방 · 오늘 깊게 해 볼 기법 하나 <small>성취기준 번호에 손을 대면 원문이 보여요</small></h2>
+      <div class="techs one"><div class="tech"><h3>문단 사다리 (한 줄 → 까닭 → 장면)</h3><span class="when">한 줄만 쓰고 &#x27;다 썼어요&#x27; 할 때</span><ol><li>한 줄을 써요</li><li>&#x27;왜냐하면 ~ 때문입니다&#x27;로 까닭을 더해요</li><li>언제, 어디서, 무엇을 했는지 장면을 더해요</li></ol><div class="meta"><code title="중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다.">[4국03-01]</code><span class="u">3학년 예시 · 3-1 3단원 · 3-2 6단원</span></div><span class="say">“네가 쓴 첫 줄이 중심 문장이고, 뒤의 두 줄이 뒷받침 문장이야.”</span></div></div>
+      <details class="more"><summary>이 마당의 다른 기법 3장 · '자료 나눔'에도 있어요</summary><div class="techs"><div class="tech"><h3>한 줄 틀 &#x27;나는 ○○지만 ○○입니다&#x27;</h3><span class="when">첫 줄에서 연필이 멈출 때</span><ol><li>빈칸 두 개에 나의 두 면을 넣어요</li><li>앞에는 아쉬운 면, 뒤에는 좋은 면을 둬요</li><li>이 한 줄이 중심 문장이 돼요</li></ol><div class="meta"><code title="중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다.">[4국03-01]</code><span class="u">3학년 예시 · 3-1 3단원 · 3-2 6단원</span></div><span class="say">“외모 말고 성격이나 마음으로 써 볼까?”</span></div><div class="tech"><h3>고쳐쓰기 세 물음</h3><span class="when">고쳐쓰기를 맞춤법 고치기로만 알 때</span><ol><li>중심 문장이 하나로 분명한가</li><li>뒷받침 문장이 모두 관련 있는가</li><li>장면이 있는가</li></ol><div class="meta"><code title="중심 문장과 뒷받침 문장을 갖추어 문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다.">[4국03-01]</code><code title="자신의 쓰기 과정을 점검하며 쓰기에 자신감을 갖는다.">[4국03-05]</code><span class="u">3학년 예시 · 3-1 3단원 · 3-2 6단원</span></div><span class="say">“맞춤법은 그다음에 봐도 돼.”</span></div><div class="tech"><h3>장면이 있는 칭찬</h3><span class="when">칭찬이 &#x27;착해&#x27;, &#x27;잘했어&#x27;로만 끝날 때</span><ol><li>&#x27;네가 ___ 했을 때&#x27;로 장면을 말해요</li><li>&#x27;나는 ___ 했어&#x27;로 내 마음을 말해요</li><li>말로 먼저 하고 글로 옮겨요</li></ol><div class="meta"><code title="목적과 주제를 고려하여 독자에게 마음을 전하는 글을 쓴다.">[4국03-04]</code><span class="u">3학년 예시 · 3-1 5단원</span></div><span class="say">“네가 ___ 했을 때, 나는 ___ 했어. 고마워!”</span></div></div></details>
     </div>
     <div class="card ladder-wrap">
       <div class="ladder" aria-hidden="true">
@@ -1042,6 +1081,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
           <label><input type="checkbox" id="s4-k2" data-k="s4.k2"> 뒷받침 문장이 모두 관련 있는가?</label>
           <label><input type="checkbox" id="s4-k3" data-k="s4.k3"> 장면(언제·어디서·무엇을)이 있는가?</label>
         </div></div>
+      <div class="field ev-field"><label for="s4-ev">③ 도달의 증거 <small>· 이 기법을 쓴 뒤 아이에게 무엇이 남으면 도달일까요?</small></label><input type="text" id="s4-ev" data-k="s4.ev" placeholder="예: 한 줄, 까닭, 장면이 이어진 세 문장과 고쳐 쓴 흔적"></div>
       <div data-board="step4"></div>
     </div>
     <div class="card plain">
@@ -1079,9 +1119,18 @@ input[type=range]{width:100%;accent-color:var(--sea)}
         <div class="row"><a class="btn sm" href="https://www.youtube.com/watch?v=ZtU0memfHig" target="_blank" rel="noopener">유튜브에서 보기 ↗</a></div>
       </div>
     </div>
+    <div class="card plain">
+      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <h2 class="h2">토의를 하랬더니</h2>
+      <div class="case"><p><i>토의 장면 받아 적기 · 주제: 나라면 친구들에게 사실대로 말했을까?</i></p><p>아이 ㄱ: 말해야 해요.</p><p>아이 ㄴ: 나도 그렇게 생각해.</p><p>아이 ㄷ: 나도.</p><p><i>(그 뒤로 조용해요)</i></p></div>
+      <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="s5.dx" data-choices="주제에 관심이 없다,의견에 이유가 없고 서로 오가지 않는다,발표를 부끄러워한다"></div></div>
+      <div class="row"><button type="button" class="btn sm" data-reveal="#dx-step5">강사의 진단 보기</button></div>
+      <div class="reveal" id="dx-step5" hidden><b>의견은 나왔지만 이유가 없고, 앞사람 말을 받는 말이 없어요.</b><span>[4국01-06]은 &#x27;의견과 이유를 제시하고&#x27;와 &#x27;서로의 생각을 교환하며&#x27; 두 가지를 함께 요구해요. 처방은 신호등 토론이에요. 모두가 색으로 입장을 드러내면 다른 색이 보이고, &#x27;왜 노랑이야?&#x27;라는 물음이 저절로 나와요. 말이 막히면 말 카드의 &#x27;왜냐하면&#x27;을 건네요.</span></div>
+    </div>
     <div class="plain">
-      <h2 class="h2">이 마당의 기법 네 가지 <small>카드마다 닿는 성취기준과 3학년 단원 예시가 있어요 · 번호에 손을 대면 원문이 보여요</small></h2>
-      <div class="techs"><div class="tech"><h3>짝 → 넷 → 전체</h3><span class="when">몇 명만 말하고 나머지는 듣기만 할 때</span><ol><li>혼자 생각을 한 줄 써요</li><li>짝과 나누고, 짝 둘이 모여 넷이 나눠요</li><li>넷에서 나온 생각 하나를 전체에 말해요</li></ol><div class="meta"><code title="주제에 적절한 의견과 이유를 제시하고 서로의 생각을 교환하며 토의한다.">[4국01-06]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“짝의 생각을 대신 말해 줄 사람?”</span></div><div class="tech"><h3>신호등 토론</h3><span class="when">모든 아이의 생각을 한눈에 보고 싶을 때</span><ol><li>주제를 듣고 초록(그렇다)·노랑(글쎄)·빨강(아니다) 가운데 하나를 들어요</li><li>같은 색끼리 이유를 모아요</li><li>다른 색의 이유를 듣고 색을 바꿔도 돼요</li></ol><div class="meta"><code title="주제에 적절한 의견과 이유를 제시하고 서로의 생각을 교환하며 토의한다.">[4국01-06]</code><code title="대상에 대한 자신의 의견과 그렇게 생각한 이유가 드러나게 글을 쓴다.">[4국03-03]</code><span class="u">3학년 예시 · 3-2 6단원</span></div><span class="say">“노랑을 든 친구는 어떤 점이 고민됐을까?”</span></div><div class="tech"><h3>토의 말 카드와 근거를 묻는 한마디</h3><span class="when">&#x27;좋아요&#x27;, &#x27;몰라요&#x27;로 말이 끝날 때</span><ol><li>말머리 카드를 한 장 골라 그대로 말해요</li><li>듣는 사람은 근거를 물어요</li><li>그림이나 문장을 짚어 근거를 대요</li></ol><div class="meta"><code title="주제에 적절한 의견과 이유를 제시하고 서로의 생각을 교환하며 토의한다.">[4국01-06]</code><code title="상황과 상대의 입장을 이해하고 예의를 지키며 대화한다.">[4국01-04]</code><span class="u">3학년 예시 · 3-2 4단원</span></div><span class="say">“어떤 장면을 보고 그렇게 생각했니?”</span></div><div class="tech"><h3>마음 그래프</h3><span class="when">인물의 마음 변화를 놓치고 줄거리만 말할 때</span><ol><li>장면 넷을 골라요</li><li>장면마다 인물의 마음 높이에 점을 찍어 선으로 이어요</li><li>가장 크게 바뀐 곳의 까닭을 말해요</li></ol><div class="meta"><code title="인물과 이야기의 흐름을 중심으로 작품을 감상한다.">[4국05-01]</code><span class="u">3학년 예시 · 3-1 5단원</span></div><span class="say">“선이 가장 크게 꺾인 곳은 어디야? 왜 그럴까?”</span></div></div>
+      <h2 class="h2">② 처방 · 오늘 깊게 해 볼 기법 하나 <small>성취기준 번호에 손을 대면 원문이 보여요</small></h2>
+      <div class="techs one"><div class="tech"><h3>신호등 토론</h3><span class="when">모든 아이의 생각을 한눈에 보고 싶을 때</span><ol><li>주제를 듣고 초록(그렇다)·노랑(글쎄)·빨강(아니다) 가운데 하나를 들어요</li><li>같은 색끼리 이유를 모아요</li><li>다른 색의 이유를 듣고 색을 바꿔도 돼요</li></ol><div class="meta"><code title="주제에 적절한 의견과 이유를 제시하고 서로의 생각을 교환하며 토의한다.">[4국01-06]</code><code title="대상에 대한 자신의 의견과 그렇게 생각한 이유가 드러나게 글을 쓴다.">[4국03-03]</code><span class="u">3학년 예시 · 3-2 6단원</span></div><span class="say">“노랑을 든 친구는 어떤 점이 고민됐을까?”</span></div></div>
+      <details class="more"><summary>이 마당의 다른 기법 3장 · '자료 나눔'에도 있어요</summary><div class="techs"><div class="tech"><h3>짝 → 넷 → 전체</h3><span class="when">몇 명만 말하고 나머지는 듣기만 할 때</span><ol><li>혼자 생각을 한 줄 써요</li><li>짝과 나누고, 짝 둘이 모여 넷이 나눠요</li><li>넷에서 나온 생각 하나를 전체에 말해요</li></ol><div class="meta"><code title="주제에 적절한 의견과 이유를 제시하고 서로의 생각을 교환하며 토의한다.">[4국01-06]</code><span class="u">단원은 지도서에서 같은 번호로 찾아요</span></div><span class="say">“짝의 생각을 대신 말해 줄 사람?”</span></div><div class="tech"><h3>토의 말 카드와 근거를 묻는 한마디</h3><span class="when">&#x27;좋아요&#x27;, &#x27;몰라요&#x27;로 말이 끝날 때</span><ol><li>말머리 카드를 한 장 골라 그대로 말해요</li><li>듣는 사람은 근거를 물어요</li><li>그림이나 문장을 짚어 근거를 대요</li></ol><div class="meta"><code title="주제에 적절한 의견과 이유를 제시하고 서로의 생각을 교환하며 토의한다.">[4국01-06]</code><code title="상황과 상대의 입장을 이해하고 예의를 지키며 대화한다.">[4국01-04]</code><span class="u">3학년 예시 · 3-2 4단원</span></div><span class="say">“어떤 장면을 보고 그렇게 생각했니?”</span></div><div class="tech"><h3>마음 그래프</h3><span class="when">인물의 마음 변화를 놓치고 줄거리만 말할 때</span><ol><li>장면 넷을 골라요</li><li>장면마다 인물의 마음 높이에 점을 찍어 선으로 이어요</li><li>가장 크게 바뀐 곳의 까닭을 말해요</li></ol><div class="meta"><code title="인물과 이야기의 흐름을 중심으로 작품을 감상한다.">[4국05-01]</code><span class="u">3학년 예시 · 3-1 5단원</span></div><span class="say">“선이 가장 크게 꺾인 곳은 어디야? 왜 그럴까?”</span></div></div></details>
     </div>
     <div class="card plain">
       <h2 class="h2">신호등 토론 <small>주제를 고르고 내 색을 들어요 · 3분</small></h2>
@@ -1091,7 +1140,7 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <div class="field"><label for="s5-lwhy">내 색의 이유 한 줄</label><input type="text" id="s5-lwhy" data-k="s5.lwhy" placeholder="예: 친구들이 실망할까 봐 말하기 어려웠을 것 같아서"></div>
     </div>
     <div class="card plain">
-      <h2 class="h2">마음 그래프 <small>장면 넷마다 여우의 마음 높이를 정해 한 선으로 이어요</small></h2>
+      <h2 class="h2">더 해 보기 · 마음 그래프 <small>장면 넷마다 여우의 마음 높이를 정해 한 선으로 이어요</small></h2>
       <div class="graph" id="graph"></div>
       <div class="sliders" id="sliders"></div>
       <p style="font-size:14px;color:var(--ink-soft)">노란 선은 마음이 가장 크게 바뀐 곳이에요. 다 그리면 옆 선생님 그래프와 견줘 보세요. 높이가 다른 장면이 이야깃거리예요. <button class="btn sm" data-timer="180">3분 재기</button></p>
@@ -1113,8 +1162,10 @@ input[type=range]{width:100%;accent-color:var(--sea)}
       <p class="talk-foot">토의하며 쓴 카드는 [썼어요]를 눌러요. <b id="talkCount">0</b> / 6장 · 여섯 장을 다 쓰면 토의가 한 바퀴 돈 거예요. <button type="button" class="btn sm" id="talkReset">처음부터</button></p>
     </div>
     <div class="sheet">
-      <div class="sheet-title"><h3>내 활동지 · 마음이 바뀐 장면</h3><span class="saved" data-saved="s5"></span></div>
-      <div class="field"><label for="s5-pick">마음이 가장 크게 바뀐 장면</label><select id="s5-pick" data-k="s5.pick"></select><small>그래프에서 자동으로 골라 두었어요. 생각이 다르면 바꿔 주세요.</small></div>
+      <div class="sheet-title"><h3>내 활동지 · 신호등 토론과 도달의 증거</h3><span class="saved" data-saved="s5"></span></div>
+      <p style="font-size:14px;color:var(--ink-soft);margin:0">위 신호등 토론에서 고른 주제와 색, 이유 한 줄이 함께 올라가요. 마음 그래프 두 칸은 더 해 본 분만 써요.</p>
+      <div class="field ev-field"><label for="s5-ev">③ 도달의 증거 <small>· 이 기법을 쓴 뒤 아이에게 무엇이 남으면 도달일까요?</small></label><input type="text" id="s5-ev" data-k="s5.ev" placeholder="예: 색을 바꾼 까닭을 말한 한마디"></div>
+      <div class="field"><label for="s5-pick">더 해 보기 · 마음이 가장 크게 바뀐 장면</label><select id="s5-pick" data-k="s5.pick"></select><small>그래프에서 자동으로 골라 두었어요. 생각이 다르면 바꿔 주세요.</small></div>
       <div class="field"><label for="s5-why">그렇게 본 까닭</label><input type="text" id="s5-why" data-k="s5.why" placeholder="예: 비에 줄무늬가 지워져 시무룩하던 여우가 다람쥐의 말을 듣고 다시 웃었기"></div>
       <div data-board="step5"></div>
     </div>
@@ -1474,6 +1525,10 @@ const SUGG = {
   "s6.stuck":()=>{ const i=STD_INFO[get("s6.std")]; return i?i.stuck:[]; },
   "s7.one":()=>["표지만 보여 주고 짝과 30초 예측하기","질문 주사위로 질문 만들기","질문 만들고 짝과 바꿔 하나 고르기","낱말 뜻을 앞뒤 문장으로 짐작하기","문단에서 중심 문장 찾기","신호등 토론으로 모두의 생각 보기","토의 말 카드로 모둠 토의하기","'나는 ○○지만 ○○입니다' 한 줄 쓰기","고쳐쓰기 세 물음으로 짝 글 읽기","지도서에서 단원 성취기준부터 찾아 읽기"],
   "lit.sum":()=>["여우의 꼬리는 쓸모가 많다.","여우는 꼬리를 여러 가지 일에 쓴다."],
+  "s3.ev":()=>["내용 질문 하나와 상상 질문 하나가 적힌 질문 쪽지","짝과 고른 질문에 '왜?'를 한 번 더 물은 흔적","읽기 전 예측과 읽은 뒤 생각을 견준 한 줄"],
+  "lit.ev":()=>["중심 문장에 밑줄을 긋고 한 문장으로 줄여 쓴 공책","'이 문장을 빼면 안 되는 까닭'을 말한 한마디","짝의 한 문장과 견주어 고친 문장"],
+  "s5.ev":()=>["색을 바꾼 까닭을 말한 한마디","친구의 이유를 받아 '덧붙이면'으로 시작한 말","의견과 이유가 함께 적힌 쪽지"],
+  "s4.ev":()=>["한 줄, 까닭, 장면이 이어진 세 문장","고쳐쓰기 세 물음으로 고친 흔적이 있는 문단","짝이 중심 문장에 밑줄을 그어 준 글"],
   "s5.lwhy":()=>["친구들이 실망할까 봐 말하기 어려웠을 것 같아서","숨기면 마음이 더 불편할 것 같아서","말을 들은 대로 자기를 그렇게 생각하게 되어서"],
   "s7.share":()=>["아침마다 그림책을 한 장면씩 읽어 줘요","질문 공책을 써 보고 있어요","짝과 글을 바꿔 읽게 해요","발표를 어려워하는 아이를 어떻게 도울지 고민이에요","글을 길게 쓰기 싫어하는 아이가 많아요"],
   "s7.why":()=>["우리 반은 읽기 전에 궁금한 것이 없어 보이기","글을 쓰라고 하면 첫 줄에서 멈추는 아이가 많기","모둠 활동에서 몇 명만 말하기","칭찬이 '착해'로만 끝나기"]
@@ -1678,14 +1733,15 @@ function drawPara(){
 }
 
 /* ── 보드 올리기 ── */
+const tail=k=>{ const d=get(k+".dx"), ev=(get(k+".ev")||"").trim(); return (d?`\n· 내가 본 아이의 막힘: ${d}`:"")+(ev?`\n· 도달의 증거: ${ev}`:""); };
 const BOARD = {
   opening:{col:"💬 여는 이야기 · 마음에 남은 한 장면", title:who, body:()=>{ const a=(get("s0.scene")||"").trim(); if(!a) return ""; const m=(get("s0.mine")||"").trim(); return `영상에서 마음에 남은 한 장면은 ${a}입니다.`+(m?` 우리 반 ${iga(m)} 떠올랐기 때문입니다.`:""); }, need:"마음에 남은 한 장면을 써 주세요."},
   step1:{col:"💬 1차시 ① 의견 공유 · 투표와 이유", title:()=>(get("s1.vote")?"학생 "+get("s1.vote"):"A 또는 B")+" · "+who(), body:()=>(get("s1.reason")||"").trim(), need:"학생을 고르고 이유 한 줄을 써 주세요."},
   step2:{col:"💬 1차시 ② 의견 공유 · 도달의 증거", title:who, body:()=>{ const ev=(get("s2.ev")||"").trim(); if(!ev) return ""; const std=get("s2.std")||"4국○○-○○"; let t=`[${std}]에 도달했는지 확인하려면, 아이들의 ${iga(ev)} 남아야 한다.`; const w=(get("s2.what")||"").trim(), h=(get("s2.how")||"").trim(); if(w||h) t+=`\n· 무엇을: ${w}\n· 어떻게: ${h}`; const cp=get("s2.comp"); if(cp) t+=`\n· 가장 가까운 국어과 역량: ${cp} 역량`; return t; }, need:"남아야 할 증거를 써 주세요."},
-  step3:{col:"💬 1차시 ③ 의견 공유 · 우리가 고른 질문", title:who, body:()=>{ const q=(get("s3.q")||"").trim(); if(!q) return ""; const st=get("s3.stage"); return `우리가 고른 질문은 '${q}'이고, 4단계 중 ${st||"____"} 질문입니다.`; }, need:"짝과 고른 질문을 써 주세요."},
-  lit:{col:"", title:who, body:()=>{ const a=(get("lit.sum")||"").trim(); if(!a) return ""; const w=(get("lit.word")||"").trim(); return `여우 꼬리 글을 한 문장으로 간추리면: ${a}`+(w?`\n· 우리 반 아이들이 어려워할 낱말: ${w}`:""); }, need:""},
-  step4:{col:"💬 1차시 ④ 의견 공유 · 나의 한 줄", title:who, body:()=>{ const p=para(); return [p.l1,p.l2,p.l3].filter(Boolean).join(" "); }, need:"1단계 한 줄부터 써 주세요."},
-  step5:{col:"💬 2차시 ① 의견 공유 · 마음이 바뀐 장면", title:()=>who()+" · 마음 그래프", body:()=>{ const sc=scenes(); const pk=get("s5.pick"); const i=(pk!==undefined&&pk!=="")?+pk:hotIndex(sc); const why=(get("s5.why")||"").trim(); if(!why) return ""; return `저는 '${sc[i].name}' 장면에서 마음이 가장 크게 바뀌었다고 봤습니다. ${why} 때문입니다.\n(마음 높이: ${sc.map(s=>s.name+" "+s.v).join(" → ")})`+(get("s5.light")?`\n· 신호등 토론: ${get("s5.topic")||"주제"} → ${get("s5.light")}`+((get("s5.lwhy")||"").trim()?`, ${get("s5.lwhy").trim()}`:""):""); }, need:"그렇게 본 까닭을 써 주세요."},
+  step3:{col:"💬 1차시 ③ 의견 공유 · 우리가 고른 질문", title:who, body:()=>{ const q=(get("s3.q")||"").trim(); if(!q) return ""; const st=get("s3.stage"); return `우리가 고른 질문은 '${q}'이고, 4단계 중 ${st||"____"} 질문입니다.`+tail("s3"); }, need:"짝과 고른 질문을 써 주세요."},
+  lit:{col:"", title:who, body:()=>{ const a=(get("lit.sum")||"").trim(); if(!a) return ""; const w=(get("lit.word")||"").trim(); return `여우 꼬리 글을 한 문장으로 간추리면: ${a}`+(w?`\n· 우리 반 아이들이 어려워할 낱말: ${w}`:"")+tail("lit"); }, need:""},
+  step4:{col:"💬 1차시 ④ 의견 공유 · 나의 한 줄", title:who, body:()=>{ const p=para(); const t=[p.l1,p.l2,p.l3].filter(Boolean).join(" "); return t?t+tail("s4"):""; }, need:"1단계 한 줄부터 써 주세요."},
+  step5:{col:"💬 2차시 ① 의견 공유 · 마음이 바뀐 장면", title:()=>who()+" · 신호등 토론", body:()=>{ const lw=(get("s5.lwhy")||"").trim(), lt=get("s5.light"); if(!lt||!lw) return ""; let t=`'${get("s5.topic")||"주제"}'에 대해 저는 ${lt}입니다.\n· 이유: ${lw}`+tail("s5"); const why=(get("s5.why")||"").trim(); if(why){ const sc=scenes(); const pk=get("s5.pick"); const k=(pk!==undefined&&pk!=="")?+pk:hotIndex(sc); t+=`\n· 마음 그래프: '${sc[k].name}' 장면에서 가장 크게 바뀌었다고 봤습니다. ${why} 때문입니다.`; } return t; }, need:"신호등 색을 고르고 이유 한 줄을 써 주세요."},
   step6:{col:"📝 활동지 W · 우리 모둠 설계 세 칸", title:()=>who()+" · 설계 세 칸", body:()=>{ const f=k=>(get("s6."+k)||"").trim(); if(!f("std")&&!f("q")) return ""; return [`▪ 쓸 기법: ${f("tech")}`,`▪ 교과서 단원(쓸 글): ${f("unit")}`,`▪ 고른 성취기준: ${f("std")?"["+f("std")+"] "+((STD_INFO[f("std")]||{}).t||""):""}`,`▪ 무엇을 / 어떻게: ${f("what")} / ${f("how")}`,`▪ 핵심 질문: ${f("q")}`,`▪ 활동: ${f("act")}`,`▪ 학습의 증거(평가): ${f("ev")}`,`▪ 우리 반에서 막힐 것 같은 지점 하나: ${f("stuck")}`].join("\n"); }, need:"성취기준과 핵심 질문부터 정해 주세요."},
   step7:{col:"💬 마무리 의견 공유 · 꺼내 쓸 한 가지", title:who, body:()=>{ const o=(get("s7.one")||"").trim(); if(!o) return ""; const w=(get("s7.why")||"").trim(); const sh=(get("s7.share")||"").trim(); return `다음 주 우리 반 국어 시간에 ${o}부터 해 보겠습니다.`+(w?` ${w} 때문입니다.`:"")+(sh?`\n· 선생님들과 나누고 싶은 한 가지: ${sh}`:""); }, need:"꺼내 쓸 한 가지를 써 주세요."}
 };
@@ -1815,6 +1871,9 @@ $("#wordQuiz").addEventListener("click",e=>{ const b=e.target.closest("button[da
   if(+b.dataset.j===q.a){ $$("button",b.parentNode).forEach(x=>x.classList.remove("no")); b.classList.add("ok"); $("#wfb-"+i).textContent="맞아요. 앞뒤 문장에서 실마리를 찾았네요."; } else { b.classList.add("no"); $("#wfb-"+i).textContent="실마리: "+q.h; } });
 $("#mainQuiz").addEventListener("click",e=>{ const b=e.target.closest("button[data-j]"); if(!b) return; const i=+b.parentNode.dataset.mq, q=MAINQ[i];
   if(+b.dataset.j===q.a){ $$("button",b.parentNode).forEach(x=>x.classList.remove("no")); b.classList.add("ok"); $("#mfb-"+i).textContent=q.ok; } else { b.classList.add("no"); $("#mfb-"+i).textContent=q.no; } });
+
+/* ── v15 · 강사의 진단 보기 ── */
+$$("[data-reveal]").forEach(b=>b.addEventListener("click",()=>{ const t=$(b.dataset.reveal); t.hidden=!t.hidden; b.textContent=t.hidden?"강사의 진단 보기":"진단 접기"; }));
 
 /* ── v14 · 신호등 토론 ── */
 $("#light").addEventListener("click",e=>{ const b=e.target.closest("button[data-light]"); if(!b) return; const [c,w,bg,fg]=b.dataset.light.split("|");
