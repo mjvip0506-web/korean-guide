@@ -229,6 +229,8 @@ input[type=text]:focus,textarea:focus,select:focus{border-color:var(--sea);outli
 mark.what{background:none;color:inherit;border-bottom:3px solid var(--sea);padding:0 1px}
 mark.how{background:var(--pencil-soft);color:inherit;border-radius:3px;padding:0 2px}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-soft)}
+.std-marked{display:block;font-size:15.5px;line-height:1.8;color:var(--ink)}
+[data-std-show] .legend{margin-top:5px;font-size:12.5px;gap:4px 12px}
 
 .stds{display:grid;gap:10px}
 .std{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;text-align:left;border:1px solid var(--line);background:var(--surface);
@@ -814,7 +816,7 @@ details.more .techs{margin-top:8px}
         <textarea id="s1-reason" data-k="s1.reason" placeholder="예: 한 가지 이야기를 까닭과 장면으로 풀어 써서 문단다워요."></textarea></div>
       <div data-board="step1"></div>
     </div>
-    <div class="tip"><b>TIP</b><span>두 글은 연수용으로 만든 예시예요. 4단계 글쓰기를 마친 뒤 같은 두 글을 한 번 더 고르게 돼요. 처음 고른 이유가 달라지는지 지켜봐 주세요.</span></div>
+    <div class="tip"><b>TIP</b><span>마당 4 글쓰기를 마친 뒤 같은 두 글을 한 번 더 고르게 돼요. 처음 고른 이유가 달라지는지 지켜봐 주세요.</span></div>
     <div class="share"><b>🗣 선생님 나눔 · 옆 선생님과 1분</b><span>우리 반에도 A 같은 글, B 같은 글이 있나요? 떠오르는 아이의 글을 한 편씩 이야기해요.</span><div class="row"><button type="button" class="btn sm" data-timer="60">1분 재기</button><button type="button" class="btn sm" data-open-pick>이름 뽑기</button></div></div>
     <nav class="pager" data-pager="step1"></nav>
   </section>
@@ -829,7 +831,7 @@ details.more .techs{margin-top:8px}
       </div>
     </div>
     <div class="plain">
-      <h2 class="h2">국어과가 기르려는 힘 <small>2022 개정 국어과 역량 여섯 가지 · 풀이는 연수용으로 쉽게 쓴 말이에요</small></h2>
+      <h2 class="h2">국어과가 기르려는 힘 <small>2022 개정 국어과 역량 여섯 가지 · 풀이는 쉽게 풀어 쓴 말이에요</small></h2>
       <div class="comp-grid">
         <div class="comp"><b>비판적·창의적 사고 역량</b><span>글과 자료를 따져 읽고 새로운 생각을 만들어 내는 힘</span><em>오늘 · 표지 예측, 질문 4단계</em></div>
         <div class="comp"><b>디지털·미디어 역량</b><span>매체 자료를 찾아 가려 쓰고, 책임 있게 만들고 나누는 힘</span><em>오늘 · 웹앱 놀이, 자료 나눔</em></div>
@@ -850,7 +852,7 @@ details.more .techs{margin-top:8px}
       <p class="note">영역마다 맨 위에 '핵심 아이디어'가 있어요. 그 영역에서 학년이 올라가도 이어지는 큰 생각을 문장으로 적어 둔 것이에요. 성취기준은 이 세 범주의 내용 요소를 엮어 만든 문장이에요. 그래서 성취기준을 읽을 때 '어느 영역, 어느 범주의 내용 요소에서 왔나'를 찾아보면 도달점이 더 또렷해져요.</p>
     </div>
     <div class="plain">
-      <h2 class="h2">오늘 함께 볼 3~4학년 성취기준 <small>하나를 눌러 고르세요</small></h2>
+      <h2 class="h2">오늘 함께 볼 성취기준 다섯 개 <small>3~4학년군 30개 가운데 오늘 쓰는 것 · 하나를 눌러 고르세요</small></h2>
       <div class="stds" data-std-pick="s2.std"></div>
     </div>
     <div class="plain">
@@ -899,7 +901,7 @@ details.more .techs{margin-top:8px}
       </div>
     </div>
     <div class="card plain">
-      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <p class="eyebrow">① 아이의 막힘</p>
       <h2 class="h2">질문을 만들랬더니</h2>
       <div class="case"><p><i>질문 공책 · 『여우지만 호랑이입니다』를 읽고</i></p><p>1. 주인공은 누구인가요?</p><p>2. 여우는 무엇을 그렸나요?</p><p>3. 비가 왔나요?</p></div>
       <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="s3.dx" data-choices="질문을 만들 줄 모른다,답이 책에 바로 있는 질문에 머문다,글의 내용을 이해하지 못했다"></div></div>
@@ -984,11 +986,11 @@ details.more .techs{margin-top:8px}
       </div>
     </div>
     <div class="example">
-      <p class="eyebrow">연습할 글 · 연수용으로 새로 쓴 설명하는 글</p>
+      <p class="eyebrow">연습할 글 · 설명하는 글</p>
       <p class="para">여우의 꼬리는 쓸모가 많습니다. 추운 겨울밤에는 꼬리로 몸을 감싸 이불처럼 덮고 잡니다. 빠르게 달리다가 방향을 바꿀 때에는 꼬리가 균형을 잡아 줍니다. 꼬리를 세우거나 흔들어서 다른 여우에게 마음을 전하기도 합니다.</p>
     </div>
     <div class="card plain">
-      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <p class="eyebrow">① 아이의 막힘</p>
       <h2 class="h2">한 문장으로 간추리랬더니</h2>
       <div class="case"><p><i>위의 여우 꼬리 글을 한 문장으로</i></p><p>아이 ㄱ: 여우의 꼬리는 쓸모가 많습니다. 추운 겨울밤에는 꼬리로 몸을 감싸 이불처럼 덮고 잡니다. 빠르게 달리다가 … <i>(끝까지 그대로 옮겨 씀)</i></p><p>아이 ㄴ: 여우는 꼬리를 이불처럼 덮고 잔다.</p></div>
       <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="lit.dx" data-choices="글을 소리 내어 읽지 못한다,중심 문장과 뒷받침 문장을 가르지 못한다,쓰기를 귀찮아한다"></div></div>
@@ -1028,7 +1030,7 @@ details.more .techs{margin-top:8px}
       </div>
     </div>
     <div class="card plain">
-      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <p class="eyebrow">① 아이의 막힘</p>
       <h2 class="h2">나를 소개하는 글을 쓰랬더니</h2>
       <div class="case"><p><i>10분 뒤, 아이 ㄱ의 공책</i></p><p>나는 <i>(쓰다 지운 자국)</i></p><p><i>옆자리 아이 ㄴ의 공책</i></p><p>나는 축구를 좋아합니다. 그리고 떡볶이를 좋아합니다. 우리 집에는 강아지가 있습니다. 끝.</p></div>
       <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="s4.dx" data-choices="쓸 내용이 없다,중심 문장을 세우지 못한다,맞춤법이 걱정된다"></div></div>
@@ -1062,7 +1064,7 @@ details.more .techs{margin-top:8px}
       </div>
     </div>
     <div class="example">
-      <p class="eyebrow">강사 예시 문단 · 연수용으로 만든 글</p>
+      <p class="eyebrow">강사 예시 문단</p>
       <p class="para"><span class="role r1">중심</span>나는 부끄럼쟁이지만 다정한 사람입니다. <span class="role r2">까닭</span>처음 만난 사람 앞에서는 말을 잘 못 하지만, 친구가 힘들어 보이면 먼저 다가가기 때문입니다. <span class="role r3">장면</span>지난주 체육 시간에 넘어진 친구에게 가장 먼저 달려가 괜찮냐고 물어보았습니다. 그때 친구가 고맙다고 웃어 주어서 나도 기분이 좋았습니다.</p>
     </div>
     <div class="sheet">
@@ -1120,7 +1122,7 @@ details.more .techs{margin-top:8px}
       </div>
     </div>
     <div class="card plain">
-      <p class="eyebrow">① 아이의 막힘 · 연수용으로 만든 사례</p>
+      <p class="eyebrow">① 아이의 막힘</p>
       <h2 class="h2">토의를 하랬더니</h2>
       <div class="case"><p><i>토의 장면 받아 적기 · 주제: 나라면 친구들에게 사실대로 말했을까?</i></p><p>아이 ㄱ: 말해야 해요.</p><p>아이 ㄴ: 나도 그렇게 생각해.</p><p>아이 ㄷ: 나도.</p><p><i>(그 뒤로 조용해요)</i></p></div>
       <div class="field"><span class="lab">이 아이는 어디서 막혔을까요? <small>· 하나를 고르고 옆 선생님과 견줘요</small></span><div class="chips" data-k="s5.dx" data-choices="주제에 관심이 없다,의견에 이유가 없고 서로 오가지 않는다,발표를 부끄러워한다"></div></div>
@@ -1501,15 +1503,37 @@ const STD_INFO = {
     stuck:["꾸미기에 시간을 다 써요 → 틀을 정해 주고 꾸미기는 생략해요","기기가 말썽이에요 → 30초 넘으면 종이 카드로 바꿔요"]},
   "4국05-02":{area:"문학",t:"자신의 경험을 바탕으로 작품 속 세계와 현실 세계를 비교하여 작품을 감상한다.",what:"작품 속 세계와 현실 세계(나의 경험)",how:"경험을 바탕으로 비교하며 작품을 감상한다",noun:"'나는 ○○지만 ○○입니다' 문장과 까닭 한 줄",q:[],act:[],ev:[],stuck:[]}
 };
+const S2_HINT = {
+  "4국02-03":{mark:'<mark class="how">질문을 활용하여</mark> <mark class="what">글</mark>을 <mark class="how">예측하며 읽고</mark> <mark class="what">자신의 읽기 과정</mark>을 <mark class="how">점검한다</mark>.',
+    what:["글의 내용 예측과 나의 읽기 과정","읽기 전·중·후에 떠올린 질문"],
+    how:["질문을 만들어 예측하며 읽고, 읽은 뒤 점검한다","예측이 맞았는지 읽으면서 확인한다"],
+    ev:["표지를 보고 쓴 예측 질문과 읽은 뒤 고친 질문","읽기 전 예측과 읽은 뒤 생각을 견준 한 줄","답을 찾은 질문에 ✓ 표시를 한 질문 쪽지"]},
+  "4국05-02":{mark:'자신의 경험을 바탕으로 <mark class="what">작품 속 세계와 현실 세계</mark>를 <mark class="how">비교하여 작품을 감상한다</mark>.',
+    what:["작품 속 세계와 현실 세계(나의 경험)","인물이 겪은 일과 닮은 나의 경험"],
+    how:["경험을 바탕으로 비교하며 작품을 감상한다","인물과 나를 견주어 말하거나 쓴다"],
+    ev:["'나는 ○○지만 ○○입니다' 문장과 까닭 한 줄","'나라면 ~했을 것이다'와 그 까닭을 쓴 쪽지","인물과 닮은 내 경험을 말한 한마디"]},
+  "4국01-04":{mark:'<mark class="what">상황과 상대의 입장</mark>을 <mark class="how">이해하고 예의를 지키며 대화한다</mark>.',
+    what:["상황과 상대의 입장","듣는 사람의 마음과 대화 예절"],
+    how:["상대의 마음을 헤아려 예의를 지키며 대화한다","상대의 말을 끝까지 듣고 입장을 생각하며 말한다"],
+    ev:["상대 마음을 헤아린 말이 담긴 대화","상처 주는 말을 힘이 되는 말로 바꿔 쓴 문장","상대 말을 받아 이어 간 대화 한 토막"]},
+  "4국01-06":{mark:'<mark class="what">주제에 적절한 의견과 이유</mark>를 <mark class="how">제시하고</mark> <mark class="what">서로의 생각</mark>을 <mark class="how">교환하며 토의한다</mark>.',
+    what:["주제에 맞는 의견과 이유","서로의 생각(친구의 의견과 이유)"],
+    how:["서로의 생각을 주고받으며 토의한다","의견에 이유를 붙여 말하고 친구 말에 덧붙인다"],
+    ev:["의견과 이유, 그림 근거가 담긴 토의 기록","의견과 이유가 함께 적힌 쪽지","이유를 듣고 생각을 바꾼 까닭을 말한 한마디"]},
+  "4국03-01":{mark:'<mark class="what">중심 문장과 뒷받침 문장</mark>을 <mark class="how">갖추어 문단을 쓰고</mark>, <mark class="what">문장과 문단</mark>을 중심으로 <mark class="how">고쳐 쓴다</mark>.',
+    what:["중심 문장과 뒷받침 문장","문단의 짜임과 고쳐 쓸 곳"],
+    how:["문단을 쓰고, 문장과 문단을 중심으로 고쳐 쓴다","한 줄에 까닭과 장면을 더해 문단을 쓰고 고친다"],
+    ev:["중심 문장과 뒷받침 문장을 갖춘 문단과 고쳐 쓴 흔적","한 줄, 까닭, 장면이 이어진 세 문장","짝이 중심 문장에 밑줄을 그어 준 글"]}
+};
 const W_ORDER=["4국02-03","4국01-06","4국03-01","4국05-01","4국01-04","4국03-03","4국03-04","4국06-02"];
 /* 고르기(선택형) + 직접 쓰기 */
 const SUGG = {
   "s0.scene":()=>["천 원을 동생에게 주고 두 시간을 걸어온 아이","'공고 다녀요' 뒤에 숨어 있던 아이의 진짜 이야기","아이 곁을 지켜 준 어른의 한마디","아이가 처음으로 마음을 꺼낸 순간"],
   "s0.mine":()=>["아침마다 엎드려 있는 우리 반 한 아이","발표할 때 목소리가 작아지는 아이","질문하면 '몰라요'부터 말하는 아이","쉬는 시간에 혼자 책을 읽는 아이"],
   "s1.reason":()=>["한 가지 이야기를 까닭과 장면으로 풀어 써서 문단다워요.","맞춤법과 띄어쓰기가 정확해요.","좋아하는 것, 가족, 꿈을 골고루 소개했어요.","읽고 나면 그 아이가 어떤 사람인지 떠올라요."],
-  "s2.what":()=>{ const i=STD_INFO[get("s2.std")]; return i?[i.what]:[]; },
-  "s2.how":()=>{ const i=STD_INFO[get("s2.std")]; return i?[i.how]:[]; },
-  "s2.ev":()=>{ const i=STD_INFO[get("s2.std")]; return (i?[i.noun]:[]).concat(["짝과 바꿔 쓴 질문 쪽지","고쳐 쓴 문단"]).filter((v,j,a)=>a.indexOf(v)===j); },
+  "s2.what":()=>{ const h=S2_HINT[get("s2.std")]; return h?h.what:[]; },
+  "s2.how":()=>{ const h=S2_HINT[get("s2.std")]; return h?h.how:[]; },
+  "s2.ev":()=>{ const h=S2_HINT[get("s2.std")]; return h?h.ev:[]; },
   "s3.q":()=>["여우는 왜 호랑이가 되고 싶었을까?","줄무늬가 지워졌을 때 여우는 어떤 마음이었을까?","나라면 친구들에게 사실대로 말했을까?","이 책은 나답게 사는 것에 대해 무엇을 말할까?"],
   "s4.ab":{label:"한 줄 고르기",list:()=>[["부끄럼쟁이","다정한 사람"],["느림보","끈기 있는 사람"],["덜렁이","친구를 잘 챙기는 사람"],["겁쟁이","새로운 일에 도전하는 사람"],["수다쟁이","귀 기울여 듣는 사람"]],
     text:v=>`${v[0]}지만 ${v[1]}`, cur:()=>[get("s4.a")||"",get("s4.b")||""], apply:v=>{ $("#s4-a").value=v[0]; $("#s4-b").value=v[1]; S.s4=S.s4||{}; S.s4.a=v[0]; set("s4.b",v[1]); $("#s4-c").focus(); }, anchor:"#s4-a"},
@@ -1828,7 +1852,11 @@ function refresh(){
   renderWho(); bindInputs();
   $$(".chips[data-k]").forEach(box=>{ const v=get(box.dataset.k); $$("button",box).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===v))); });
   $$(".std",stdBox).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.code===get("s2.std"))));
-  $$("[data-std-show]").forEach(el=>{ const c=get(el.dataset.stdShow); const s=STDS.find(x=>x[0]===c); el.textContent=s?`[${s[0]}] ${s[1]}`:"위 목록에서 하나를 눌러 고르세요."; });
+  $$("[data-std-show]").forEach(el=>{ const c=get(el.dataset.stdShow); const s=STDS.find(x=>x[0]===c); const h=S2_HINT[c];
+    if(s&&h) el.innerHTML=`<span class="std-marked"><b>[${s[0]}]</b> ${h.mark}</span><span class="legend"><span><mark class="what">밑줄</mark> 무엇을 · 다루는 내용</span><span><mark class="how">형광</mark> 어떻게 · 아이가 보여 줄 행동</span></span>`;
+    else el.textContent=s?`[${s[0]}] ${s[1]}`:"위 목록에서 하나를 눌러 고르세요."; });
+  { const h=S2_HINT[get("s2.std")], ph=(id,v,empty)=>{ const el=$(id); if(el) el.placeholder=h?"예: "+v(h):empty; };
+    ph("#s2-what",x=>x.what[0],"먼저 위에서 성취기준을 골라 주세요"); ph("#s2-how",x=>x.how[0],"성취기준을 고르면 예시가 보여요"); ph("#s2-ev",x=>x.ev[0],"성취기준을 고르면 예시가 보여요"); }
   const fv=get("s1.vote"); const fe=$("[data-first-vote]"); if(fe) fe.textContent=fv?`처음 고른 학생: ${fv}`:"";
   drawPara(); drawGraph(); drawBoards(); drawSheets(); drawGuess(); drawSugg(); drawW(); drawEl();
   $$("[data-nav]").forEach(a=>{ const r=a.dataset.nav; const b=BOARD[r]; let d=a.querySelector(".done"); const ok=b&&!!b.body();
