@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>독서수업 함께하기</title>
+<meta name="description" content="디지털 독서수업 사례나눔 · 휴대폰으로 참여하기">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* 한 화면에 한 장면. 아이 말풍선 → 교사의 세 가지 한마디 → 바로 풀이. 발표 슬라이드의 크림·초록·갈색을 그대로 씀 */
+:root{
+  --bg:#fdf3ea; --card:#ffffff; --ink:#4a3a30; --soft:#7b6a5f; --line:#eadbcc;
+  --green:#4f8a72; --green-soft:#dcebe1; --peach:#f6d9c8; --lilac:#e3dbf0; --warn:#c8643c; --on-green:#ffffff;
+  --display:"Jua","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  --body:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#231d19; --card:#2f2722; --ink:#f3e9df; --soft:#c2b3a6; --line:#4a3f37;
+  --green:#7fc1a5; --green-soft:#2c423a; --peach:#5a4034; --lilac:#3d3650; --warn:#f0a07c; --on-green:#16241e; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#231d19; --card:#2f2722; --ink:#f3e9df; --soft:#c2b3a6; --line:#4a3f37;
+  --green:#7fc1a5; --green-soft:#2c423a; --peach:#5a4034; --lilac:#3d3650; --warn:#f0a07c; --on-green:#16241e; color-scheme:dark }
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;word-break:keep-all;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px}
+.app{max-width:460px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;gap:14px}
+h1,h2,.display{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--display);font-size:20px;color:var(--green)}
+.dots{display:flex;gap:6px}
+.dots i{width:22px;height:8px;border-radius:99px;background:var(--line)}
+.dots i.on{background:var(--green)}
+.screen{display:flex;flex-direction:column;gap:14px;flex:1}
+.hero{background:var(--card);border-radius:28px;padding:28px 22px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.hero h1{font-size:34px;color:var(--green);line-height:1.15}
+.hero p{margin:0;color:var(--soft)}
+.flow{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-family:var(--display);font-size:18px}
+.flow span{padding:6px 14px;border-radius:99px;background:var(--green-soft)}
+.flow span:nth-child(2){background:var(--peach)} .flow span:nth-child(3){background:var(--lilac)}
+.book{align-self:flex-start;font-size:14px;color:var(--soft);background:var(--card);border-radius:99px;padding:4px 12px}
+.bubble{position:relative;background:var(--card);border-radius:24px;padding:18px 18px 18px 20px;font-size:20px;line-height:1.5}
+.bubble::after{content:"";position:absolute;left:28px;bottom:-10px;width:20px;height:20px;background:var(--card);transform:rotate(45deg);border-radius:4px}
+.who{font-size:14px;color:var(--soft);margin:6px 0 0 10px}
+.ask{font-family:var(--display);font-size:19px;margin-top:4px}
+.opts{display:flex;flex-direction:column;gap:10px}
+button{font:inherit;color:inherit;cursor:pointer;border:0}
+.opt{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;min-height:60px;line-height:1.45}
+.opt:focus-visible,.go:focus-visible,.link:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.opt[disabled]{cursor:default}
+.opt.best{border-color:var(--green);background:var(--green-soft)}
+.opt.mine:not(.best){border-color:var(--warn)}
+.opt small{display:block;margin-top:6px;font-size:14px;color:var(--soft)}
+.opt.best small{color:var(--green)} .opt.mine:not(.best) small{color:var(--warn)}
+.note{background:var(--lilac);border-radius:18px;padding:12px 16px;font-size:16px}
+.go{background:var(--green);color:var(--on-green);font-family:var(--display);font-size:21px;border-radius:99px;padding:14px 20px;min-height:54px;width:100%}
+.go.ghost{background:transparent;color:var(--green);border:2px solid var(--green)}
+.link{display:block;text-align:center;text-decoration:none;background:var(--peach);color:var(--ink);font-family:var(--display);font-size:19px;border-radius:99px;padding:13px 20px}
+.spacer{flex:1}
+.menu{display:flex;flex-direction:column;gap:12px}
+.tile{display:flex;align-items:center;gap:14px;text-align:left;text-decoration:none;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px 18px;min-height:76px;width:100%}
+.tile:focus-visible,.q:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.tile .n{flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:22px;background:var(--green-soft);color:var(--green)}
+.tile:nth-child(2) .n{background:var(--peach);color:var(--ink)} .tile:nth-child(3) .n{background:var(--lilac);color:var(--ink)}
+.tile b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.3}
+.tile span.d{display:block;font-size:14px;color:var(--soft)}
+.tile .txt{min-width:0}
+.q{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;text-decoration:none;color:var(--ink);background:var(--card);border-radius:20px;padding:14px 16px}
+.q .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:20px;background:var(--green);color:var(--on-green)}
+.q b{display:block;font-weight:600;font-size:17px;line-height:1.45}
+.q span.d{display:block;font-size:14px;color:var(--soft);margin-top:2px}
+.q .txt{min-width:0}
+.back{background:transparent;color:var(--soft);font-size:15px;padding:10px;align-self:center;text-decoration:underline}
+
+.score{font-family:var(--display);font-size:64px;color:var(--green);line-height:1}
+.score small{font-size:22px;color:var(--soft)}
+.type{font-family:var(--display);font-size:26px}
+.bars{display:flex;flex-direction:column;gap:8px;text-align:left}
+.bar{display:grid;grid-template-columns:5.5em 1fr 2em;align-items:center;gap:8px;font-size:15px}
+.bar b{height:12px;border-radius:99px;background:var(--line);overflow:hidden;display:block}
+.bar b i{display:block;height:100%;border-radius:99px;background:var(--green)}
+.bar:nth-child(2) b i{background:var(--warn)} .bar:nth-child(3) b i{background:var(--soft)}
+.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){ .screen{animation:in .25s ease-out} @keyframes in{from{transform:translateY(8px);opacity:.6}to{transform:none;opacity:1}} }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><span class="brand">독서수업 함께하기</span><div class="dots" id="dots" aria-hidden="true"></div></div>
+  <div id="view" class="screen"></div>
+</div>
+
+<script>
+const PADLET = "https://padlet.com/mjmjvip0506/padlet-s025bj60hj9g05p6n4im";
+// kind: back = 책의 근거로 돌려보내는 말, tell = 답을 알려 주는 말, praise = 칭찬만 하는 말
+const SCENES = [
+  { book:"『이상한 화요일』 · 질문", say:"개구리가 하늘을 나는 건요, 마법사가 마법을 걸어서 그래요!",
+    opts:[
+      {k:"back",  t:"어느 그림을 보고 그렇게 생각했어?"},
+      {k:"tell",  t:"음, 그건 책에 없는 이야기야."},
+      {k:"praise",t:"우와, 상상력이 정말 좋구나!"} ],
+    note:"엉뚱한 답도 그림에서 출발했을 수 있어요. 어느 장면인지 물으면 아이가 책을 다시 펴요." },
+  { book:"『이상한 화요일』 · 예측", say:"다음 장면에서는 개구리들이 다 집으로 돌아갈 것 같아요.",
+    opts:[
+      {k:"back",  t:"그림 속 어떤 단서가 그 예측을 도와줬어?"},
+      {k:"tell",  t:"선생님이 알려 줄게. 다음 장면은 말이야…"},
+      {k:"praise",t:"좋은 예측이야. 자, 다음 사람?"} ],
+    note:"예측이 맞았는지보다 무엇을 보고 예측했는지가 남아야 해요. 빗나가면 단서가 하나 더 생겨요." },
+  { book:"『젓가락 달인』 · 인물 읽기", say:"우봉이는 그냥 떨려서 망설이는 거예요.",
+    opts:[
+      {k:"back",  t:"우봉이의 어떤 말이나 행동에서 떨린다고 느꼈어?"},
+      {k:"tell",  t:"아니야, 상대가 친구라서 그런 거야."},
+      {k:"praise",t:"그럴 수도 있겠다. 잘 생각했어."} ],
+    note:"해석이 다른 것은 괜찮아요. 근거가 어디인지 말하게 하면 서로의 해석을 견줄 수 있어요." },
+  { book:"고쳐 쓰기", say:"친구 얘기를 들으니까 생각이 바뀌었어요. 처음 쓴 건 지울게요.",
+    opts:[
+      {k:"back",  t:"처음 생각은 남겨 두고, 무엇을 보고 바뀌었는지 옆에 써 볼까?"},
+      {k:"tell",  t:"그래, 틀린 건 지우고 새로 쓰자."},
+      {k:"praise",t:"생각이 바뀌다니 멋지다!"} ],
+    note:"지우면 생각이 자란 흔적도 사라져요. 처음 생각과 고친 까닭을 함께 남겨요." }
+];
+const TAG = { back:"책으로 돌려보내는 말", tell:"답을 알려 주는 말", praise:"칭찬에서 멈추는 말" };
+const WHY = { back:"아이가 근거를 찾으러 책으로 돌아가요.", tell:"아이의 생각이 여기서 멈춰요.", praise:"기분은 좋지만 다시 읽을 까닭이 없어요." };
+
+const dots = document.getElementById("dots");
+let i = -1, picks = [];
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+const shuffle = a => { a = a.slice(); for (let j = a.length - 1; j > 0; j--) { const r = Math.floor(Math.random() * (j + 1)); [a[j], a[r]] = [a[r], a[j]]; } return a; };
+
+function paintDots(){ dots.replaceChildren(...SCENES.map((_, n) => { const d = el("i"); if (n < picks.length || n === i) d.classList.add("on"); return d; })); dots.hidden = i < 0; }
+function show(...nodes){ const s = el("div", "screen"); s.append(...nodes); document.getElementById("view").replaceWith(s); s.id = "view"; window.scrollTo(0, 0); return s; }
+
+const QUESTIONS = [
+  { n:"①", q:"오늘이나 이번 주에 우리 반 아이가 한 질문 중 기억나는 것은?", d:"한 줄 · 제목에는 이름이나 별명" },
+  { n:"②", q:"영상 속 교실에서 가장 눈에 들어온 것은?", d:"한 단어" },
+  { n:"③", q:"연잎을 타고 날아오른 개구리들, 다음엔 어디로 갈까요?", d:"예측 한 줄 + 그렇게 생각한 단서" },
+  { n:"④", q:"우봉이는 왜 망설일까?", d:"세 줄 · 질문 / 잠정적인 예상 / 책에서 확인할 근거" },
+  { n:"⑤", q:"처음에는 ___ 생각했다. ___ 장면을 확인하고, 생각을 바꾸거나 더 분명히 했다.", d:"오늘 소감 + 내 교실에 가져갈 한 가지" }
+];
+
+function tile(tag, n, title, desc){
+  const t = el(tag, "tile"), txt = el("span", "txt");
+  txt.append(el("b", null, title), el("span", "d", desc));
+  t.append(el("span", "n", n), txt); return t;
+}
+
+function start(){
+  i = -1; picks = []; paintDots();
+  const hero = el("div", "hero");
+  hero.append(el("h1", null, "함께 읽고, 묻고, 고쳐요"),
+    el("p", null, "디지털 독서수업 사례나눔 · 휴대폰으로 참여하기"));
+  const flow = el("div", "flow"); ["질문", "근거", "수정"].forEach(w => flow.append(el("span", null, w)));
+  hero.append(flow);
+  const menu = el("div", "menu");
+  const a = tile("button", "1", "오늘의 질문", "지금 몇 번 질문인지 보고 패들렛에 쓰기"); a.id = "goQ"; a.onclick = questions;
+  const b = tile("button", "2", "퀴즈 · 다음 한마디", "장면 4개 · 1분 30초"); b.id = "start"; b.onclick = () => scene(0);
+  const c = tile("a", "3", "패들렛 바로 열기", "로그인 없이 글과 댓글 쓰기"); c.href = PADLET; c.target = "_blank"; c.rel = "noopener";
+  menu.append(a, b, c);
+  show(hero, menu);
+}
+
+function questions(){
+  i = -1; paintDots();
+  const list = QUESTIONS.map(x => {
+    const q = el("a", "q"), txt = el("span", "txt"); q.href = PADLET; q.target = "_blank"; q.rel = "noopener";
+    txt.append(el("b", null, x.q), el("span", "d", "패들렛 " + x.n + " 칸 · " + x.d));
+    q.append(el("span", "n", x.n), txt); return q;
+  });
+  const pad = el("a", "link", "패들렛 열기"); pad.href = PADLET; pad.target = "_blank"; pad.rel = "noopener";
+  const back = el("button", "back", "처음으로"); back.id = "home"; back.onclick = start;
+  show(el("h2", "ask", "오늘의 질문 다섯 가지"),
+       el("div", "note", "선생님이 “몇 번 칸”이라고 말하면, 그 번호 질문을 눌러 패들렛에 써 주세요."),
+       ...list, pad, back);
+}
+
+function scene(n){
+  i = n; paintDots();
+  const sc = SCENES[n];
+  const bubble = el("div", "bubble", "“" + sc.say + "”");
+  const opts = el("div", "opts");
+  const order = shuffle(sc.opts);
+  const btns = order.map((o, idx) => { const b = el("button", "opt", o.t); b.id = "opt" + idx; b.onclick = () => choose(n, o.k, btns, order, tail); return b; });
+  opts.append(...btns);
+  const tail = el("div", "screen"); tail.style.flex = "0 0 auto"; tail.style.animation = "none";
+  show(el("span", "book", sc.book), bubble, el("p", "who", "우리 반 아이"), el("h2", "ask", "선생님의 다음 한마디는?"), opts, tail);
+}
+
+function choose(n, kind, btns, order, tail){
+  picks[n] = kind; paintDots();
+  btns.forEach((b, idx) => {
+    const o = order[idx]; b.disabled = true;
+    if (o.k === "back") b.classList.add("best");
+    if (o.k === kind) b.classList.add("mine");
+    if (o.k === "back" || o.k === kind) b.append(el("small", null, (o.k === kind ? "내 선택 · " : "") + TAG[o.k] + " — " + WHY[o.k]));
+  });
+  const next = el("button", "go", n + 1 < SCENES.length ? "다음 장면" : "내 결과 보기"); next.id = "next";
+  next.onclick = () => (n + 1 < SCENES.length ? scene(n + 1) : result());
+  tail.replaceChildren(el("div", "note", SCENES[n].note), next);
+  next.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
+function result(){
+  i = SCENES.length; paintDots();
+  const c = { back:0, tell:0, praise:0 }; picks.forEach(k => c[k]++);
+  let type, tip;
+  if (c.back === SCENES.length){ type = "책으로 돌려보내는 코치"; tip = "네 장면 모두 근거를 물으셨어요. 교실에서는 아이가 답할 때까지 기다리는 시간만 더해 보세요."; }
+  else if (c.back >= c.tell && c.back >= c.praise){ type = "한 걸음만 더 코치"; tip = "근거를 묻는 버릇이 이미 있어요. 급할 때 나오는 한마디만 “어디에서 그렇게 생각했어?”로 바꿔 보세요."; }
+  else if (c.praise >= c.tell){ type = "따뜻한 응원 코치"; tip = "칭찬은 그대로 두고, 그 뒤에 “어디에서 그렇게 생각했어?” 한마디만 붙여 보세요."; }
+  else { type = "친절한 안내 코치"; tip = "답을 알려 주고 싶을 때, 답 대신 “책 어디를 보면 알 수 있을까?”를 건네 보세요."; }
+  const hero = el("div", "hero");
+  const score = el("div", "score", String(c.back)); score.append(el("small", null, " / " + SCENES.length));
+  hero.append(el("p", null, "책으로 돌려보낸 한마디"), score, el("div", "type", type), el("p", null, tip));
+  const bars = el("div", "bars");
+  [["back","근거 묻기"],["tell","답 알려 주기"],["praise","칭찬하기"]].forEach(([k, label]) => {
+    const row = el("div", "bar"), track = el("b"), fill = el("i"); fill.style.width = (c[k] / SCENES.length * 100) + "%"; track.append(fill);
+    row.append(el("span", null, label), track, el("span", null, c[k] + "번")); bars.append(row);
+  });
+  hero.append(bars);
+  const pad = el("a", "link", "패들렛으로 돌아가기"); pad.href = PADLET; pad.target = "_blank"; pad.rel = "noopener";
+  const again = el("button", "go ghost", "다시 해 보기"); again.id = "again"; again.onclick = () => scene(0);
+  const back = el("button", "back", "처음으로"); back.id = "home"; back.onclick = start;
+  show(hero, el("div", "note", "옆 선생님과 화면을 맞대 보세요. 어느 장면에서 갈렸나요?"), pad, again, back);
+}
+start();
+</script>
+</body>
+</html>
