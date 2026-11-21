@@ -85,6 +85,10 @@ button{font:inherit;color:inherit;cursor:pointer;border:0}
 .timerbox.done .track i{background:var(--warn)}
 .msg{text-align:center;font-family:var(--display);font-size:24px;min-height:1.5em;margin:0}
 .timerbox{display:flex;flex-direction:column;gap:14px;background:var(--card);border-radius:28px;padding:20px 18px}
+.tile.feature{border-color:var(--green);background:var(--green-soft)}
+.tile.feature .n{background:var(--green);color:var(--on-green)}
+.opt.jin{display:flex;gap:12px;align-items:center;font-size:19px;min-height:72px}
+.jn{flex:0 0 auto;font-family:var(--display);font-size:26px;color:var(--green)}
 .score{font-family:var(--display);font-size:64px;color:var(--green);line-height:1}
 .score small{font-size:22px;color:var(--soft)}
 .type{font-family:var(--display);font-size:26px}
@@ -170,7 +174,26 @@ function start(){
   const c = tile("a", "3", "패들렛 바로 열기", "로그인 없이 글과 댓글 쓰기"); c.href = PADLET; c.target = "_blank"; c.rel = "noopener";
   const d = tile("button", "4", "타이머", "활동 시간 재기 · 20초부터 3분까지"); d.id = "goT"; d.onclick = timer;
   menu.append(a, b, c, d);
-  show(hero, menu);
+  const j = tile("button", "★", "진진가 · 가짜를 찾아라", "먼저 여기부터 · 30초"); j.classList.add("feature"); j.id = "goJ"; j.onclick = jin;
+  show(j, hero, menu);
+}
+
+function jin(){
+  i = -1; paintDots();
+  const marks = ["①", "②", "③"];
+  const items = ["다연 샘과 나는 둘 다 쌍둥이다", "다연 샘과 나의 경력 차는 10년이다", "나는 애둘맘이다"];
+  const note = el("div", "note", "가짜라고 생각하는 것을 하나 눌러 주세요.");
+  const btns = items.map((t, n) => {
+    const b = el("button", "opt jin"); b.id = "j" + (n + 1); b.append(el("span", "jn", marks[n]), el("span", null, t));
+    b.onclick = () => { btns.forEach(x => x.classList.remove("best")); b.classList.add("best");
+      note.textContent = marks[n] + "번을 가짜로 골랐어요. 정답은 선생님이 곧 알려 줘요. 손 들 준비!"; };
+    return b;
+  });
+  const opts = el("div", "opts"); opts.append(...btns);
+  const hero = el("div", "hero");
+  hero.append(el("h1", null, "진진가"), el("p", null, "김미정 선생님 이야기예요. 진짜 둘, 가짜 하나. 여기서 ‘나’는 김미정 선생님이에요."));
+  const back = el("button", "back", "처음으로"); back.id = "home"; back.onclick = start;
+  show(hero, opts, note, back);
 }
 
 function timer(){
