@@ -73,6 +73,18 @@ button{font:inherit;color:inherit;cursor:pointer;border:0}
 .q .txt{min-width:0}
 .back{background:transparent;color:var(--soft);font-size:15px;padding:10px;align-self:center;text-decoration:underline}
 
+.app.wide{max-width:900px}
+.big{font-family:var(--display);font-size:min(34vw,300px);line-height:1;text-align:center;color:var(--green);font-variant-numeric:tabular-nums;padding:10px 0}
+.timerbox.done .big{color:var(--warn)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.preset{background:var(--card);border:2px solid var(--line);border-radius:99px;padding:10px 16px;min-height:48px;font-size:17px}
+.preset.on{border-color:var(--green);background:var(--green-soft)}
+.preset:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.track{height:14px;border-radius:99px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;width:100%;background:var(--green);transition:width .2s linear}
+.timerbox.done .track i{background:var(--warn)}
+.msg{text-align:center;font-family:var(--display);font-size:24px;min-height:1.5em;margin:0}
+.timerbox{display:flex;flex-direction:column;gap:14px;background:var(--card);border-radius:28px;padding:20px 18px}
 .score{font-family:var(--display);font-size:64px;color:var(--green);line-height:1}
 .score small{font-size:22px;color:var(--soft)}
 .type{font-family:var(--display);font-size:26px}
@@ -156,8 +168,44 @@ function start(){
   const a = tile("button", "1", "오늘의 질문", "지금 몇 번 질문인지 보고 패들렛에 쓰기"); a.id = "goQ"; a.onclick = questions;
   const b = tile("button", "2", "퀴즈 · 다음 한마디", "장면 4개 · 1분 30초"); b.id = "start"; b.onclick = () => scene(0);
   const c = tile("a", "3", "패들렛 바로 열기", "로그인 없이 글과 댓글 쓰기"); c.href = PADLET; c.target = "_blank"; c.rel = "noopener";
-  menu.append(a, b, c);
+  const d = tile("button", "4", "타이머", "활동 시간 재기 · 20초부터 3분까지"); d.id = "goT"; d.onclick = timer;
+  menu.append(a, b, c, d);
   show(hero, menu);
+}
+
+function timer(){
+  i = -1; paintDots();
+  const app = document.querySelector(".app"); app.classList.add("wide");
+  const PRESETS = [[20,"20초"],[30,"30초"],[60,"1분"],[90,"1분 30초"],[120,"2분"],[180,"3분"]];
+  let total = 60, left = 60, end = null, id = null, ac = null;
+  const fmt = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
+  const box = el("div", "timerbox"), big = el("div", "big"), track = el("div", "track"), fill = el("i"), msg = el("p", "msg");
+  track.append(fill);
+  const presets = el("div", "presets");
+  const pbtns = PRESETS.map(([n, label]) => { const b = el("button", "preset", label); b.id = "p" + n; b.onclick = () => { stop(); total = left = n; paint(); }; presets.append(b); return [n, b]; });
+  const go = el("button", "go"); go.id = "tgo";
+  const reset = el("button", "go ghost", "처음부터"); reset.id = "treset"; reset.onclick = () => { stop(); left = total; paint(); };
+  const back = el("button", "back", "처음으로"); back.id = "home"; back.onclick = () => { stop(); app.classList.remove("wide"); start(); };
+  function stop(){ if (id) { clearInterval(id); id = null; } }
+  function beep(){ try { if (!ac) return; [0, .35, .7].forEach(t => { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = 880; o.connect(g); g.connect(ac.destination);
+      g.gain.setValueAtTime(.25, ac.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, ac.currentTime + t + .25); o.start(ac.currentTime + t); o.stop(ac.currentTime + t + .26); }); } catch (e) {} }
+  function paint(){
+    big.textContent = fmt(left); fill.style.width = (total ? left / total * 100 : 0) + "%";
+    box.classList.toggle("done", left === 0);
+    msg.textContent = left === 0 ? "시간이 됐어요" : (id ? "" : (left === total ? "시간을 고르고 시작을 눌러요" : "잠깐 멈췄어요"));
+    go.textContent = id ? "잠깐 멈춤" : (left === 0 ? "다시 시작" : "시작");
+    pbtns.forEach(([n, b]) => b.classList.toggle("on", n === total));
+  }
+  function tick(){ left = Math.max(0, Math.ceil((end - Date.now()) / 1000)); if (left === 0) { stop(); beep(); } paint(); }
+  go.onclick = async () => {
+    if (id) { left = Math.max(0, Math.ceil((end - Date.now()) / 1000)); stop(); paint(); return; }
+    if (left === 0) left = total;
+    try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === "suspended") ac.resume(); } catch (e) {}
+    end = Date.now() + left * 1000; id = setInterval(tick, 200); paint();
+    try { if (navigator.wakeLock) await navigator.wakeLock.request("screen"); } catch (e) {}
+  };
+  box.append(big, track, msg);
+  show(box, presets, go, reset, back); paint();
 }
 
 function questions(){
