@@ -128,6 +128,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:24px;align-items:center;
   background:var(--side-bg);color:var(--side-ink);border-radius:20px;padding:30px;overflow:hidden;position:relative}
 .hero .eyebrow{color:var(--pencil)}
+.hero .eyebrow.course{margin-top:4px;color:var(--side-ink);opacity:.86;letter-spacing:0;font-weight:500}
 .hero h1{font-size:clamp(30px,4.6vw,46px);margin:12px 0 14px}
 .hero h1 em{font-style:normal;color:var(--pencil)}
 .hero .lead{color:var(--side-soft)}
@@ -394,6 +395,18 @@ input[type=range]{width:100%;accent-color:var(--sea)}
 .wheel-wrap{display:grid;place-items:center;position:relative}
 .wheel-wrap canvas{width:min(320px,80vw);height:auto;aspect-ratio:1}
 .pointer{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:24px solid var(--no)}
+.roster summary span{font-weight:500;color:var(--ink-soft)}
+.roster-add{display:flex;gap:8px;margin-top:6px}
+.roster-add input{flex:1;min-width:0}
+.roster-help{font-size:13px;color:var(--ink-soft);margin:8px 0}
+.roster-list{display:flex;flex-wrap:wrap;gap:8px}
+.roster-list .rn{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:999px;overflow:hidden}
+.roster-list .rn button{border:0;background:none;color:var(--ink);font:inherit;font-size:15px;font-weight:600;padding:7px 12px;cursor:pointer}
+.roster-list .rn .rx{padding:7px 10px 7px 4px;color:var(--ink-soft);font-weight:400}
+.roster-list .rn.off{border-style:dashed;background:var(--surface-2)}
+.roster-list .rn.off .rt{text-decoration:line-through;color:var(--ink-soft);font-weight:400}
+.roster-list .rn.done .rt::after{content:" ✓";color:var(--sea)}
+.roster-list .rn.new{border-color:var(--pencil)}
 .pick-result{font-family:var(--f-display);font-size:30px;font-weight:700;text-align:center;min-height:1.4em}
 .toast{position:fixed;z-index:70;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));
   background:var(--side-bg);color:var(--side-ink);padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);font-size:15px;max-width:calc(100% - 32px)}
@@ -591,7 +604,7 @@ details.orig summary code{color:var(--sea);font-weight:700}
 <aside class="side" id="side" aria-label="목차">
   <div class="brand">
     <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="10" width="52" height="44" rx="12" style="fill:var(--sea)"/><path d="M16 24h32M16 32h32M16 40h20" stroke-width="3" stroke-linecap="round" style="stroke:var(--on-sea)"/><circle cx="48" cy="44" r="9" style="fill:var(--pencil)"/><text x="48" y="48.5" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--on-pencil);font-family:var(--f-body)">?</text></svg>
-    <div><b>읽고 묻고 쓰는<br>국어 수업</b><small>중학년 국어과 지도의 실제</small></div>
+    <div><b>읽고 묻고 쓰는<br>국어 수업</b><small>중학년 국어 · 배움 디자인</small></div>
   </div>
   <div class="side-scroll">
     <nav class="nav nav-group" aria-label="연수 단계">
@@ -651,7 +664,8 @@ details.orig summary code{color:var(--sea);font-weight:700}
   <section class="view" data-route="home">
     <div class="hero">
       <div>
-        <p class="eyebrow">2026 교원 연수 · 중학년(3~4학년) 국어과 지도의 실제 · 2차시 100분</p>
+        <p class="eyebrow">2026 (입직기~심화기) 초등 교사 수업 전문성 향상 직무연수 · 중학년(3~4학년) 국어 · 2차시 100분</p>
+        <p class="eyebrow course">교과의 뿌리를 다지는 교사의 수업, 국어과 전문가를 위한 배움 디자인</p>
         <h1>읽고, 묻고, 쓰는<br><em>우리 반 국어 수업</em></h1>
         <p class="lead">질문과 책 읽기, 문해력, 토의토론, 글쓰기. 네 마당마다 아이의 막힘을 진단하고, 기법 하나를 깊게 해 보고, 도달의 증거를 정합니다. 해 본 놀이와 기법 카드는 연수 뒤에도 우리 반에서 그대로 써요.</p>
         <div class="row" style="margin-top:18px">
@@ -1431,7 +1445,7 @@ details.orig summary code{color:var(--sea);font-weight:700}
     <div class="modal-head"><h2 id="whoTitle">이름 고르기</h2><button class="x-btn" data-close aria-label="닫기">✕</button></div>
     <p style="color:var(--ink-soft);font-size:15px">내 이름을 누르고 저장해 주세요. 보드에 올릴 제목에 이름이 저절로 붙어요. 이 기기에만 저장돼요.</p>
     <div class="who-grid" id="whoGrid" role="group" aria-label="이름 고르기"></div>
-    <div class="field"><label for="whoName">명단에 없으면 직접 써요</label><input type="text" id="whoName" placeholder="예: 김○○"></div>
+    <div class="field"><label for="whoName">명단에 없거나 현장 접수로 오셨으면 여기에 이름을 써 주세요</label><input type="text" id="whoName" placeholder="예: 김○○" autocomplete="off"></div>
     <button class="btn primary" id="whoSave">저장</button>
   </div>
 </div>
@@ -1459,6 +1473,12 @@ details.orig summary code{color:var(--sea);font-weight:700}
     <p class="pick-result" id="pickResult" aria-live="polite"></p>
     <p style="font-size:14px;color:var(--ink-soft);text-align:center" id="pickOrder"></p>
     <div class="row" style="justify-content:center"><button class="btn primary" id="spin">돌리기</button><button class="btn" id="pickReset">처음부터</button></div>
+    <details class="more roster" id="rosterBox">
+      <summary>명단 고치기 · 이름 추가 <span id="rosterCount"></span></summary>
+      <div class="roster-add"><input type="text" id="rosterName" placeholder="현장 접수 이름 (예: 김○○)" autocomplete="off" aria-label="추가할 이름"><button class="btn sm primary" type="button" id="rosterAdd">추가</button></div>
+      <p class="roster-help">이름을 누르면 오늘 룰렛에서 빠져요. 다시 누르면 돌아와요. 추가한 이름은 ✕로 지워요. 이 기기에 저장돼서 새로 고쳐도 남아요.</p>
+      <div class="roster-list" id="rosterList"></div>
+    </details>
   </div>
 </div>
 
@@ -1995,9 +2015,42 @@ let actx=null;
 function beep(){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); [0,.35,.7].forEach(t=>{ const o=actx.createOscillator(), g=actx.createGain(); o.frequency.value=880; o.connect(g); g.connect(actx.destination); g.gain.setValueAtTime(.0001,actx.currentTime+t); g.gain.exponentialRampToValueAtTime(.25,actx.currentTime+t+.02); g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+t+.28); o.start(actx.currentTime+t); o.stop(actx.currentTime+t+.3); }); }catch(e){} }
 
 /* ── 룰렛 ── */
-const W={left:PEOPLE.slice(),angle:0,spinning:false,picked:[]};
-function wReset(){ W.left=PEOPLE.slice(); W.picked=[]; W.angle=0; $("#pickResult").textContent=""; $("#pickOrder").textContent=""; drawWheel(); }
+const PKEY=KEY+"-pick";
+const today=()=>{ const d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); };
+let PK={extra:[],off:[],picked:[],day:today()};
+try{ const o=JSON.parse(localStorage.getItem(PKEY)||"null"); if(o){ PK.extra=(o.extra||[]).filter(x=>typeof x==="string"); PK.off=(o.off||[]).filter(x=>typeof x==="string"); if(o.day===PK.day) PK.picked=(o.picked||[]).filter(x=>typeof x==="string"); } }catch(e){}
+const pkSave=()=>{ try{ localStorage.setItem(PKEY,JSON.stringify(PK)); }catch(e){} };
+const roster=()=>PEOPLE.concat(PK.extra);
+const esc2=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const W={left:[],angle:0,spinning:false,picked:PK.picked.slice()};
+function wLeft(){ const rm=$("#pickRemove").checked; W.left=roster().filter(n=>!PK.off.includes(n)&&!(rm&&W.picked.includes(n))); }
+function wOrder(){ $("#pickOrder").textContent=W.picked.length?"뽑힌 순서: "+W.picked.join(" → "):""; }
+function drawRoster(){
+  const box=$("#rosterList"); if(!box) return;
+  box.innerHTML=roster().map(n=>{ const x=PK.extra.includes(n), off=PK.off.includes(n), done=W.picked.includes(n);
+    return `<span class="rn${off?" off":""}${done?" done":""}${x?" new":""}"><button type="button" class="rt" data-rn="${esc2(n)}" aria-pressed="${off}" title="${off?"다시 넣기":"오늘 빼기"}">${esc2(n)}</button>${x?`<button type="button" class="rx" data-rx="${esc2(n)}" aria-label="${esc2(n)} 지우기">✕</button>`:""}</span>`; }).join("");
+  const on=roster().filter(n=>!PK.off.includes(n)).length; $("#rosterCount").textContent="(오늘 "+on+"명"+(PK.extra.length?" · 추가 "+PK.extra.length+"명":"")+")";
+}
+function wSync(){ if(W.spinning) return; wLeft(); wOrder(); drawWheel(); drawRoster(); }
+function wReset(){ W.picked=[]; PK.picked=[]; pkSave(); W.angle=0; $("#pickResult").textContent=""; wSync(); }
 $("#pickReset").addEventListener("click",wReset);
+$("#pickRemove").addEventListener("change",wSync);
+function rosterAdd(){
+  if(W.spinning){ toast("룰렛이 멈춘 뒤에 추가해 주세요"); return; }
+  const inp=$("#rosterName"); const names=inp.value.split(/[,，、\n]+/).map(x=>x.trim().replace(/\s+/g," ")).filter(Boolean); if(!names.length){ toast("추가할 이름을 써 주세요"); return; }
+  const added=[], dup=[];
+  names.forEach(n=>{ n=n.slice(0,12); if(roster().includes(n)){ dup.push(n); PK.off=PK.off.filter(x=>x!==n); } else { PK.extra.push(n); added.push(n); } });
+  pkSave(); inp.value=""; wSync();
+  toast(added.length?added.join(", ")+" 선생님을 룰렛에 넣었어요":dup.join(", ")+" 선생님은 이미 명단에 있어요");
+}
+$("#rosterAdd").addEventListener("click",rosterAdd);
+$("#rosterName").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.isComposing){ e.preventDefault(); rosterAdd(); } });
+$("#rosterList").addEventListener("click",e=>{
+  if(W.spinning) return;
+  const x=e.target.closest("[data-rx]"), t=e.target.closest("[data-rn]");
+  if(x){ const n=x.dataset.rx; PK.extra=PK.extra.filter(v=>v!==n); PK.off=PK.off.filter(v=>v!==n); W.picked=W.picked.filter(v=>v!==n); PK.picked=W.picked.slice(); pkSave(); wSync(); toast(n+" 이름을 지웠어요"); }
+  else if(t){ const n=t.dataset.rn; if(PK.off.includes(n)) PK.off=PK.off.filter(v=>v!==n); else PK.off.push(n); pkSave(); wSync(); }
+});
 function tok(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 function drawWheel(){
   const cv=$("#wheel"); if(!cv) return; const ctx=cv.getContext("2d"); const R=300, cx=320, cy=320; const n=W.left.length;
@@ -2007,21 +2060,21 @@ function drawWheel(){
   const seg=Math.PI*2/n;
   for(let i=0;i<n;i++){ const a0=W.angle+i*seg-Math.PI/2;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,a0,a0+seg); ctx.closePath(); ctx.fillStyle=fills[i%3]; ctx.fill(); ctx.strokeStyle=tok("--line"); ctx.lineWidth=2; ctx.stroke();
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0+seg/2); ctx.fillStyle=tok("--ink"); ctx.font="700 "+(n>8?30:38)+"px "+tok("--f-body"); ctx.textAlign="right"; ctx.textBaseline="middle"; ctx.fillText(W.left[i],R-24,0); ctx.restore(); }
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0+seg/2); ctx.fillStyle=tok("--ink"); ctx.font="700 "+(n>14?20:n>11?24:n>8?30:38)+"px "+tok("--f-body"); ctx.textAlign="right"; ctx.textBaseline="middle"; ctx.fillText(W.left[i],R-24,0); ctx.restore(); }
   ctx.beginPath(); ctx.arc(cx,cy,42,0,Math.PI*2); ctx.fillStyle=tok("--side-bg"); ctx.fill();
 }
 function pickedIndex(){ const n=W.left.length, seg=Math.PI*2/n; let a=((-W.angle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2); return Math.floor(a/seg)%n; }
 $("#spin").addEventListener("click",()=>{
-  if(W.spinning) return; if(!W.left.length){ toast("모두 뽑았어요. '처음부터'를 눌러 주세요"); return; }
+  if(W.spinning) return; wLeft(); if(!W.left.length){ toast("모두 뽑았어요. '처음부터'를 눌러 주세요"); drawWheel(); return; }
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const target=W.angle+(reduce?0:Math.PI*2*5)+Math.random()*Math.PI*2; const from=W.angle; const dur=reduce?1:3200; const t0=performance.now(); W.spinning=true;
   function step(t){ const k=Math.min(1,(t-t0)/dur); const e=1-Math.pow(1-k,3); W.angle=from+(target-from)*e; drawWheel();
-    if(k<1) requestAnimationFrame(step); else { W.spinning=false; const i=pickedIndex(); const g=W.left[i]; $("#pickResult").textContent=g+" 선생님!"; W.picked.push(g);
-      $("#pickOrder").textContent="뽑힌 순서: "+W.picked.join(" → ");
-      if($("#pickRemove").checked){ setTimeout(()=>{ W.left.splice(i,1); drawWheel(); },900); } } }
+    if(k<1) requestAnimationFrame(step); else { W.spinning=false; const i=pickedIndex(); const g=W.left[i]; $("#pickResult").textContent=g+" 선생님!"; W.picked.push(g); PK.picked=W.picked.slice(); PK.day=today(); pkSave();
+      wOrder(); drawRoster();
+      if($("#pickRemove").checked){ setTimeout(()=>{ if(!W.spinning){ wLeft(); drawWheel(); } },900); } } }
   requestAnimationFrame(step);
 });
-$$("[data-open-pick]").forEach(b=>b.addEventListener("click",()=>{ openModal("pickModal"); drawWheel(); closeSide(); }));
+$$("[data-open-pick]").forEach(b=>b.addEventListener("click",()=>{ openModal("pickModal"); wSync(); closeSide(); }));
 
 /* ── 함께 보기: 내 답 · 전체 + 댓글·평가 ── */
 const ANS={};
@@ -2225,7 +2278,7 @@ $("#guess").addEventListener("click",e=>{ const b=e.target.closest("button[data-
 $("#revealBtn").addEventListener("click",()=>set("s0.shown",!get("s0.shown")));
 
 /* ── 시작 ── */
-newGame(); wReset(); drawTap(); drawAreas();
+newGame(); wSync(); drawTap(); drawAreas();
 orderGame("#og2",[{t:"나는 부끄럼쟁이지만 다정한 사람입니다.",r:"중심"},{t:"처음 만난 사람 앞에서는 말을 잘 못 하지만, 친구가 힘들어 보이면 먼저 다가가기 때문입니다.",r:"까닭"},{t:"지난주 체육 시간에 넘어진 친구에게 가장 먼저 달려가 괜찮냐고 물어보았습니다.",r:"장면"},{t:"그때 친구가 고맙다고 웃어 주어서 나도 기분이 좋았습니다.",r:"장면"}],"다시 세운 문단");
 orderGame("#og3",[{t:"여우가 호랑이 책을 보며 호랑이를 부러워해요.",r:"1"},{t:"여우가 붓으로 몸에 줄무늬를 그려요.",r:"2"},{t:"거북이는 경주용 자동차, 토끼는 로봇이 돼요.",r:"3"},{t:"셋이 신나게 어울려 놀아요.",r:"4"},{t:"갑자기 비가 쏟아져 줄무늬가 씻겨 나가요.",r:"5"},{t:"다람쥐의 말을 듣고 여우는 자기가 여우라서 기뻐해요.",r:"6"}],"이어진 이야기");
 refresh(); route(); tDraw();
